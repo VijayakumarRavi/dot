@@ -15,18 +15,18 @@ log_file=~/install_progress_log.txt
 #==============
 # Delete existing dot files and folders
 #==============
-sudo rm -rf ~/.vim > /dev/null 2>&1
-sudo rm -rf ~/.vimrc > /dev/null 2>&1
-sudo rm -rf ~/.bashrc > /dev/null 2>&1
-sudo rm -rf ~/.tmux > /dev/null 2>&1
-sudo rm -rf ~/.tmux.conf > /dev/null 2>&1
-sudo rm -rf ~/.zsh_prompt > /dev/null 2>&1
-sudo rm -rf ~/.zshrc > /dev/null 2>&1
-sudo rm -rf ~/.gitconfig > /dev/null 2>&1
-sudo rm -rf ~/.antigen > /dev/null 2>&1
-sudo rm -rf ~/.antigen.zsh > /dev/null 2>&1
-sudo rm -rf ~/.psqlrc > /dev/null 2>&1
-sudo rm -rf ~/.tigrc > /dev/null 2>&1
+sudo rm -rif ~/.vim > /dev/null 2>&1
+sudo rm -rfi ~/.vimrc > /dev/null 2>&1
+sudo rm -rfi ~/.bashrc > /dev/null 2>&1
+sudo rm -rfi ~/.tmux > /dev/null 2>&1
+sudo rm -rfi ~/.tmux.conf > /dev/null 2>&1
+sudo rm -rfi ~/.zsh_prompt > /dev/null 2>&1
+sudo rm -rfi ~/.zshrc > /dev/null 2>&1
+sudo rm -rfi ~/.gitconfig > /dev/null 2>&1
+sudo rm -rfi ~/.antigen > /dev/null 2>&1
+sudo rm -rfi ~/.antigen.zsh > /dev/null 2>&1
+sudo rm -rfi ~/.psqlrc > /dev/null 2>&1
+sudo rm -rfi ~/.tigrc > /dev/null 2>&1
 
 #==============
 # Create symlinks in the home folder
@@ -54,5 +54,5 @@ ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
 echo -e "\n====== Summary ======\n"
 cat $log_file
 echo
-echo "Enjoy -Jarrod"
+echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
 rm $log_file
