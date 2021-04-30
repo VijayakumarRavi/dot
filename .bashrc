@@ -169,6 +169,8 @@ NC="\e[m"               # Color Reset
 
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
+tmux
+
 neofetch
 
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
