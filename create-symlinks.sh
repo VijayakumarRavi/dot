@@ -27,7 +27,6 @@ sudo rm -rf ~/.antigen > /dev/null 2>&1
 sudo rm -rf ~/.antigen.zsh > /dev/null 2>&1
 sudo rm -rf ~/.psqlrc > /dev/null 2>&1
 sudo rm -rf ~/.tigrc > /dev/null 2>&1
-sudo rm -rf ~/.config > /dev/null 2>&1
 
 #==============
 # Create symlinks in the home folder
@@ -41,7 +40,7 @@ ln -sf $dotfiles_dir/zsh/ ~/.config/
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/.conkyrc ~/.conkyrc
 ln -s $dotfiles_dir/.gitconfig ~/.gitconfig
-ln -s $dotfiles_dir/.zshrc ~/.zshrc
+ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
 
 
 #==============
