@@ -70,8 +70,8 @@ conky.config = {
 
 --# Color scheme ##
 
---# fe4515 crimson-orange
-	default_color = 'fe4515',
+--# fe4515 nord-blue
+	default_color = '728DA9',
 
 --# ffffff white
 	color1 = 'ffffff',
