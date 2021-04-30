@@ -3,12 +3,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/vim/plugged')
 "Plug 'dylanaraps/wal.vim'
 "Plug 'wadackel/vim-dogrun'
 "Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-substrata'
 "Plug 'bluz71/vim-moonfly-colors'
+Plug 'arcticicestudio/nord-vim'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'

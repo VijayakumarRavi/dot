@@ -172,7 +172,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 neofetch
 
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
-echo -e "${Green}" 
+echo -e "${Green}"
 date
 function _exit()              # Function to run upon exit of shell.
 {
@@ -402,8 +402,9 @@ alias 666='chmod -R 666'
 alias 755='chmod -R 755'
 alias 777='chmod -R 777'
 
-# Pacman 
-alias pacup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm'             # Synchronize with repositories and then upgrade packages that are out of date on the local system.
+# Pacman
+# alias pacup='sudo pacman -Syu --noconfirm && yay -Syu --noconfirm && sudo snap refresh '             # Synchronize with repositories and then upgrade packages that are out of date on the local system.
+alias yayin=' yay -S '
 alias pacupd='sudo pacman -Sy'             # Refresh of all package lists after updating /etc/pacman.d/mirrorlist
 alias pacin='sudo pacman -S'               # Install specific package(s) from the repositories
 alias pacinu='sudo pacman -U'              # Install specific local package(s)
@@ -417,8 +418,8 @@ alias pacind='sudo pacman -S --asdeps'     # Install given package(s) as depende
 alias pacclean="sudo pacman -Sc"           # Delete all not currently installed package files
 alias pacmake="makepkg -fcsi"         # Make package from PKGBUILD file in current directory
 alias changemirror='nvim /etc/pacman.d/mirrorlist'
- 
- 
+
+
 #alias aup='sudo apt-get update && sudo apt-get upgrade -y'
 #alias ain='sudo apt-get install -y'
 #alias arm='sudo apt-get autoremove'
@@ -489,7 +490,6 @@ function xtitle()
     *)  ;;
     esac
 }
-
 
 # Aliases that use xtitle
 alias top='xtitle Processes on $HOST && top'
@@ -1006,6 +1006,14 @@ alias ytv-best="youtube-dl -f bestvideo+bestaudio "
 alias yta-mp3Playlist="youtube-dl --extract-audio --audio-format mp3 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
 alias ytv-Playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
 
+function update(){
+	echo -e "${BPurple}   *****Pacman*****${NC}"
+	sudo pacman -Syu --noconfirm
+	echo -e "${BPurple}   ******Yay******${NC}"
+	yay -Syu --noconfirm
+	echo -e "${BPurple}   ******Snap******${NC}"
+	sudo snap refresh
+}
 
 # syntax highlighting
 # Add the following line at the end of bashrc

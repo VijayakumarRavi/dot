@@ -5,9 +5,10 @@
 set list listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:· ",eol:¬
 
 " Colorschemes
-"set termguicolors
+set termguicolors
 set background=dark
-colorscheme substrata
+" colorscheme substrata
+colorscheme nord
 
 " Function, identifier and comments in italic
 highlight Function cterm=italic gui=italic
@@ -15,7 +16,7 @@ highlight Indentifier cterm=italic gui=italic
 highlight Comment cterm=italic gui=italic
 
 " Number of screenlines for command-line
-set cmdheight=2
+set cmdheight=1
 
 " Split the right way
 set splitright splitbelow
