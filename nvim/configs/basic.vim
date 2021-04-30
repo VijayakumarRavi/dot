@@ -3,10 +3,10 @@
 set number
 
 " Enable mouse scroll
-set mouse=a
+" set mouse=a
 
 " Lines vim should remember
-set history=500
+set history=1000
 
 " Don't be Vi compatible
 set nocompatible
