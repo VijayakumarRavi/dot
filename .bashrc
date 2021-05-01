@@ -419,6 +419,8 @@ alias pacclean="sudo pacman -Sc"           # Delete all not currently installed 
 alias pacmake="makepkg -fcsi"         # Make package from PKGBUILD file in current directory
 alias changemirror='nvim /etc/pacman.d/mirrorlist'
 
+#Tmux
+alias tdot='tmux a -t Dotfiles'
 
 #alias aup='sudo apt-get update && sudo apt-get upgrade -y'
 #alias ain='sudo apt-get install -y'
