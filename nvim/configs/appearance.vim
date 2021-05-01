@@ -5,10 +5,11 @@
 set list listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:· ",eol:¬
 
 " Colorschemes
-set termguicolors
-set background=dark
+" set termguicolors
+" set background=dark
 " colorscheme substrata
-colorscheme nord
+" colorscheme nord
+colorscheme industry
 
 " Function, identifier and comments in italic
 highlight Function cterm=italic gui=italic

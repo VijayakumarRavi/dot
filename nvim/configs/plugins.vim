@@ -6,7 +6,7 @@ endif
 call plug#begin('~/.config/vim/plugged')
 "Plug 'dylanaraps/wal.vim'
 "Plug 'wadackel/vim-dogrun'
-"Plug 'cocopon/iceberg.vim'
+Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-substrata'
 "Plug 'bluz71/vim-moonfly-colors'
 Plug 'arcticicestudio/nord-vim'
@@ -33,9 +33,13 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-pandoc/vim-pandoc-syntax', {'for': ['markdown', 'markdown.pandoc']}
 Plug 'lervag/vimtex', {'for': 'tex'}
 
+Plug 'mhinz/vim-startify'
+
 "Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['cpp', 'c'] }
 
+" For tmux
+Plug 'tpope/vim-obsession'
 call plug#end()
