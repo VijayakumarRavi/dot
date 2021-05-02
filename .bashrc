@@ -422,9 +422,15 @@ alias changemirror='nvim /etc/pacman.d/mirrorlist'
 #Tmux
 alias tdot='tmux a -t Dotfiles'
 
-#alias aup='sudo apt-get update && sudo apt-get upgrade -y'
-#alias ain='sudo apt-get install -y'
-#alias arm='sudo apt-get autoremove'
+alias aup='sudo apt-get update && sudo apt-get upgrade -y'
+alias ain='sudo apt-get install -y'
+alias arm='sudo apt-get autoremove'
+
+# Git
+alias gs='git status'
+alias ga='git add .'
+alias gc='git commit -m'
+alias gp='git push origin'
 
 #-------------------------------------------------------------
 # The 'ls' family (this assumes you use a recent GNU ls).
