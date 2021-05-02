@@ -1,4 +1,4 @@
-DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq
+DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq)
 if [$DISTRO=="arch"]; then
 	echo "Arch based distro found !!!!!"
 	sudo pacman -S --noconfirm zsh
