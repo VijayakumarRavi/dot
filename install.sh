@@ -1,5 +1,6 @@
 DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq
-if [$DISTRO=="arch"] then
+if [$DISTRO=="arch"]
+then
 	echo "Arch based distro found !!!!!"
 	sudo pacman -S --noconfirm zsh
 	sudo pacman -S --noconfirm zsh-syntax-highlighting
@@ -18,7 +19,8 @@ if [$DISTRO=="arch"] then
 	sudo pacman -S --noconfirm tmux
 
 
-elif [$DISTRO=="debian"] then
+elif [$DISTRO=="debian"]
+then
 	echo "Debian based distro found !!!!"
 	sudo apt install -y zsh
 	sudo apt install -y zsh-syntax-highlighting
