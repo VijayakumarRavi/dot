@@ -1,5 +1,5 @@
-
-if type -p pacman > /dev/null; then
+DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq
+if $DISTRO=="arch"; then
 	echo "Arch based distro found !!!!!"
 	sudo pacman -S --noconfirm zsh
 	sudo pacman -S --noconfirm zsh-syntax-highlighting
@@ -18,7 +18,7 @@ if type -p pacman > /dev/null; then
 	sudo pacman -S --noconfirm tmux
 
 
-elif type -p apt > /dev/null; then
+elif $DISTRO=="debian"; then
 	echo "Debian based distro found !!!!"
 	sudo apt install -y zsh
 	sudo apt install -y zsh-syntax-highlighting
@@ -45,7 +45,7 @@ elif type -p apt > /dev/null; then
 	sudo apt install -y python-pip
 	sudo apt install -y tmux
 else
-	echo "Something Wrong !!!!!!"
+	echo -e "Something Wrong !!!!!!\n\n $DISTRO \n\n"
 fi
 
 # ---
