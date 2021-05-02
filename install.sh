@@ -44,6 +44,8 @@ elif type -p apt > /dev/null; then
 	sudo apt install -y npm
 	sudo apt install -y python-pip
 	sudo apt install -y tmux
+else
+	echo "Something Wrong !!!!!!"
 fi
 
 # ---
