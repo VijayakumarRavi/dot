@@ -16,9 +16,9 @@ if [$DISTRO=="arch"]; then
 	sudo pacman -S --noconfirm npm
 	sudo pacman -S --noconfirm python-pip
 	sudo pacman -S --noconfirm tmux
+fi
 
-
-elif [$DISTRO=="debian"]; then
+if [$DISTRO=="debian"]; then
 	echo "Debian based distro found !!!!"
 	sudo apt install -y zsh
 	sudo apt install -y zsh-syntax-highlighting
