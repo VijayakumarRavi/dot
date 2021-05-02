@@ -1,7 +1,7 @@
 DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq
 if [$DISTRO=="arch"]
 then
-	echo "Arch based distro found !!!!!"
+	echo "Arch based distro found !!!!!";
 	sudo pacman -S --noconfirm zsh
 	sudo pacman -S --noconfirm zsh-syntax-highlighting
 	sudo pacman -S --noconfirm neovim
@@ -21,7 +21,7 @@ then
 
 elif [$DISTRO=="debian"]
 then
-	echo "Debian based distro found !!!!"
+	echo "Debian based distro found !!!!";
 	sudo apt install -y zsh
 	sudo apt install -y zsh-syntax-highlighting
 	sudo apt install -y neovim
@@ -29,11 +29,11 @@ then
 	sudo apt install -y telegram-desktop
 	sudo apt install -y thunderbird
 	sudo apt install -y gnome-tweaks
-	echo "Downloading chrome package!!!"
+	echo "Downloading chrome package!!!";
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo apt install ./google-chrome-stable_current_amd64.deb
 
-	echo "Installing Beave"
+	echo "Installing Beave";
 	sudo apt install apt-transport-https curl
 	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
@@ -47,7 +47,7 @@ then
 	sudo apt install -y python-pip
 	sudo apt install -y tmux
 else
-	echo -e "Something Wrong !!!!!!\n\n $DISTRO \n\n"
+	echo -e "Something Wrong !!!!!!\n\n $DISTRO \n\n";
 fi
 
 # ---
@@ -108,5 +108,4 @@ ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
 #==============
 # Give the user a finishing installed note
 #==============
-echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
-
+echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n";
