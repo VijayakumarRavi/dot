@@ -1,52 +1,50 @@
 DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq)
-if [$DISTRO=="arch"]; then
-	echo "Arch based distro found !!!!!"
-	sudo pacman -S --noconfirm zsh
-	sudo pacman -S --noconfirm zsh-syntax-highlighting
-	sudo pacman -S --noconfirm neovim
-	sudo pacman -S --noconfirm curl
-	sudo pacman -S --noconfirm telegram-desktop
-	sudo pacman -S --noconfirm thunderbird
-	sudo pacman -S --noconfirm gnome-tweaks
-	yay -S --noconfirm google-chrome
-	yay -S --noconfirm brave-bin
-	sudo pacman -S --noconfirm conky
-	sudo pacman -S --noconfirm htop
-	sudo pacman -S --noconfirm neofetch
-	sudo pacman -S --noconfirm npm
-	sudo pacman -S --noconfirm python-pip
-	sudo pacman -S --noconfirm tmux
-fi
 
-if [$DISTRO=="debian"]; then
-	echo "Debian based distro found !!!!"
-	sudo apt install -y zsh
-	sudo apt install -y zsh-syntax-highlighting
-	sudo apt install -y neovim
-	sudo apt install -y curl
-	sudo apt install -y telegram-desktop
-	sudo apt install -y thunderbird
-	sudo apt install -y gnome-tweaks
-	echo "Downloading chrome package!!!"
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	sudo apt install ./google-chrome-stable_current_amd64.deb
+# echo "Arch based distro found !!!!!"
+sudo pacman -S --noconfirm zsh
+sudo pacman -S --noconfirm zsh-syntax-highlighting
+sudo pacman -S --noconfirm neovim
+sudo pacman -S --noconfirm curl
+sudo pacman -S --noconfirm telegram-desktop
+sudo pacman -S --noconfirm thunderbird
+sudo pacman -S --noconfirm gnome-tweaks
+yay -S --noconfirm google-chrome
+yay -S --noconfirm brave-bin
+sudo pacman -S --noconfirm conky
+sudo pacman -S --noconfirm htop
+sudo pacman -S --noconfirm neofetch
+sudo pacman -S --noconfirm npm
+sudo pacman -S --noconfirm python-pip
+sudo pacman -S --noconfirm tmux
 
-	echo "Installing Beave"
-	sudo apt install apt-transport-https curl
-	sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-	echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-	sudo apt update
-	sudo apt install brave-browser
 
-	sudo apt install -y conky
-	sudo apt install -y htop
-	sudo apt install -y neofetch
-	sudo apt install -y npm
-	sudo apt install -y python-pip
-	sudo apt install -y tmux
-else
-	echo -e "Something Wrong !!!!!!\n\n $DISTRO \n\n"
-fi
+# echo "Debian based distro found !!!!"
+sudo apt install -y zsh
+sudo apt install -y zsh-syntax-highlighting
+sudo apt install -y neovim
+sudo apt install -y curl
+sudo apt install -y telegram-desktop
+sudo apt install -y thunderbird
+sudo apt install -y gnome-tweaks
+echo "Downloading chrome package!!!"
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+rm google-chrome-stable_current_amd64.deb
+
+echo "Installing Beave"
+sudo apt install -y apt-transport-https curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update
+sudo apt install -y brave-browser
+sudo apt install -y conky
+sudo apt install -y htop
+sudo apt install -y neofetch
+sudo apt install -y npm
+sudo apt install -y python3-pip
+sudo apt install -y tmux
+
 
 # ---
 # Install git-completion and git-prompt
