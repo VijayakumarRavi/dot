@@ -35,11 +35,15 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 
 Plug 'mhinz/vim-startify'
 
-"Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['cpp', 'c'] }
 
 " For tmux
 Plug 'tpope/vim-obsession'
+
+" Remember cursor position
+Plug 'farmergreg/vim-lastplace'
+
 call plug#end()
