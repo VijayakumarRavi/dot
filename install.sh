@@ -2,107 +2,120 @@ DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubunt
 
 BPurple='\e[1;35m'
 NC="\e[m"
-echo -e "${BPurple}   *****Pacman*****${NC}"
+
+echo "${BPurple}   *****Pacman*****${NC}"
 # echo "Arch based distro found !!!!!"
 
-echo -e "${BPurple}   *****Zsh*****${NC}"
+echo "${BPurple}   *****Zsh*****${NC}"
 sudo pacman -S --noconfirm zsh
 
-echo -e "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
+echo "${BPurple}   *****Git*****${NC}"
+sudo pacman -S --noconfirm git
+
+echo "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
 sudo pacman -S --noconfirm zsh-syntax-highlighting
 
-echo -e "${BPurple}   *****Neovim*****${NC}"
+echo "${BPurple}   *****Neovim*****${NC}"
 sudo pacman -S --noconfirm neovim
 
-echo -e "${BPurple}   *****curl*****${NC}"
+echo "${BPurple}   *****curl*****${NC}"
 sudo pacman -S --noconfirm curl
 
-echo -e "${BPurple}   *****Telegram*****${NC}"
+echo "${BPurple}   *****Telegram*****${NC}"
 sudo pacman -S --noconfirm telegram-desktop
 
-echo -e "${BPurple}   *****Thunderbird*****${NC}"
+echo "${BPurple}   *****Thunderbird*****${NC}"
 sudo pacman -S --noconfirm thunderbird
 
-echo -e "${BPurple}   *****Gnome Tweaks*****${NC}"
+echo "${BPurple}   *****Gnome Tweaks*****${NC}"
 sudo pacman -S --noconfirm gnome-tweaks
 
-echo -e "${BPurple}   *****Google Chrome*****${NC}"
+echo "${BPurple}   *****Google Chrome*****${NC}"
 yay -S --noconfirm google-chrome
 
-echo -e "${BPurple}   *****Brave*****${NC}"
+echo "${BPurple}   *****Brave*****${NC}"
 yay -S --noconfirm brave-bin
 
-echo -e "${BPurple}   *****conky*****${NC}"
+echo "${BPurple}   *****conky*****${NC}"
 sudo pacman -S --noconfirm conky
 
-echo -e "${BPurple}   *****Htop*****${NC}"
+echo "${BPurple}   *****Htop*****${NC}"
 sudo pacman -S --noconfirm htop
 
-echo -e "${BPurple}   *****Neofetch*****${NC}"
+echo "${BPurple}   *****Neofetch*****${NC}"
 sudo pacman -S --noconfirm neofetch
 
-echo -e "${BPurple}   *****Npm*****${NC}"
+echo "${BPurple}   *****Npm*****${NC}"
 sudo pacman -S --noconfirm npm
 
-echo -e "${BPurple}   *****Python pip*****${NC}"
+echo "${BPurple}   *****Python pip*****${NC}"
 sudo pacman -S --noconfirm python-pip
 
-echo -e "${BPurple}   *****tmux*****${NC}"
+echo "${BPurple}   *****tmux*****${NC}"
 sudo pacman -S --noconfirm tmux
+
+echo "${BPurple}   *****gawk*****${NC}"
+sudo pacman -S --noconfirm gawk
+
 
 
 # echo "Debian based distro found !!!!"
-echo -e "${BPurple}   *****Zsh*****${NC}"
+echo "${BPurple}   *****Zsh*****${NC}"
 sudo apt install -y zsh
 
-echo -e "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
+echo "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
 sudo apt install -y zsh-syntax-highlighting
 
-echo -e "${BPurple}   *****Neovim*****${NC}"
+echo "${BPurple}   *****Neovim*****${NC}"
 sudo apt install -y neovim
 
-echo -e "${BPurple}   *****curl*****${NC}"
+echo "${BPurple}   *****curl*****${NC}"
 sudo apt install -y curl
 
-echo -e "${BPurple}   *****Telegram*****${NC}"
+echo "${BPurple}   *****Telegram*****${NC}"
 sudo apt install -y telegram-desktop
 
-echo -e "${BPurple}   *****Thunderbird*****${NC}"
+echo "${BPurple}   *****Thunderbird*****${NC}"
 sudo apt install -y thunderbird
 
-echo -e "${BPurple}   *****Gnome Tweaks*****${NC}"
+echo "${BPurple}   *****Gnome Tweaks*****${NC}"
 sudo apt install -y gnome-tweaks
 
-echo -e "${BPurple}   *****Google chrome*****${NC}"
+echo "${BPurple}   *****Google chrome*****${NC}"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-echo -e "${BPurple}   ******Installing Beave******${NC}"
+echo "${BPurple}   ******Installing Beave******${NC}"
 sudo apt install -y apt-transport-https curl
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
 sudo apt install -y brave-browser
 
-echo -e "${BPurple}   *****Conky*****${NC}"
+echo "${BPurple}   *****Conky*****${NC}"
 sudo apt install -y conky
 
-echo -e "${BPurple}   *****Htop*****${NC}"
+echo "${BPurple}   *****Htop*****${NC}"
 sudo apt install -y htop
 
-echo -e "${BPurple}   *****Neofetch*****${NC}"
+echo "${BPurple}   *****Git*****${NC}"
+sudo apt install -y git
+
+echo "${BPurple}   *****Neofetch*****${NC}"
 sudo apt install -y neofetch
 
-echo -e "${BPurple}   *****Npm*****${NC}"
+echo "${BPurple}   *****Npm*****${NC}"
 sudo apt install -y npm
 
-echo -e "${BPurple}   *****Python pip*****${NC}"
+echo "${BPurple}   *****Python pip*****${NC}"
 sudo apt install -y python3-pip
 
-echo -e "${BPurple}   *****Tmux*****${NC}"
+echo "${BPurple}   *****Tmux*****${NC}"
 sudo apt install -y tmux
 
+echo "${BPurple}   ******gawk******${NC}"
+sudo apt install -y gawk
 
 # ---
 # Install git-completion and git-prompt
@@ -158,7 +171,21 @@ ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
 # Set zsh as the default shell
 #==============
 sudo chsh -s /bin/zsh
-conky -c ~/.conkyrc
+
+#==============
+#Starting conky
+#==============
+conky -c ~/.conkyrc &
+
+#============
+#ble.sh setup
+#============
+
+
+cd ~/Git
+git clone --recursive https://github.com/akinomyoga/ble.sh.git
+make -C ble.sh install PREFIX=~/.local
+
 #==============
 # Give the user a finishing installed note
 #==============
