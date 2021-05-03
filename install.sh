@@ -173,19 +173,24 @@ ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
 #==============
 sudo chsh -s /bin/zsh
 
-#==============
-#Starting conky
-#==============
+#===============
+# Starting conky
+#===============
 conky -c ~/.conkyrc &
 
-#============
-#ble.sh setup
-#============
-
-
+#=============
+# ble.sh setup
+#=============
 cd ~/Git
 git clone --recursive https://github.com/akinomyoga/ble.sh.git
 make -C ble.sh install PREFIX=~/.local
+
+#========
+# fm6000
+#========
+curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl --output fm6000
+chmod +x fm6000
+sudo mv fm6000 /usr/bin/
 
 #==============
 # Give the user a finishing installed note

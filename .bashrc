@@ -169,7 +169,8 @@ NC="\e[m"               # Color Reset
 
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
-neofetch
+# neofetch
+fm6000 -c bright_yellow -de Gnome -phb
 
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
 echo -e "${Green}"

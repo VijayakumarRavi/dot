@@ -94,7 +94,7 @@ autocmd BufWritePre * %s/\s\+$//e
 set shell=bash
 
 " Python host
-let g:python3_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 
 "Goyo
 nnoremap <leader><ENTER> :Goyo<CR>
