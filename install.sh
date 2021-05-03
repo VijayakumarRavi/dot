@@ -160,6 +160,7 @@ ln -sf $dotfiles_dir/nvim ~/.config/
 ln -sf $dotfiles_dir/htop ~/.config/
 ln -sf $dotfiles_dir/neofetch ~/.config/
 ln -sf $dotfiles_dir/zsh/ ~/.config/
+ln -sf $dotfiles_dir/tmux/ ~/config/
 
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/.conkyrc ~/.conkyrc
