@@ -170,7 +170,9 @@ NC="\e[m"               # Color Reset
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
 # neofetch
-fm6000 -c bright_yellow -de Gnome -phb
+# fm6000 -c bright_yellow -de Gnome -phb
+echo -e "${Yellow}"
+fortune | cowsay -f tux
 
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
 echo -e "${Green}"
@@ -445,7 +447,7 @@ alias lc='ls -ltcr'        #  Sort by/show change time,most recent last.
 alias lu='ls -ltur'        #  Sort by/show access time,most recent last.
 
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
-alias ll="ls -lav --group-directories-first |more"
+alias ll="ls -lAv --group-directories-first |more"
 alias lm='ll |more'        #  Pipe through 'more'
 alias lr='ll -R'           #  Recursive ls.
 alias la='ll -A'           #  Show hidden files.

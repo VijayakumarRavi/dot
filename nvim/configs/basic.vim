@@ -105,7 +105,7 @@ function! s:goyo_enter()
     set nocursorline
 	set number
     CocDisable
-    Limelight
+    " Limelight
 endfunction
 
 function! s:goyo_leave()
@@ -113,7 +113,7 @@ function! s:goyo_leave()
     set showcmd
     set cursorline
     CocEnable
-    Limelight!
+    " Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
