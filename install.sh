@@ -196,3 +196,13 @@ sudo mv fm6000 /usr/bin/
 # Give the user a finishing installed note
 #==============
 echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
+#===========
+#Yay install
+#===========
+echo "${BPurple}   ***** Trying to installing YAY *****${NC}"
+echo "${BPurple}   ***** Ctrl-c to cancel *****${NC}
+cd /opt
+sudo git clone https://aur.archlinux.org/yay-git.git yay
+sudo chown -R $USER:wheel yay
+cd yay
+makepkg -si
