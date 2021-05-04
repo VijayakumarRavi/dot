@@ -21,6 +21,8 @@ Plug 'voldikss/vim-floaterm'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" to view csv files
+Plug 'chrisbra/csv.vim'
 
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
