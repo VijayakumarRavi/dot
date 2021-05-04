@@ -192,17 +192,19 @@ curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.
 chmod +x fm6000
 sudo mv fm6000 /usr/bin/
 
-#==============
+sudo mpm install -g neovim
+pip3 install pynvim
+
+#=========================================
 # Give the user a finishing installed note
-#==============
+#=========================================
 echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
-#===========
-#Yay install
-#===========
-echo "${BPurple}   ***** Trying to installing YAY *****${NC}"
-echo "${BPurple}   ***** Ctrl-c to cancel *****${NC}
-cd /opt
-sudo git clone https://aur.archlinux.org/yay-git.git yay
-sudo chown -R $USER:wheel yay
-cd yay
-makepkg -si
+
+
+#=================
+#Setting Wallpaper
+#=================
+sudo curl -L 'https://raw.githubusercontent.com/VijayakumarRavi/Wallpapers/main/From%20reddit.jpeg' --output /usr/share/backgrounds/gnome/wall.jpg
+gsettings set org.gnome.desktop.background picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
+gsettings set org.gnome.desktop.screensaver picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
+
