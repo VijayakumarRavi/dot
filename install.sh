@@ -57,65 +57,11 @@ sudo pacman -S --noconfirm tmux
 echo "${BPurple}   *****gawk*****${NC}"
 sudo pacman -S --noconfirm gawk
 
+echo "${BPurple}   *****Cowsay*****${NC}"
+sudo pacman -S --noconfirm cowsay
 
-
-# echo "Debian based distro found !!!!"
-echo "${BPurple}   *****Zsh*****${NC}"
-sudo apt install -y zsh
-
-echo "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
-sudo apt install -y zsh-syntax-highlighting
-
-echo "${BPurple}   *****Neovim*****${NC}"
-sudo apt install -y neovim
-
-echo "${BPurple}   *****curl*****${NC}"
-sudo apt install -y curl
-
-echo "${BPurple}   *****Telegram*****${NC}"
-sudo apt install -y telegram-desktop
-
-echo "${BPurple}   *****Thunderbird*****${NC}"
-sudo apt install -y thunderbird
-
-echo "${BPurple}   *****Gnome Tweaks*****${NC}"
-sudo apt install -y gnome-tweaks
-
-echo "${BPurple}   *****Google chrome*****${NC}"
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install -y ./google-chrome-stable_current_amd64.deb
-rm google-chrome-stable_current_amd64.deb
-
-echo "${BPurple}   ******Installing Beave******${NC}"
-sudo apt install -y apt-transport-https curl
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt install -y brave-browser
-
-echo "${BPurple}   *****Conky*****${NC}"
-sudo apt install -y conky
-
-echo "${BPurple}   *****Htop*****${NC}"
-sudo apt install -y htop
-
-echo "${BPurple}   *****Git*****${NC}"
-sudo apt install -y git
-
-echo "${BPurple}   *****Neofetch*****${NC}"
-sudo apt install -y neofetch
-
-echo "${BPurple}   *****Npm*****${NC}"
-sudo apt install -y npm
-
-echo "${BPurple}   *****Python pip*****${NC}"
-sudo apt install -y python3-pip
-
-echo "${BPurple}   *****Tmux*****${NC}"
-sudo apt install -y tmux
-
-echo "${BPurple}   ******gawk******${NC}"
-sudo apt install -y gawk
+echo "${BPurple}   *****Fortune*****${NC}"
+sudo pacman -S --noconfirm fortune-mod
 
 # ---
 # Install git-completion and git-prompt
@@ -128,6 +74,7 @@ curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~
 # Cloning Repo
 # ---
 mkdir ~/Git
+mkdir ~/.config
 cd ~/Git
 git clone https://github.com/VijayakumarRavi/Dotfiles.git
 
@@ -160,7 +107,7 @@ ln -sf $dotfiles_dir/nvim ~/.config/
 ln -sf $dotfiles_dir/htop ~/.config/
 ln -sf $dotfiles_dir/neofetch ~/.config/
 ln -sf $dotfiles_dir/zsh/ ~/.config/
-ln -sf $dotfiles_dir/tmux/ ~/config/
+ln -sf $dotfiles_dir/tmux/ ~/.config/
 
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/.conkyrc ~/.conkyrc
@@ -192,7 +139,7 @@ curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.
 chmod +x fm6000
 sudo mv fm6000 /usr/bin/
 
-sudo mpm install -g neovim
+sudo npm install -g neovim
 pip3 install pynvim
 
 #=========================================

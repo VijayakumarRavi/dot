@@ -42,12 +42,12 @@ newperms() { # Set special sudoers settings for install (or after).
 newperms "%wheel ALL=(ALL) ALL #LARBS
 %wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
 
-su vijay
+# su vijay
 
-cd /opt
-sudo git clone https://aur.archlinux.org/yay-git.git yay
-sudo chown -R $USER:wheel yay
-cd yay
-makepkg -si
+# cd /opt
+# sudo git clone https://aur.archlinux.org/yay-git.git yay
+# sudo chown -R $USER:wheel yay
+# cd yay
+# makepkg -si
 
-curl -L vijayakumarravi.github.io/Dotfiles/install.sh | sh
+# curl -L vijayakumarravi.github.io/Dotfiles/install.sh | sh
