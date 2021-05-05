@@ -67,7 +67,7 @@ mount /dev/sdb1 /mnt/home
 
 pacman -Sy --noconfirm archlinux-keyring
 
-pacstrap /mnt base base-devel linux linux-lts linux-headers linux-firmware xorg nvidia nvidia-utils gdm gnome
+pacstrap /mnt base base-devel linux linux-lts linux-headers linux-firmware xorg nvidia nvidia-utils gdm gnome git neovim curl telegram-desktop thunderbird gnome-tweaks conky htop neofetch npm python-pip tmux gawk cowsay fortune-mod go
 
 genfstab -U /mnt >> /mnt/etc/fstab
 cat tz.tmp > /mnt/tzfinal.tmp

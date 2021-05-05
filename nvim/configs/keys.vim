@@ -3,13 +3,13 @@
 " noremap <Left> <Nop>
 " noremap <Right> <Nop>
 
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
+" inoremap <expr> <c-j> ("\<C-n>")
+" inoremap <expr> <c-k> ("\<C-p>")
 
-nnoremap <M-j> :resize -2<CR>
-nnoremap <M-k> :resize +2<CR>
-nnoremap <M-l> :vertical resize -2<CR>
-nnoremap <M-h> :vertical resize +2<CR>
+nnoremap <C-j> :resize -2<CR>
+nnoremap <C-k> :resize +2<CR>
+nnoremap <C-l> :vertical resize -2<CR>
+nnoremap <C-h> :vertical resize +2<CR>
 
 tnoremap <C-w> <C-\><C-n><C-w>
 
