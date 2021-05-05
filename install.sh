@@ -3,65 +3,15 @@ DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubunt
 BPurple='\e[1;35m'
 NC="\e[m"
 
-echo "${BPurple}   *****Pacman*****${NC}"
-# echo "Arch based distro found !!!!!"
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si --noconfirm
 
-echo "${BPurple}   *****Zsh*****${NC}"
-sudo pacman -S --noconfirm zsh
-
-echo "${BPurple}   *****Git*****${NC}"
-sudo pacman -S --noconfirm git
-
-echo "${BPurple}   ***** zsh-syntax-highlighting *****${NC}"
-sudo pacman -S --noconfirm zsh-syntax-highlighting
-
-echo "${BPurple}   *****Neovim*****${NC}"
-sudo pacman -S --noconfirm neovim
-
-echo "${BPurple}   *****curl*****${NC}"
-sudo pacman -S --noconfirm curl
-
-echo "${BPurple}   *****Telegram*****${NC}"
-sudo pacman -S --noconfirm telegram-desktop
-
-echo "${BPurple}   *****Thunderbird*****${NC}"
-sudo pacman -S --noconfirm thunderbird
-
-echo "${BPurple}   *****Gnome Tweaks*****${NC}"
-sudo pacman -S --noconfirm gnome-tweaks
+echo "${BPurple}   *****Brave-bin*****${NC}"
+yay -S --noconfirm brave-bin
 
 echo "${BPurple}   *****Google Chrome*****${NC}"
 yay -S --noconfirm google-chrome
-
-echo "${BPurple}   *****Brave*****${NC}"
-yay -S --noconfirm brave-bin
-
-echo "${BPurple}   *****conky*****${NC}"
-sudo pacman -S --noconfirm conky
-
-echo "${BPurple}   *****Htop*****${NC}"
-sudo pacman -S --noconfirm htop
-
-echo "${BPurple}   *****Neofetch*****${NC}"
-sudo pacman -S --noconfirm neofetch
-
-echo "${BPurple}   *****Npm*****${NC}"
-sudo pacman -S --noconfirm npm
-
-echo "${BPurple}   *****Python pip*****${NC}"
-sudo pacman -S --noconfirm python-pip
-
-echo "${BPurple}   *****tmux*****${NC}"
-sudo pacman -S --noconfirm tmux
-
-echo "${BPurple}   *****gawk*****${NC}"
-sudo pacman -S --noconfirm gawk
-
-echo "${BPurple}   *****Cowsay*****${NC}"
-sudo pacman -S --noconfirm cowsay
-
-echo "${BPurple}   *****Fortune*****${NC}"
-sudo pacman -S --noconfirm fortune-mod
 
 # ---
 # Install git-completion and git-prompt
