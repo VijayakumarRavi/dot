@@ -1,53 +1,46 @@
-#Potential variables: timezone, lang and local
 
-passwd
+echo root:vijay | chpasswd
 
-TZuser=$(cat tzfinal.tmp)
-
-ln -sf /usr/share/zoneinfo/$TZuser /etc/localtime
-
+ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+timedatectl set-ntp true
 hwclock --systohc
+
+
 
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
 
-#pacman --noconfirm --needed -S xrog nvidia nvidia-utils gdm gnome
-
-pacman --noconfirm --needed -S networkmanager
+# pacman --noconfirm --needed -S networkmanager
 systemctl enable NetworkManager
 systemctl start NetworkManager
 systemctl enable gdm
+systemctl enable bluetooth
+systemctl enable cups.service
+systemctl enable sshd
+systemctl enable avahi-daemon
+systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable libvirtd
+systemctl enable firewalld
+systemctl enable acpid
 
-pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 
-pacman --noconfirm --needed -S dialog
-# larbs() { curl -O https://raw.githubusercontent.com/LukeSmithxyz/LARBS/master/larbs.sh && bash larbs.sh ;}
-# dialog --title "Install Luke's Rice" --yesno "This install script will easily let you access Luke's Auto-Rice Boostrapping Scripts (LARBS) which automatically install a full Arch Linux i3-gaps desktop environment.\n\nIf you'd like to install this, select yes, otherwise select no.\n\nLuke"  15 60 && larbs
-
-useradd -m -G wheel vijay
-passwd vijay
+# pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 
 
-# echo "Adding user as a sudoer"
-# echo '%wheel ALL=(ALL) ALL' | EDITOR='tee -a' visudo
+useradd -m vijay
+echo vijay:vijay | chpasswd
+usermod -aG libvirt vijay
 
-newperms() { # Set special sudoers settings for install (or after).
-	sed -i "/#LARBS/d" /etc/sudoers
-	echo "$* #LARBS" >> /etc/sudoers ;}
+echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
 
-# This line, overwriting the `newperms` command above will allow the user to run
-# serveral important commands, `shutdown`, `reboot`, updating, etc. without a password.
-newperms "%wheel ALL=(ALL) ALL #LARBS
-%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/packer -Syu,/usr/bin/packer -Syyu,/usr/bin/systemctl restart NetworkManager,/usr/bin/rc-service NetworkManager restart,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/yay,/usr/bin/pacman -Syyuw --noconfirm"
+firewall-cmd --add-port=1025-65535/tcp --permanent
+firewall-cmd --add-port=1025-65535/udp --permanent
+firewall-cmd --reload
 
-# su vijay
+printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
-# cd /opt
-# sudo git clone https://aur.archlinux.org/yay-git.git yay
-# sudo chown -R $USER:wheel yay
-# cd yay
-# makepkg -si
-
-# curl -L vijayakumarravi.github.io/Dotfiles/install.sh | sh
