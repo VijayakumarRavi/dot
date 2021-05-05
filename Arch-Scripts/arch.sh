@@ -13,7 +13,8 @@ dialog --defaultno --title "DON'T BE A BRAINLET!" --yesno "Do you think I'm memi
 
 dialog --no-cancel --inputbox "Enter a name for your computer." 10 60 2> comp
 
-tzselect > tz.tmp
+# tzselect > tz.tmp
+echo "Asia/kolkata" > tz.tmp
 
 timedatectl set-ntp true
 
