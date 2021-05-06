@@ -1,37 +1,19 @@
-DISTRO=$( cat /etc/*-release | tr [:upper:] [:lower:] | grep -Poi '(debian|ubuntu|red hat|centos|arch)' | uniq)
-
-BPurple='\e[1;35m'
-NC="\e[m"
-
-git clone https://aur.archlinux.org/yay.git
-cd yay/
-makepkg -si --noconfirm
-
-echo "${BPurple}   *****Brave-bin*****${NC}"
-yay -S --noconfirm brave-bin
-
-echo "${BPurple}   *****Google Chrome*****${NC}"
-yay -S --noconfirm google-chrome
-
-# ---
-# Install git-completion and git-prompt
-# ---
-cd ~/
-curl -OL https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
-mv ~/git-completion.bash ~/.git-completion.bash
-curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
-# ---
-# Cloning Repo
-# ---
-mkdir ~/Git
-mkdir ~/.config
-cd ~/Git
-git clone https://github.com/VijayakumarRavi/Dotfiles.git
+#!/bin/bash
 
 #==============
 # Variables
 #==============
 dotfiles_dir=~/Git/Dotfiles
+BPurple='\e[1;35m'
+NC="\e[m"
+mkdir ~/Git
+mkdir ~/.config
+
+#=============
+# Cloning Repo
+#=============
+cd ~/Git
+git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git
 
 #==============
 # Delete existing dot files and folders
@@ -61,19 +43,20 @@ ln -sf $dotfiles_dir/tmux/ ~/.config/
 
 ln -sf $dotfiles_dir/.bashrc ~/.bashrc
 ln -sf $dotfiles_dir/.conkyrc ~/.conkyrc
-ln -s $dotfiles_dir/.gitconfig ~/.gitconfig
-ln -s $dotfiles_dir/zsh/.zshrc ~/.zshrc
+ln -sf $dotfiles_dir/.gitconfig ~/.gitconfig
+ln -sf $dotfiles_dir/zsh/.zshrc ~/.zshrc
 
 
-#==============
-# Set zsh as the default shell
-#==============
-sudo chsh -s /bin/zsh
+cd ~/Git
+git clone https://aur.archlinux.org/yay.git
+cd yay/
+makepkg -si --noconfirm
 
-#===============
-# Starting conky
-#===============
-conky -c ~/.conkyrc &
+echo "${BPurple}   *****Brave-bin*****${NC}"
+yay -S --noconfirm brave-bin
+
+echo "${BPurple}   *****Google Chrome*****${NC}"
+yay -S --noconfirm google-chrome
 
 #=============
 # ble.sh setup
@@ -90,13 +73,8 @@ chmod +x fm6000
 sudo mv fm6000 /usr/bin/
 
 sudo npm install -g neovim
+sudo npm install --save nord
 pip3 install pynvim
-
-#=========================================
-# Give the user a finishing installed note
-#=========================================
-echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
-
 
 #=================
 #Setting Wallpaper
@@ -104,4 +82,32 @@ echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
 sudo curl -L 'https://raw.githubusercontent.com/VijayakumarRavi/Wallpapers/main/From%20reddit.jpeg' --output /usr/share/backgrounds/gnome/wall.jpg
 gsettings set org.gnome.desktop.background picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
 gsettings set org.gnome.desktop.screensaver picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
+
+#===================
+#Nord Terminal Theme
+#===================
+cd ~/Git
+git clone https://github.com/arcticicestudio/nord-gnome-terminal.git
+cd nord-gnome-terminal/src
+bash nord.sh -p Unnamed
+cd ~/Git
+
+curl -LO https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2MTkyMDU5NzUiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImRlODI4OTlmMTBmMWVhMzkxMmY2MWY2NDdiYTk2NjAyNzlkNzFiNDM4YWU3MmY3MTMxOTcyN2RkNGMwYzI2MjdjNjcyN2IyMjBlOWJiNWU2NjZiZGJiNDg0NDUwYmE4OWNlYmIyMTg0MjYwYWQ5MGE0OTg2MGM0NDFlNTgxZjEwIiwidCI6MTYyMDIzODY3Nywic3RmcCI6bnVsbCwic3RpcCI6bnVsbH0.S3ZRXnHZq65byxyoR0-U2bDD1WN_6cPMjFlvSf9yo4I/Nordic-darker.tar.xz
+tar -xf Nordic-darker.tar.xz
+sudo cp -vi Nordic-darker/   /usr/share/themes/
+
+# ---
+# Install git-completion and git-prompt
+# ---
+cd ~/
+curl -OL https://github.com/git/git/raw/master/contrib/completion/git-completion.bash
+mv ~/git-completion.bash ~/.git-completion.bash
+curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+
+sudo sh ~/Git/Dotfiles/font.sh
+
+#=========================================
+# Give the user a finishing installed note
+#=========================================
+echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
 

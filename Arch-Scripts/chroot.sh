@@ -25,6 +25,7 @@ systemctl enable reflector.timer
 systemctl enable fstrim.timer
 systemctl enable libvirtd
 systemctl enable firewalld
+systemctl start firewalld
 systemctl enable acpid
 
 

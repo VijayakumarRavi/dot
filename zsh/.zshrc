@@ -37,7 +37,7 @@ NC="\e[m"               # Color Reset
 neofetch
 
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
-echo -e "${Green}" 
+echo -e "${Green}"
 date
 function _exit()    # Function to run upon exit of shell.
 {
@@ -47,7 +47,7 @@ trap _exit EXIT
 
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/vijay/.config/zsh/.oh-my-zsh"
+# export ZSH="/home/vijay/.config/zsh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -118,7 +118,7 @@ PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magent
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions archlinux)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -143,7 +143,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="nvim ~/.config/zsh/.zshrc"
+alias zshrc="nvim ~/.config/zsh/.zshrc"
 alias loadzsh="source ~/.config/zsh/.zshrc"
 # alias ohmyzsh="nvim ~/.oh-my-zsh"
 
@@ -319,7 +319,7 @@ alias ytv-Playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%
 
 
 
-# Addded from ramdom zshrc's 
+# Addded from ramdom zshrc's
 
 # History in cache directory:
 HISTSIZE=10000

@@ -17,7 +17,7 @@ echo "<?xml version="1.0"?>
      <family>Noto Color Emoji</family>
      <family>Noto Emoji</family>
      <family>DejaVu Sans</family>
-   </prefer> 
+   </prefer>
  </alias>
 
  <alias>

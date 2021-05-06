@@ -370,6 +370,7 @@ alias df='df -kTh'
 
 
 alias q='exit'
+alias :q='exit'
 alias c='clear'
 alias h='history'
 alias pd='pwd'
@@ -1025,7 +1026,8 @@ function update(){
 	echo -e "${BPurple}   ******Snap******${NC}"
 	sudo snap refresh
 }
-
+# install Aur packages
+aur(){ curl  -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 # syntax highlighting
 # Add the following line at the end of bashrc
 ((_ble_bash)) && ble-attach
