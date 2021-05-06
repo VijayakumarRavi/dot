@@ -9,12 +9,6 @@ NC="\e[m"
 mkdir ~/Git
 mkdir ~/.config
 
-#=============
-# Cloning Repo
-#=============
-cd ~/Git
-git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git
-
 #==============
 # Delete existing dot files and folders
 #==============
@@ -30,6 +24,12 @@ sudo rm -rfi ~/.antigen > /dev/null 2>&1
 sudo rm -rfi ~/.antigen.zsh > /dev/null 2>&1
 sudo rm -rfi ~/.psqlrc > /dev/null 2>&1
 sudo rm -rfi ~/.tigrc > /dev/null 2>&1
+
+#=============
+# Cloning Repo
+#=============
+cd ~/Git
+git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git
 
 #==============
 # Create symlinks in the home folder
@@ -105,6 +105,12 @@ mv ~/git-completion.bash ~/.git-completion.bash
 curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 
 sudo sh ~/Git/Dotfiles/font.sh
+
+sudo systemctl start firewall
+firewall-cmd --add-port=1025-65535/tcp --permanent
+firewall-cmd --add-port=1025-65535/udp --permanent
+firewall-cmd --reload
+
 
 #=========================================
 # Give the user a finishing installed note

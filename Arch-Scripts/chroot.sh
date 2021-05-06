@@ -25,7 +25,6 @@ systemctl enable reflector.timer
 systemctl enable fstrim.timer
 systemctl enable libvirtd
 systemctl enable firewalld
-systemctl start firewalld
 systemctl enable acpid
 
 
@@ -38,10 +37,6 @@ echo vijay:vijay | chpasswd
 usermod -aG libvirt vijay
 
 echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
-
-firewall-cmd --add-port=1025-65535/tcp --permanent
-firewall-cmd --add-port=1025-65535/udp --permanent
-firewall-cmd --reload
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 
