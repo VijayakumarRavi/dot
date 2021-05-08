@@ -174,7 +174,7 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 echo -e "${Yellow}"
 fortune | cowsay -f tux
 # vim mode
- set -o vi
+# set -o vi
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
 echo -e "${Green}"
 date
