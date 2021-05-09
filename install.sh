@@ -12,18 +12,18 @@ mkdir ~/.config ;
 #==============
 # Delete existing dot files and folders
 #==============
-sudo rm -rif ~/.vim > /dev/null 2>&1 ;
-sudo rm -rfi ~/.vimrc > /dev/null 2>&1 ;
-sudo rm -rfi ~/.bashrc > /dev/null 2>&1 ;
-sudo rm -rfi ~/.tmux > /dev/null 2>&1 ;
-sudo rm -rfi ~/.tmux.conf > /dev/null 2>&1 ;
-sudo rm -rfi ~/.zsh_prompt > /dev/null 2>&1 ;
-sudo rm -rfi ~/.zshrc > /dev/null 2>&1 ;
-sudo rm -rfi ~/.gitconfig > /dev/null 2>&1 ;
-sudo rm -rfi ~/.antigen > /dev/null 2>&1 ;
-sudo rm -rfi ~/.antigen.zsh > /dev/null 2>&1 ;
-sudo rm -rfi ~/.psqlrc > /dev/null 2>&1 ;
-sudo rm -rfi ~/.tigrc > /dev/null 2>&1 ;
+sudo rm -rvif ~/.vim > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.vimrc > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.bashrc > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.tmux > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.tmux.conf > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.zsh_prompt > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.zshrc > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.gitconfig > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.antigen > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.antigen.zsh > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.psqlrc > /dev/null 2>&1 ;
+sudo rm -rvfi ~/.tigrc > /dev/null 2>&1 ;
 
 #=============
 # Cloning Repo
@@ -34,16 +34,16 @@ cd ~/Git && git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.gi
 # Create symlinks in the home folder
 # Allow overriding with files of matching names in the custom-configs dir
 #==============
-ln -sf $dotfiles_dir/nvim ~/.config/ ;
-ln -sf $dotfiles_dir/htop ~/.config/ ;
-ln -sf $dotfiles_dir/neofetch ~/.config/ ;
-ln -sf $dotfiles_dir/zsh/ ~/.config/ ;
-ln -sf $dotfiles_dir/tmux/ ~/.config/ ;
+ln -svf $dotfiles_dir/nvim ~/.config/ ;
+ln -svf $dotfiles_dir/htop ~/.config/ ;
+ln -svf $dotfiles_dir/neofetch ~/.config/ ;
+ln -svf $dotfiles_dir/zsh/ ~/.config/ ;
+ln -svf $dotfiles_dir/tmux/ ~/.config/ ;
 
-ln -sf $dotfiles_dir/.bashrc ~/.bashrc ;
-ln -sf $dotfiles_dir/.conkyrc ~/.conkyrc ;
-ln -sf $dotfiles_dir/.gitconfig ~/.gitconfig ;
-ln -sf $dotfiles_dir/zsh/.zshrc ~/.zshrc ;
+ln -svf $dotfiles_dir/.bashrc ~/.bashrc ;
+ln -svf $dotfiles_dir/.conkyrc ~/.conkyrc ;
+ln -svf $dotfiles_dir/.gitconfig ~/.gitconfig ;
+ln -svf $dotfiles_dir/zsh/.zshrc ~/.zshrc ;
 
 
 cd ~/Git && git clone https://aur.archlinux.org/yay.git && cd yay/ && makepkg -si --noconfirm ;
@@ -76,7 +76,7 @@ sudo curl -L 'https://raw.githubusercontent.com/VijayakumarRavi/Wallpapers/main/
 #===================
 cd ~/Git && git clone https://github.com/arcticicestudio/nord-gnome-terminal.git && cd nord-gnome-terminal/src && bash nord.sh -p vijay ;
 
-cd ~/Git && curl -LO https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2MTkyMDU5NzUiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImRlODI4OTlmMTBmMWVhMzkxMmY2MWY2NDdiYTk2NjAyNzlkNzFiNDM4YWU3MmY3MTMxOTcyN2RkNGMwYzI2MjdjNjcyN2IyMjBlOWJiNWU2NjZiZGJiNDg0NDUwYmE4OWNlYmIyMTg0MjYwYWQ5MGE0OTg2MGM0NDFlNTgxZjEwIiwidCI6MTYyMDIzODY3Nywic3RmcCI6bnVsbCwic3RpcCI6bnVsbH0.S3ZRXnHZq65byxyoR0-U2bDD1WN_6cPMjFlvSf9yo4I/Nordic-darker.tar.xz && tar -xf Nordic-darker.tar.xz && sudo cp -vi Nordic-darker/   /usr/share/themes/ ;
+# cd ~/Git && curl -LO https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2MTkyMDU5NzUiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImRlODI4OTlmMTBmMWVhMzkxMmY2MWY2NDdiYTk2NjAyNzlkNzFiNDM4YWU3MmY3MTMxOTcyN2RkNGMwYzI2MjdjNjcyN2IyMjBlOWJiNWU2NjZiZGJiNDg0NDUwYmE4OWNlYmIyMTg0MjYwYWQ5MGE0OTg2MGM0NDFlNTgxZjEwIiwidCI6MTYyMDIzODY3Nywic3RmcCI6bnVsbCwic3RpcCI6bnVsbH0.S3ZRXnHZq65byxyoR0-U2bDD1WN_6cPMjFlvSf9yo4I/Nordic-darker.tar.xz && tar -xf Nordic-darker.tar.xz && sudo cp -vi Nordic-darker/   /usr/share/themes/ ;
 
 # ---
 # Install git-completion and git-prompt
