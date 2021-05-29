@@ -63,5 +63,4 @@ echo "127.0.0.1 localhost" >> /mnt/etc/hosts ;
 echo "::1       localhost" >> /mnt/etc/hosts ;
 echo "127.0.1.1 archlinux.localdomain archlinux" >> /mnt/etc/hosts ;
 
-curl https://raw.githubusercontent.com/VijayakumarRavi/Dotfiles/main/Arch-Scripts/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh && umount -a && swapoff /dev/sda2 && lsblk ;
-
+curl https://raw.githubusercontent.com/VijayakumarRavi/Dotfiles/main/Arch-Scripts/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh && umount -a ; swapoff /dev/sda2 && lsblk ;
