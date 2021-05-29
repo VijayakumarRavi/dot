@@ -20,3 +20,4 @@ source $HOME/.config/nvim/configs/snippets.vim
 source $HOME/.config/nvim/configs/floaterm.vim
 source $HOME/.config/nvim/configs/keys.vim
 source $HOME/.config/nvim/configs/fzf.vim
+source $HOME/.config/nvim/configs/startify.vim

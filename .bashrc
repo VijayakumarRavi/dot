@@ -174,8 +174,10 @@ ALERT=${BWhite}${On_Red} # Bold White on red background
 echo -e "${Yellow}"
 fortune | cowsay -f tux
 # vim mode
-# set -o vi
+set -o vi
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
+# echo -e $UPDATE_LIST
+# yay -Qu | wc -l
 echo -e "${Green}"
 date
 function _exit()              # Function to run upon exit of shell.
@@ -414,7 +416,7 @@ alias pacupd='sudo pacman -Sy'             # Refresh of all package lists after 
 alias pacin='sudo pacman -S'               # Install specific package(s) from the repositories
 alias pacinu='sudo pacman -U'              # Install specific local package(s)
 alias pacre='sudo pacman -R'               # Remove the specified package(s), retaining its configuration(s) and required dependencies
-alias pacun='sudo pacman -Rcsn'            # Remove the specified package(s), its configuration(s) and unneeded dependencies
+alias pacrm='sudo pacman -Rcsn'            # Remove the specified package(s), its configuration(s) and unneeded dependencies
 alias pacinfo='sudo pacman -Si'            # Display information about a given package in the repositories
 alias pacse='sudo pacman -Ss'              # Search for package(s) in the repositories
 
@@ -1021,11 +1023,13 @@ alias ytv-Playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%
 
 function update(){
 	echo -e "${BPurple}   *****Pacman*****${NC}"
-	sudo pacman -Syu --noconfirm
+	sudo pacman -Syyu --noconfirm
 	echo -e "${BPurple}   ******Yay******${NC}"
 	yay -Syu --noconfirm
 	echo -e "${BPurple}   ******Snap******${NC}"
 	sudo snap refresh
+	echo -e "${BPurple}   ******Flatpak******${NC}"
+	sudo flatpak update -y
 }
 # install Aur packages
 aur(){ curl  -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
