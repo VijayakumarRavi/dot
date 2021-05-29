@@ -32,21 +32,9 @@ w
 EOF
 partprobe
 
-cat <<EOF | fdisk /dev/sdb
-o
-n
-p
-
-
-
-w
-EOF
-partprobe
-
-
-mkfs.ext4 /dev/sdb1 && mkfs.ext4 /dev/sda3 && mkfs.ext4 /dev/sda1 && mkswap /dev/sda2 ;
+mkfs.ext4 /dev/sda3 && mkfs.ext4 /dev/sda1 && mkswap /dev/sda2 ;
 swapon /dev/sda2 ;
-mount /dev/sda3 /mnt  && mkdir -p /mnt/boot && mount /dev/sda1 /mnt/boot && mkdir -p /mnt/home && mount /dev/sdb1 /mnt/home ;
+mount /dev/sda3 /mnt  && mkdir -p /mnt/boot && mount /dev/sda1 /mnt/boot ;
 
 lsblk ;
 sleep 20 ;
