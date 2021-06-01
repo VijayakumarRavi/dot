@@ -352,7 +352,7 @@ export HOSTFILE=$HOME/.hosts    # Put a list of remote hosts in ~/.hosts
 # Personnal Aliases
 #-------------------
 
-alias rm='rm -ivr'
+# alias rm='rm -vr'
 alias cp='cp -ivr'
 alias mv='mv -iv'
 # -> Prevents accidentally clobbering files.
