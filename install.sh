@@ -8,7 +8,7 @@ BPurple='\e[1;35m' ;
 NC="\e[m" ;
 mkdir ~/Git ;
 mkdir ~/.config ;
-
+sudo ln -svf ~/Git/Dotfiles/pacman.conf /etc/
 #==============
 # Delete existing dot files and folders
 #==============
@@ -34,6 +34,7 @@ cd ~/Git && git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.gi
 # Create symlinks in the home folder
 # Allow overriding with files of matching names in the custom-configs dir
 #==============
+sudo ln -svf ~/Git/Dotfiles/pacman.conf /etc/
 ln -svf $dotfiles_dir/nvim ~/.config/ ;
 ln -svf $dotfiles_dir/htop ~/.config/ ;
 ln -svf $dotfiles_dir/neofetch ~/.config/ ;

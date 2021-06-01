@@ -8,6 +8,7 @@ call plug#begin('~/.config/vim/plugged')
 Plug 'cocopon/iceberg.vim'
 Plug 'arzg/vim-substrata'
 Plug 'arcticicestudio/nord-vim'
+Plug 'sainnhe/everforest'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'

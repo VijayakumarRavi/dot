@@ -30,4 +30,4 @@ function! GetUniqueSessionName()
   return substitute(path . branch, '/', '-', 'g')
 endfunction
 
-autocmd VimLeavePre * silent execute 'SSave! ' . GetUniqueSessionName()
+" autocmd VimLeavePre * silent execute 'SSave! ' . GetUniqueSessionName()
