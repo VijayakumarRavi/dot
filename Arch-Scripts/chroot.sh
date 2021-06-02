@@ -44,7 +44,14 @@ config-users() {
 }
 
 install-pkgs() {
-	pacman -U --noconfirm /temp/*.pkg.tar.zst
+	pwd
+	sleep 5
+	cd /tmp
+	curl -LO https://gitlab.com/vijaysrv/arch-repo/-/raw/main/x86_64/yay-10.2.2-4-x86_64.pkg.tar.zst
+	curl -LO https://gitlab.com/vijaysrv/arch-repo/-/raw/main/x86_64/google-chrome-91.0.4472.77-1-x86_64.pkg.tar.zst
+	curl -LO https://gitlab.com/vijaysrv/arch-repo/-/raw/main/x86_64/brave-bin-1:1.25.68-1-x86_64.pkg.tar.zst
+	pacman -U --noconfirm *.pkg.tar.zst
+	rm -v *.pkg.tar.zst
 	sleep 10
 }
 
