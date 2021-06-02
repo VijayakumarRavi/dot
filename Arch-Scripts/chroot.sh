@@ -55,10 +55,17 @@ install-pkgs() {
 	sleep 10
 }
 
+install-dots(){
+	printf "\e[1;32m ***********installing Dotfiles **********\e[0m"
+	curl -L vijayakumarravi.github.io/Dotfiles/install.sh | bash
+	sleep 20
+}
+
 etc-configs
 starting-service
 config-users
 install-pkgs
 grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+install-dots
 sleep 10
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
