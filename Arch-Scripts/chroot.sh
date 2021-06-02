@@ -56,8 +56,9 @@ install-pkgs() {
 }
 
 install-dots(){
-	printf "\e[1;32m ***********installing Dotfiles **********\e[0m"
-	curl -L vijayakumarravi.github.io/Dotfiles/install.sh | bash
+	printf "\e[1;32m ***********installing Dotfiles **********/n\e[0m"
+	curl -L vijayakumarravi.github.io/Dotfiles/install.sh -o /home/vijay/install.sh
+	bash /home/vijay/install.sh
 	sleep 20
 }
 
