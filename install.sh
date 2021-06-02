@@ -3,94 +3,79 @@
 #==============
 # Variables
 #==============
-dotfiles_dir=~/Git/Dotfiles ;
-BPurple='\e[1;35m' ;
-NC="\e[m" ;
-mkdir ~/Git ;
-mkdir ~/.config ;
-sudo ln -svf ~/Git/Dotfiles/pacman.conf /etc/
-#==============
-# Delete existing dot files and folders
-#==============
-sudo rm -rvif ~/.vim > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.vimrc > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.bashrc > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.tmux > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.tmux.conf > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.zsh_prompt > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.zshrc > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.gitconfig > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.antigen > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.antigen.zsh > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.psqlrc > /dev/null 2>&1 ;
-sudo rm -rvfi ~/.tigrc > /dev/null 2>&1 ;
+HOME=/home/vijay
+dotfiles_dir=/home/vijay/Git/Dotfiles
+BPurple='\e[1;35m'
+NC="\e[m"
 
-#=============
-# Cloning Repo
-#=============
-cd ~/Git && git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git ;
+mkdir $HOME/Git
+mkdir $HOME/.config
 
-#==============
-# Create symlinks in the home folder
-# Allow overriding with files of matching names in the custom-configs dir
-#==============
-sudo ln -svf ~/Git/Dotfiles/pacman.conf /etc/
-ln -svf $dotfiles_dir/nvim ~/.config/ ;
-ln -svf $dotfiles_dir/htop ~/.config/ ;
-ln -svf $dotfiles_dir/neofetch ~/.config/ ;
-ln -svf $dotfiles_dir/zsh/ ~/.config/ ;
-ln -svf $dotfiles_dir/tmux/ ~/.config/ ;
+del-existing-files() {
+	sudo rm -rvif $HOME/.vim > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.vimrc > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.bashrc > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.tmux > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.tmux.conf > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.zsh_prompt > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.zshrc > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.gitconfig > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.antigen > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.antigen.zsh > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.psqlrc > /dev/null 2>&1
+	sudo rm -rvfi $HOME/.tigrc > /dev/null 2>&1
+}
 
-ln -svf $dotfiles_dir/.bashrc ~/.bashrc ;
-ln -svf $dotfiles_dir/.conkyrc ~/.conkyrc ;
-ln -svf $dotfiles_dir/.gitconfig ~/.gitconfig ;
-ln -svf $dotfiles_dir/zsh/.zshrc ~/.zshrc ;
+cloneing-repos(){
+	cd $HOME/Git/
+	git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git
+	git clone --recursive https://github.com/akinomyoga/ble.sh.git
+	git clone https://github.com/arcticicestudio/nord-gnome-terminal.git
+}
 
+link-files() {
+	ln -svf $dotfiles_dir/pacman.conf /etc/
+	ln -svf $dotfiles_dir/nvim $HOME/.config/
+	ln -svf $dotfiles_dir/htop $HOME/.config/
+	ln -svf $dotfiles_dir/neofetch $HOME/.config/
+	ln -svf $dotfiles_dir/zsh/ $HOME/.config/
+	ln -svf $dotfiles_dir/tmux/ $HOME/.config/
+	ln -svf $dotfiles_dir/.bashrc $HOME/.bashrc
+	ln -svf $dotfiles_dir/.conkyrc $HOME/.conkyrc
+	ln -svf $dotfiles_dir/.gitconfig $HOME/.gitconfig
+	ln -svf $dotfiles_dir/zsh/.zshrc $HOME/.zshrc
+}
 
-cd ~/Git && git clone https://aur.archlinux.org/yay.git && cd yay/ && makepkg -si --noconfirm ;
+repo-installs() {
+	cd $HOME/Git
+	make -C ble.sh install PREFIX=$HOME/.local
+	bash nord-gnome-terminal/src/nord.sh
+}
 
-echo "${BPurple}   *****Brave-bin*****${NC}" ;
-yay -S --noconfirm brave-bin ;
+others() {
+	cd $HOME/Git
+	curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl --output fm6000 && chmod +x fm6000 &&sudo mv fm6000 /usr/bin/
+	npm install -g neovim
+	npm install --save nord
+	pip3 install pynvim
+	curl -L 'https://raw.githubusercontent.com/VijayakumarRavi/Wallpapers/main/From%20reddit.jpeg' --output /usr/share/backgrounds/gnome/wall.jpg
+	gsettings set org.gnome.desktop.background picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
+	gsettings set org.gnome.desktop.screensaver picture-uri '/usr/share/backgrounds/gnome/wall.jpg'
+	curl -L https://github.com/git/git/raw/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash
+	curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o $HOME/.git-prompt.sh
+}
 
-echo "${BPurple}   *****Google Chrome*****${NC}" ;
-yay -S --noconfirm google-chrome ;
+grub-theme() {
+	cd $dotfiles_dir/themes
+	bash install.sh
+}
 
-#=============
-# ble.sh setup
-#=============
-cd ~/Git && git clone --recursive https://github.com/akinomyoga/ble.sh.git && make -C ble.sh install PREFIX=~/.local ;
+del-existing-files
+clone-repos
+link-files
+repo-install
+grub-theme
+others
 
-#========
-# fm6000
-#========
-curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl --output fm6000 && chmod +x fm6000 &&sudo mv fm6000 /usr/bin/ ;
-
-sudo npm install -g neovim && sudo npm install --save nord && pip3 install pynvim ;
-
-#=================
-#Setting Wallpaper
-#=================
-sudo curl -L 'https://raw.githubusercontent.com/VijayakumarRavi/Wallpapers/main/From%20reddit.jpeg' --output /usr/share/backgrounds/gnome/wall.jpg && gsettings set org.gnome.desktop.background picture-uri '/usr/share/backgrounds/gnome/wall.jpg' && gsettings set org.gnome.desktop.screensaver picture-uri '/usr/share/backgrounds/gnome/wall.jpg' ;
-
-#===================
-#Nord Terminal Theme
-#===================
-cd ~/Git && git clone https://github.com/arcticicestudio/nord-gnome-terminal.git && cd nord-gnome-terminal/src && bash nord.sh -p vijay ;
-
-# cd ~/Git && curl -LO https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE2MTkyMDU5NzUiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6ImRlODI4OTlmMTBmMWVhMzkxMmY2MWY2NDdiYTk2NjAyNzlkNzFiNDM4YWU3MmY3MTMxOTcyN2RkNGMwYzI2MjdjNjcyN2IyMjBlOWJiNWU2NjZiZGJiNDg0NDUwYmE4OWNlYmIyMTg0MjYwYWQ5MGE0OTg2MGM0NDFlNTgxZjEwIiwidCI6MTYyMDIzODY3Nywic3RmcCI6bnVsbCwic3RpcCI6bnVsbH0.S3ZRXnHZq65byxyoR0-U2bDD1WN_6cPMjFlvSf9yo4I/Nordic-darker.tar.xz && tar -xf Nordic-darker.tar.xz && sudo cp -vi Nordic-darker/   /usr/share/themes/ ;
-
-# ---
-# Install git-completion and git-prompt
-# ---
-cd ~/ && curl -OL https://github.com/git/git/raw/master/contrib/completion/git-completion.bash && mv ~/git-completion.bash ~/.git-completion.bash && curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh ;
-
-sudo sh ~/Git/Dotfiles/font.sh ;
-
-sudo systemctl start firewalld && sudo firewall-cmd --add-port=1025-65535/tcp --permanent && sudo firewall-cmd --add-port=1025-65535/udp --permanent && sudo firewall-cmd --reload ;
-
-
-#=========================================
-# Give the user a finishing installed note
-#=========================================
 echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
 
