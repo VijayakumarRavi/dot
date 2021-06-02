@@ -4,10 +4,10 @@ etc-configs() {
 	ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 	timedatectl set-ntp true
 	hwclock --systohc
-	echo "archlinux" >> /mnt/etc/hostname
-	echo "127.0.0.1 localhost" >> /mnt/etc/hosts
-	echo "::1       localhost" >> /mnt/etc/hosts
-	echo "127.0.1.1 archlinux.localdomain archlinux" >> /mnt/etc/hosts
+	echo "archlinux" >> /etc/hostname
+	echo "127.0.0.1 localhost" >> /etc/hosts
+	echo "::1       localhost" >> /etc/hosts
+	echo "127.0.1.1 archlinux.localdomain archlinux" >> /etc/hosts
 	echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 	echo "en_US ISO-8859-1" >> /etc/locale.gen
@@ -33,11 +33,13 @@ starting-service() {
 }
 
 config-users() {
+	printf "\e[1;32m********createing user vijay*********\e[0m"
 	useradd -m vijay
 	echo root:vijay | chpasswd
 	echo vijay:vijay | chpasswd
 	usermod -aG libvirt vijay
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
+	printf "\e[1;32m********createing user Successfully Done*********\e[0m"
 	sleep 10
 }
 
