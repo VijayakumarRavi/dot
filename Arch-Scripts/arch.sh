@@ -1,13 +1,7 @@
 #!/bin/bash
 
-#This is a lazy script I have for auto-installing Arch.
-#It's not officially part of LARBS, but I use it for testing.
-#DO NOT RUN THIS YOURSELF because Step 1 is it reformatting /dev/sda WITHOUT confirmation,
-#which means RIP in peace qq your data unless you've already backed up all of your drive.
-
-timedatectl set-ntp true ;
-
-cat <<EOF | fdisk /dev/sda
+create-part-d1() {
+	cat <<EOF | fdisk /dev/sda
 o
 n
 p
@@ -18,7 +12,7 @@ n
 p
 
 
-+4G
++2G
 n
 p
 
@@ -30,9 +24,11 @@ p
 
 w
 EOF
-partprobe
-
-cat <<EOF | fdisk /dev/sdb
+	partprobe
+	sleep 10
+}
+create-part-d2() {
+	cat <<EOF | fdisk /dev/sdb
 o
 n
 p
@@ -41,26 +37,76 @@ p
 
 w
 EOF
-partprobe
+	partprobe
+	sleep 10
+}
 
+makefs() {
+	mkfs.ext4 /dev/sdb1
+	mkfs.ext4 /dev/sda3
+	mkfs.ext4 /dev/sda1
+	mkswap /dev/sda2
+	sleep 10
+}
 
-mkfs.ext4 /dev/sdb1 && mkfs.ext4 /dev/sda3 && mkfs.ext4 /dev/sda1 && mkswap /dev/sda2 ;
-swapon /dev/sda2 ;
-mount /dev/sda3 /mnt  && mkdir -p /mnt/boot && mount /dev/sda1 /mnt/boot && mkdir -p /mnt/home && mount /dev/sdb1 /mnt/home ;
+mountfs() {
+	swapon /dev/sda2
+	mount /dev/sda3 /mnt
+	mkdir -p /mnt/boot
+	mount /dev/sda1 /mnt/boot
+	mkdir -p /mnt/home
+	mount /dev/sdb1 /mnt/home
+	mkdir ~/temp
+	mkdir -p /mnt/temp
+	lsblk
+	sleep 20
+}
 
-lsblk ;
-sleep 20 ;
+install-pkgs() {
+	pacman -Sy --noconfirm archlinux-keyring
+	pacstrap /mnt base base-devel linux linux-lts linux-headers linux-firmware xorg nvidia nvidia-utils gdm gnome git neovim curl telegram-desktop thunderbird gnome-tweaks conky htop neofetch npm python-pip tmux gawk cowsay fortune-mod go grub networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector papirus-icon-theme polkit udisks2 pulseaudio-bluetooth
+	genfstab -U /mnt >> /mnt/etc/fstab ;
+	cat /mnt/etc/fstab ;
+	sleep 20
+}
 
-pacman -Sy --noconfirm archlinux-keyring ;
+install-yay() {
+	cd ~/temp/
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -s
+	mv -v *.pkg.tar.zst /mnt/temp/
+	sleep 10
+}
 
-pacstrap /mnt base base-devel linux linux-lts linux-headers linux-firmware xorg nvidia nvidia-utils gdm gnome git neovim curl telegram-desktop thunderbird gnome-tweaks conky htop neofetch npm python-pip tmux gawk cowsay fortune-mod go grub networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector papirus-icon-theme polkit udisks2 pulseaudio-bluetooth && genfstab -U /mnt >> /mnt/etc/fstab ;
+install-brave() {
+	cd ~/temp/
+	git clone https://aur.archlinux.org/brave-bin.git
+	cd brave-bin
+	makepkg -s
+	mv -v *.pkg.tar.zst /mnt/temp
+	sleep 10
+}
 
-cat /mnt/etc/fstab ;
-sleep 20 ;
+chroot-fun() {
+	curl https://raw.githubusercontent.com/VijayakumarRavi/Dotfiles/main/Arch-Scripts/chroot.sh > /mnt/chroot.sh
+	printf "\e[1;32m*********CHROOT Scripts Started**********\e[0m"
+	arch-chroot /mnt bash chroot.sh
+	rm -v /mnt/chroot.sh
+	rm -rv /mnt/temp
+	umount -a
+	swapoff /dev/sda2
+	lsblk
+}
 
-echo "archlinux" >> /mnt/etc/hostname ;
-echo "127.0.0.1 localhost" >> /mnt/etc/hosts ;
-echo "::1       localhost" >> /mnt/etc/hosts ;
-echo "127.0.1.1 archlinux.localdomain archlinux" >> /mnt/etc/hosts ;
+printf "\e[1;32m*********Arch Scripts Started**********\e[0m"
+timedatectl set-ntp true
+create-part-d1
+create-part-d2
+makefs
+mountfs
+install-pkgs
+install-yay
+install-brave
+chroot-fun
 
-curl https://raw.githubusercontent.com/VijayakumarRavi/Dotfiles/main/Arch-Scripts/chroot.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh && umount -a ; swapoff /dev/sda2 && lsblk ;
