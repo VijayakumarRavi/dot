@@ -17,7 +17,6 @@ etc-configs() {
 
 starting-service() {
 	systemctl enable NetworkManager
-	systemctl start NetworkManager
 	systemctl enable gdm
 	systemctl enable bluetooth
 	systemctl enable cups.service
@@ -33,13 +32,13 @@ starting-service() {
 }
 
 config-users() {
-	printf "\e[1;32m********createing user vijay*********\e[0m"
+	printf "\e[1;32m********createing user vijay*********/n\e[0m"
 	useradd -m vijay
 	echo root:vijay | chpasswd
 	echo vijay:vijay | chpasswd
 	usermod -aG libvirt vijay
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
-	printf "\e[1;32m********createing user Successfully Done*********\e[0m"
+	printf "\e[1;32m********createing user Successfully Done*********/n\e[0m"
 	sleep 10
 }
 
@@ -59,6 +58,7 @@ install-dots(){
 	printf "\e[1;32m ***********installing Dotfiles **********/n\e[0m"
 	curl -L vijayakumarravi.github.io/Dotfiles/install.sh -o /home/vijay/install.sh
 	bash /home/vijay/install.sh
+	rm -v /home/vijay/install.sh
 	sleep 20
 }
 

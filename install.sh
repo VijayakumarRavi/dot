@@ -1,5 +1,6 @@
 #!/bin/bash
 
+printf "\e[1;32m*********Dotfiles Scripts Started**********\e[0m"
 #==============
 # Variables
 #==============
@@ -11,11 +12,15 @@ NC="\e[m"
 if [[ ! -d $HOME/Git ]]; then
 	mkdir -p $HOME/Git ;
 	echo "Git folder is created" ;
-elif [[ ! -d $HOME/.config ]]; then
+else
+	echo "Git is already exist" ;
+fi
+
+if [[ ! -d $HOME/.config ]]; then
 	mkdir $HOME/.config ;
 	echo ".config folder is created" ;
 else
-	echo "folders already exist" ;
+	echo ".config already exist" ;
 fi
 
 del-existing-files() {
@@ -78,7 +83,7 @@ grub-theme() {
 }
 
 del-existing-files
-clone-repos
+cloneing-repos
 link-files
 repo-install
 grub-theme
