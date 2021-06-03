@@ -1,6 +1,6 @@
 #!/bin/bash
 
-printf "\e[1;32m*********Dotfiles Scripts Started**********\e[0m"
+printf "\e[1;32m*********Dotfiles Scripts Started**********/n\e[0m"
 #==============
 # Variables
 #==============
@@ -24,18 +24,18 @@ else
 fi
 
 del-existing-files() {
-	sudo rm -rvif $HOME/.vim > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.vimrc > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.bashrc > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.tmux > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.tmux.conf > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.zsh_prompt > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.zshrc > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.gitconfig > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.antigen > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.antigen.zsh > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.psqlrc > /dev/null 2>&1 ;
-	sudo rm -rvfi $HOME/.tigrc > /dev/null 2>&1 ;
+	rm -rvif $HOME/.vim > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.vimrc > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.bashrc > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.tmux > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.tmux.conf > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.zsh_prompt > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.zshrc > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.gitconfig > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.antigen > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.antigen.zsh > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.psqlrc > /dev/null 2>&1 ;
+	rm -rvfi $HOME/.tigrc > /dev/null 2>&1 ;
 }
 
 cloneing-repos(){
