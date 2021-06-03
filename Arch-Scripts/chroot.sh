@@ -65,7 +65,9 @@ install-dots(){
 etc-configs
 starting-service
 config-users
-install-pkgs
+if [[ $1 = "ip" ]]; then
+	install-pkgs
+fi
 grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 install-dots
 sleep 10
