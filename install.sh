@@ -58,7 +58,7 @@ link-files() {
 	ln -svf $dotfiles_dir/zsh/.zshrc $HOME/.zshrc ;
 }
 
-repo-installs() {
+repo-install() {
 	cd $HOME/Git
 	make -C ble.sh install PREFIX=$HOME/.local ;
 	bash nord-gnome-terminal/src/nord.sh ;
