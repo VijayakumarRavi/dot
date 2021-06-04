@@ -1037,3 +1037,4 @@ aur(){ curl  -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar
 # Add the following line at the end of bashrc
 ((_ble_bash)) && ble-attach
 
+. "$HOME/.cargo/env"
