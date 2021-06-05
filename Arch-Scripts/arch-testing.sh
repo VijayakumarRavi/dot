@@ -81,7 +81,7 @@ chroot-fun() {
 	lsblk
 }
 
-chroot() {
+chroot-ex() {
 	cat <<EOF | arch-chroot /mnt bash
 #!/bin/bash
 printf "\e[1;32m*********CHROOT Scripts Started**********\e[0m"
