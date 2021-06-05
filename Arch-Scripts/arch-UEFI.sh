@@ -23,6 +23,7 @@ n
 w
 EOF
 	partprobe
+	lsblk
 	sleep 10
 }
 
