@@ -40,9 +40,8 @@ EOF
 }
 
 makefs() {
-	mkfs.ext4 /dev/sdb1
 	mkfs.ext4 /dev/sda3
-	mkfs.ext4 /dev/sda1
+	mkfs.fat -F32 /dev/sda1
 	mkswap /dev/sda2
 	sleep 10
 }
@@ -50,12 +49,8 @@ makefs() {
 mountfs() {
 	swapon /dev/sda2
 	mount /dev/sda3 /mnt
-	mkdir -p /mnt/boot
-	mount /dev/sda1 /mnt/boot
-	mkdir -p /mnt/home
-	mount /dev/sdb1 /mnt/home
-	mkdir ~/temp
-	mkdir -p /mnt/temp
+	mkdir -p /mnt/boot/efi
+	mount /dev/sda1 /mnt/boot/efi
 	lsblk
 	sleep 20
 }
