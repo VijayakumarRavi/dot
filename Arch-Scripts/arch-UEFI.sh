@@ -1,25 +1,23 @@
 #!/bin/bash
 
 create-part-d1() {
-	cat <<EOF | fdisk /dev/sda
+	cat <<EOF | gdisk /dev/sda
 o
 n
-p
 
 
 +200M
+ef00
 n
-p
 
 
 +2G
+8200
 n
-p
 
 
 
 n
-p
 
 
 w
@@ -64,7 +62,7 @@ mountfs() {
 
 install-pkgs() {
 	pacman -Sy --noconfirm archlinux-keyring
-	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
+	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
 	cat /mnt/etc/fstab ;
 	sleep 20
@@ -116,7 +114,8 @@ config-users() {
 etc-configs
 starting-service
 config-users
-grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+# grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
 sleep 10
 #printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 EOF
