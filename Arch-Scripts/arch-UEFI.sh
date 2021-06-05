@@ -1,6 +1,6 @@
 #!/bin/bash
 
-create-part-d1() {
+partition() {
 	cat <<EOF | gdisk /dev/sda
 o
 n
@@ -18,19 +18,6 @@ n
 
 
 n
-
-
-w
-EOF
-	partprobe
-	sleep 10
-}
-create-part-d2() {
-	cat <<EOF | fdisk /dev/sdb
-o
-n
-p
-
 
 
 w
@@ -66,7 +53,7 @@ install-pkgs() {
 chroot-ex() {
 	cat <<EOF | arch-chroot /mnt bash
 #!/bin/bash
-printf "\e[1;32m*********CHROOT Scripts Started**********\e[0m"
+printf "\e[1;32m\n*********CHROOT Scripts Started**********\n\e[0m"
 etc-configs() {
 	ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 	timedatectl set-ntp true
@@ -97,12 +84,12 @@ starting-service() {
 }
 
 config-users() {
-	printf "\e[1;32m********createing user vijay*********/n\e[0m"
+	printf "\e[1;32m\n********createing user vijay*********\n\e[0m"
 	useradd -m vijay
 	echo root:vijay | chpasswd
 	echo vijay:vijay | chpasswd
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
-	printf "\e[1;32m********createing user Successfully Done*********/n\e[0m"
+	printf "\e[1;32m\n********createing user Successfully Done*********\n\e[0m"
 	sleep 10
 }
 
@@ -115,10 +102,9 @@ sleep 10
 #printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 EOF
 }
-printf "\e[1;32m*********Arch Scripts Started**********\e[0m"
+printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
 timedatectl set-ntp true
-create-part-d1
-# create-part-d2
+partition
 makefs
 mountfs
 install-pkgs
