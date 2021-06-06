@@ -81,6 +81,7 @@ starting-service() {
 	systemctl enable fstrim.timer
 	systemctl enable firewalld
 	systemctl enable acpid
+	systemctl enable lightdm
 	sleep 10
 }
 
@@ -102,9 +103,9 @@ i3-install() {
 
 
 etc-configs
-starting-service
 config-users
 i3-install
+starting-service
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
 sleep 10
 #printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
