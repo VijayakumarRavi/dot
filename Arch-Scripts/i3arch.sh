@@ -39,6 +39,7 @@ mountfs() {
 	mount /dev/sda3 /mnt
 	mkdir -p /mnt/boot/efi
 	mount /dev/sda1 /mnt/boot/efi
+	mount /dev/sdb1 /mnt/home
 	lsblk
 	sleep 20
 }
