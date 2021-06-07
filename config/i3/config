@@ -152,18 +152,18 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 assign [class="Brave-browser"] workspace $ws2
 for_window [class="Brave-browser"] focus
 
-assign [class="vlc"] workspace $ws4
+assign [class="vlc"] workspace $ws5
 for_window [class="vlc"] focus
 
-assign [class="thunderbird"] workspace $ws10
+assign [class="thunderbird"] workspace $ws4
 for_window [class=thunderbird] focus
 
-assign [class="Spacefm"] workspace $ws3
-for_window [class=Spacefm] focus
+assign [class="spotify"] workspace $ws4
+for_window [class=spotify] focus
 
 exec --no-startup-id sleep 1 && brave
 exec --no-startup-id sleep 2 && thunderbird
-# exec --no-startup-id sleep 3 && spacefm
+exec --no-startup-id sleep 3 && spotify-tray
 # exec --no-startup-id sleep 4 && kitty --class ncmpcpp-ueberzug -e ncmpcpp-ueberzug
 # exec --no-startup-id sleep 5 && kitty --class cava -e cava
 
@@ -333,9 +333,9 @@ mode "$mode_gaps_left" {
 bar {
         # status_command i3status
 		font pango:Inconsolata 10
-		tray_output none
-		status_command ~/Git/bumblebee-status/bumblebee-status -m arch-update spotify\
-		pihole nic date time bluetooth2 pasink pasource dunstctl \
+#		tray_output none
+		status_command ~/git/bumblebee-status/bumblebee-status -m arch-update spotify\
+		nic date time bluetooth2 pasink pasource dunstctl \
 			-p root.path=/ time.format="%I:%M %p" date.format="%a, %b %d %Y" nic.format="{ssid}" nic.include="{wlp4s0}" pihole.address="http://10.0.0.12" \
 			-t solarized-powerline
 
