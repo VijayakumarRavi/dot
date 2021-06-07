@@ -5,7 +5,7 @@
 # Variables
 #==============
 HOME=/home/vijay
-dotfiles_dir=/home/vijay/Git/Dotfiles
+dotfiles_dir=/home/vijay/Git/Dotfiles/config
 BPurple='\e[1;35m'
 NC="\e[m"
 create-dirs() {
@@ -24,20 +24,20 @@ else
 fi
 }
 
-del-existing-files() {
-	rm -rvif $HOME/.vim > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.vimrc > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.bashrc > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.tmux > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.tmux.conf > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.zsh_prompt > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.zshrc > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.gitconfig > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.antigen > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.antigen.zsh > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.psqlrc > /dev/null 2>&1 ;
-	rm -rvfi $HOME/.tigrc > /dev/null 2>&1 ;
-}
+# del-existing-files() {
+#	rm -rvif $HOME/.vim > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.vimrc > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.bashrc > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.tmux > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.tmux.conf > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.zsh_prompt > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.zshrc > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.gitconfig > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.antigen > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.antigen.zsh > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.psqlrc > /dev/null 2>&1 ;
+#	rm -rvfi $HOME/.tigrc > /dev/null 2>&1 ;
+#}
 
 cloneing-repos(){
 	cd $HOME/Git/
@@ -46,12 +46,17 @@ cloneing-repos(){
 }
 
 link-files() {
-	ln -svf $dotfiles_dir/pacman.conf /etc/ ;
-	ln -svf $dotfiles_dir/nvim $HOME/.config/ ;
+	sudo ln -svf $dotfiles_dir/pacman.conf /etc/ ;
+	ln -svf $dotfiles_dir/alacritty $HOME/.config/ ;
 	ln -svf $dotfiles_dir/htop $HOME/.config/ ;
 	ln -svf $dotfiles_dir/neofetch $HOME/.config/ ;
-	ln -svf $dotfiles_dir/zsh/ $HOME/.config/ ;
+	ln -svf $dotfiles_dir/i3 $HOME/.config/ ;
+	ln -svf $dotfiles_dir/i3status $HOME/.config/ ;
+	ln -svf $dotfiles_dir/nvim $HOME/.config/ ;
+	ln -svf $dotfiles_dir/pcmanfm $HOME/.config/ ;
 	ln -svf $dotfiles_dir/tmux/ $HOME/.config/ ;
+	ln -svf $dotfiles_dir/transmission/ $HOME/.config/ ;
+	ln -svf $dotfiles_dir/zsh/ $HOME/.config/ ;
 	ln -svf $dotfiles_dir/.bashrc $HOME/.bashrc ;
 	ln -svf $dotfiles_dir/.conkyrc $HOME/.conkyrc ;
 	ln -svf $dotfiles_dir/.gitconfig $HOME/.gitconfig ;
@@ -78,13 +83,13 @@ grub-theme() {
 	bash install.sh ;
 }
 
-create-dirs
-del-existing-files
-cloneing-repos
+# create-dirs
+# del-existing-files
+# cloneing-repos
 link-files
-repo-install
-grub-theme
-others
+# repo-install
+# grub-theme
+# others
 
 echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
 

@@ -169,10 +169,10 @@ NC="\e[m"               # Color Reset
 
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
-# neofetch
-# fm6000 -c bright_yellow -de Gnome -phb
-echo -e "${Yellow}"
-fortune | cowsay -f tux
+neofetch
+# fm6000 -c bright_yellow -phb
+# echo -e "${Yellow}"
+# fortune | cowsay -f tux
 # vim mode
 set -o vi
 echo -e "${BYellow}Vanakkam da Mapla${Red}"
@@ -398,6 +398,7 @@ alias n='nvim'
 alias vimrc='nvim ~/.config/nvim/init.vim'
 alias nvimrc='nvim ~/.config/nvim/init.vim'
 alias bashrc='nvim ~/.bashrc'
+alias i3con='nvim ~/.config/i3/config'
 alias loadbash='source ~/.bashrc'
 alias notes='vim ~/.notes.txt'
 
