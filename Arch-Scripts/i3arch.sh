@@ -39,6 +39,7 @@ mountfs() {
 	mount /dev/sda3 /mnt
 	mkdir -p /mnt/boot/efi
 	mount /dev/sda1 /mnt/boot/efi
+	mkdir /mnt/home
 	mount /dev/sdb1 /mnt/home
 	lsblk
 	sleep 20
@@ -46,7 +47,7 @@ mountfs() {
 
 install-pkgs() {
 	pacman -Sy --noconfirm archlinux-keyring
-	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
+	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
 	cat /mnt/etc/fstab ;
 	sleep 20
@@ -83,6 +84,7 @@ starting-service() {
 	systemctl enable firewalld
 	systemctl enable acpid
 	systemctl enable lightdm
+	systemctl enable libvertd
 	sleep 10
 }
 
@@ -91,6 +93,7 @@ config-users() {
 	useradd -m vijay
 	echo root:vijay | chpasswd
 	echo vijay:vijay | chpasswd
+	usermod -aG libvirt vijay
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
 	printf "\e[1;32m\n********createing user Successfully Done*********\n\e[0m"
 	sleep 10
@@ -100,12 +103,14 @@ i3-install() {
 	pacman -S xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon
 }
 
-
-
+kvm-install() {
+	pacman -S virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+}
 
 etc-configs
 config-users
 i3-install
+kvm-install
 starting-service
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
 sleep 10
