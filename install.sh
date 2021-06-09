@@ -40,6 +40,8 @@ link-files() {
 	ln -svf $dotfiles_dir/i3status $HOME/.config/ ;
 	ln -svf $dotfiles_dir/nvim $HOME/.config/ ;
 	ln -svf $dotfiles_dir/pcmanfm $HOME/.config/ ;
+	ln -svf $dotfiles_dir/picom $HOME/.config/ ;
+	ln -svf $dotfiles_dir/polybar $HOME/.config/ ;
 	ln -svf $dotfiles_dir/tmux/ $HOME/.config/ ;
 	ln -svf $dotfiles_dir/transmission/ $HOME/.config/ ;
 	ln -svf $dotfiles_dir/zsh/ $HOME/.config/ ;
