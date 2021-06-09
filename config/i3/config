@@ -353,7 +353,7 @@ exec blueman-tray
 exec volumeicon
 # Launching applications
 bindsym $mod+e exec pcmanfm
-bindsym $mod+w exec brave
+bindsym $mod+w exec firefox
 bindsym $mod+s exec spotify
 #wallpaper
 # exec nitrogen --restore
