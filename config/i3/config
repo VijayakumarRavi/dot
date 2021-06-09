@@ -161,9 +161,9 @@ for_window [class=thunderbird] focus
 assign [class="spotify"] workspace $ws4
 for_window [class=spotify] focus
 
-exec --no-startup-id sleep 1 && brave
-exec --no-startup-id sleep 2 && thunderbird
-exec --no-startup-id sleep 3 && spotify-tray
+# exec --no-startup-id sleep 1 && brave
+# exec --no-startup-id sleep 2 && thunderbird
+# exec --no-startup-id sleep 3 && spotify
 # exec --no-startup-id sleep 4 && kitty --class ncmpcpp-ueberzug -e ncmpcpp-ueberzug
 # exec --no-startup-id sleep 5 && kitty --class cava -e cava
 
@@ -331,22 +331,22 @@ mode "$mode_gaps_left" {
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        # status_command i3status
-		font pango:Inconsolata 10
-#		tray_output none
-		status_command ~/git/bumblebee-status/bumblebee-status -m arch-update spotify\
-		nic date time bluetooth2 pasink pasource dunstctl \
-			-p root.path=/ time.format="%I:%M %p" date.format="%a, %b %d %Y" nic.format="{ssid}" nic.include="{wlp4s0}" pihole.address="http://10.0.0.12" \
-			-t solarized-powerline
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+		#font pango:Inconsolata 10
+		font pango:Noto Sans Regular 10
+		position top
+		# i3bar_command i3bar --transparency
+		# tray_output primary
+		tray_padding 0
+
 
 }
 
 
-#wallpaper
-exec nitrogen --restore
-# exec /home/vijay/Pictures/wallpapers/wallpaper.sh
 #picom
 exec picom -f
+# Dock
+exec plank
 #bluetooth
 exec blueman-tray
 #Volume
@@ -354,4 +354,12 @@ exec volumeicon
 # Launching applications
 bindsym $mod+e exec pcmanfm
 bindsym $mod+w exec brave
+bindsym $mod+s exec spotify
+#wallpaper
+# exec nitrogen --restore
+exec dwall -s colony &
+# exec /home/vijay/Pictures/wallpapers/wallpaper.sh
+
+#eww
+exec ~/.config/eww/launch_eww
 
