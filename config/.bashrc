@@ -426,7 +426,7 @@ alias pacind='sudo pacman -S --asdeps'     # Install given package(s) as depende
 alias pacclean="sudo pacman -Sc"           # Delete all not currently installed package files
 alias pacmake="makepkg -fcsi"         # Make package from PKGBUILD file in current directory
 alias changemirror='nvim /etc/pacman.d/mirrorlist'
-
+alias pacor="sudo pacman -Rs $(pacman -Qqtd)" # Removes orphan packages
 #Tmux
 alias tdot='tmux a -t Dotfiles'
 
