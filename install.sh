@@ -46,6 +46,7 @@ link-files() {
 	ln -svf $dotfiles_dir/transmission/ $HOME/.config/ ;
 	ln -svf $dotfiles_dir/zsh/ $HOME/.config/ ;
 	ln -svf $dotfiles_dir/.bashrc $HOME/.bashrc ;
+	ln -svf $dotfiles_dir/.inputrc $HOME/.inputrc ;
 	ln -svf $dotfiles_dir/.conkyrc $HOME/.conkyrc ;
 	ln -svf $dotfiles_dir/.gitconfig $HOME/.gitconfig ;
 	ln -svf $dotfiles_dir/zsh/.zshrc $HOME/.zshrc ;
