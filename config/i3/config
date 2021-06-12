@@ -7,34 +7,38 @@
 
 # i3 config file (v4)
 #
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
+font pango:Futura BK BT Book 8
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+#font -xos4-terminus-medium-r-*-*-12-*
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# hide border
-# default_border pixel 0
-# hide_edge_borders smart
-# title_align center
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel o
+hide_edge_borders smart
+# start a terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+q kill
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -43,28 +47,20 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-
-# kill focused window
-bindsym $mod+q kill
-
 # start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run -fn "-xos4-terminus-medium-r-*-*-12-*"
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+#bindsym $mod+d exec --no-startup-id rofi -show run -font "pragmata 8" -fg "#EEE8D5" -bg "#073642" -bgalt "#002b36" -hlfg "#002b36" -hlbg "#657B83" -o 85
 bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -73,10 +69,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -85,17 +81,17 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+z split h
 
 # split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+s layout stacking
-bindsym $mod+Shift+t layout tabbed
+#bindsym $mod+s layout stacking
+bindsym $mod+Shift+t  layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
@@ -110,72 +106,73 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-
-set $ws1 ""
-set $ws2 ""
-set $ws3 ""
-set $ws4 ""
-set $ws5 ""
-set $ws6 ""
-set $ws7 ""
-set $ws8 ""
-set $ws9 ""
-set $ws10 "📧"
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 
+bindsym $mod+KP_1 workspace 1
+bindsym $mod+KP_2 workspace 2
+bindsym $mod+KP_3 workspace 3
+bindsym $mod+KP_4 workspace 4
+bindsym $mod+KP_5 workspace 5
+bindsym $mod+KP_6 workspace 6
+bindsym $mod+KP_7 workspace 7
+bindsym $mod+KP_8 workspace 8
+bindsym $mod+KP_9 workspace 9
+bindsym $mod+KP_0 workspace 10
 
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
-assign [class="Brave-browser"] workspace $ws2
-for_window [class="Brave-browser"] focus
+# set workspaces to specific monitors
+workspace 1 output DVI-0
+workspace 3 output DVI-0
+workspace 5 output DVI-0
+workspace 7 output DVI-0
+workspace 9 output DVI-0
 
-assign [class="vlc"] workspace $ws5
-for_window [class="vlc"] focus
+workspace 2 output DVI-1
+workspace 4 output DVI-1
+workspace 6 output DVI-1
+workspace 8 output DVI-1
+workspace 10 output DVI-1
 
-assign [class="thunderbird"] workspace $ws4
-for_window [class=thunderbird] focus
 
-assign [class="spotify"] workspace $ws4
-for_window [class=spotify] focus
+# https://www.reddit.com/r/i3wm/comments/460ggx/can_i_have_i3_always_display_virtual_desktops_17/
 
-# exec --no-startup-id sleep 1 && brave
-# exec --no-startup-id sleep 2 && thunderbird
-# exec --no-startup-id sleep 3 && spotify
-# exec --no-startup-id sleep 4 && kitty --class ncmpcpp-ueberzug -e ncmpcpp-ueberzug
-# exec --no-startup-id sleep 5 && kitty --class cava -e cava
-
+# Go to lowest empty workspace
+bindsym $mod+Shift+q exec ~/git/Dotfiles/config/i3/scripts/bin/nextworkspace
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec i3exit logout # "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3exit logout
+
 bindsym $mod+Shift+s exec i3exit suspend
-# Lock the screen
+
 bindsym $mod+Shift+x exec i3lock-fancy --show-failed-attempts
+# "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -184,10 +181,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -195,180 +192,97 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
+        bindsym Shift+Left resize shrink width 1 px or 1 ppt
+        bindsym Shift+Down resize grow height 1 px or 1 ppt
+        bindsym Shift+Up resize shrink height 1 px or 1 ppt
+        bindsym Shift+Right resize grow width 1 px or 1 ppt
+
+        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
-# Set inner/outer gaps
-gaps inner 10
-gaps outer 5
-
-set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_horiz Horizontal Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_verti Vertical Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_top Top Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_right Right Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_bottom Bottom Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_left Left Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym h      mode "$mode_gaps_horiz"
-        bindsym v      mode "$mode_gaps_verti"
-        bindsym t      mode "$mode_gaps_top"
-        bindsym r      mode "$mode_gaps_right"
-        bindsym b      mode "$mode_gaps_bottom"
-        bindsym l      mode "$mode_gaps_left"
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_horiz" {
-        bindsym plus  gaps horizontal current plus 5
-        bindsym minus gaps horizontal current minus 5
-        bindsym 0     gaps horizontal current set 0
-
-        bindsym Shift+plus  gaps horizontal all plus 5
-        bindsym Shift+minus gaps horizontal all minus 5
-        bindsym Shift+0     gaps horizontal all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_verti" {
-        bindsym plus  gaps vertical current plus 5
-        bindsym minus gaps vertical current minus 5
-        bindsym 0     gaps vertical current set 0
-
-        bindsym Shift+plus  gaps vertical all plus 5
-        bindsym Shift+minus gaps vertical all minus 5
-        bindsym Shift+0     gaps vertical all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_top" {
-        bindsym plus  gaps top current plus 5
-        bindsym minus gaps top current minus 5
-        bindsym 0     gaps top current set 0
-
-        bindsym Shift+plus  gaps top all plus 5
-        bindsym Shift+minus gaps top all minus 5
-        bindsym Shift+0     gaps top all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_right" {
-        bindsym plus  gaps right current plus 5
-        bindsym minus gaps right current minus 5
-        bindsym 0     gaps right current set 0
-
-        bindsym Shift+plus  gaps right all plus 5
-        bindsym Shift+minus gaps right all minus 5
-        bindsym Shift+0     gaps right all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_bottom" {
-        bindsym plus  gaps bottom current plus 5
-        bindsym minus gaps bottom current minus 5
-        bindsym 0     gaps bottom current set 0
-
-        bindsym Shift+plus  gaps bottom all plus 5
-        bindsym Shift+minus gaps bottom all minus 5
-        bindsym Shift+0     gaps bottom all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_left" {
-        bindsym plus  gaps left current plus 5
-        bindsym minus gaps left current minus 5
-        bindsym 0     gaps left current set 0
-
-        bindsym Shift+plus  gaps left all plus 5
-        bindsym Shift+minus gaps left all minus 5
-        bindsym Shift+0     gaps left all set 0
-
-        bindsym Return mode "$mode_gaps"
-        bindsym Escape mode "default"
-}
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-		#font pango:Inconsolata 10
-		font pango:Noto Sans Regular 10
-		position top
-		# i3bar_command i3bar --transparency
-		# tray_output primary
-		tray_padding 0
+    status_command i3status -c ~/git/Dotfiles/config/i3/i3status.conf
+	i3bar_command i3bar -t
+	font pango:Mono Sans Bold 12
+	tray_output none
+	#height 18
+	colors {
+		#background #20242c
+		background #00000000
+		statusline #4c7899
+		separator #4c7899
 
-
+		focused_workspace  #00000000 #4c7899   #ffffff
+	        active_workspace   #00000000 #00000000 #ffffff
+        	inactive_workspace #00000000 #00000000 #888888
+      		urgent_workspace   #00000000 #00000000 #900000
+        	binding_mode       #00000000 #00000000 #900000
+	}
 }
 
 
-#picom
-exec picom -f
-# Dock
-exec plank
-#bluetooth
-exec blueman-tray
-#Volume
-exec volumeicon
-# Launching applications
+# autostart
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id picom -f
+exec --no-startup-id blueman-tray
+exec --no-startup-id numlockx on
+exec --no-startup-id --slient sleep 2 && thunderbird
+
+# floating windows
+#for_window [class="[.]*"] floating enable
+for_window [class="Thunderbird"] floating enable
+for_window [class="VirtualBox"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="Corebird"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="NotifyOSDConfiguration"] floating enable
+for_window [class="Firefox" instance="Toplevel"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="Mainwindow.py"] floating enable
+
+#contrain floating window size
+floating_maximum_size 1680 x 1050
+
+# remove titlebars
+new_window pixel 3
+
+# mouse
+#focus_follows_mouse yes
+
+#gaps
+gaps inner 15
+gaps outer 10
+
+# notifications
+exec killall -q /usr/lib/x86_64-linux-gnu/notify-osd
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+
+# Shortcuts
 bindsym $mod+e exec pcmanfm
 bindsym $mod+w exec firefox
 bindsym $mod+s exec spotify
-#wallpaper
-# exec nitrogen --restore
-exec dwall -s colony &
-# exec /home/vijay/Pictures/wallpapers/wallpaper.sh
 
-#eww
-exec ~/.config/eww/launch_eww
+#colours
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #285577 #ffffff #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000
 
-#####################################
-# Application menu handled by rofi: #
-#####################################
+client.background       #ffffff
+
+#set keyboard delay and rate
+exec --no-startup-id xset r rate 200 25
 
 ## rofi bindings fancy application menu (two bindings F9/$mod+d)
-
 bindsym F9 exec rofi -modi drun -show drun -display-drun "Apps : " -line-padding 4 \
                 -columns 2 -padding 30 -hide-scrollbar \
                 -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
@@ -376,3 +290,13 @@ bindsym F9 exec rofi -modi drun -show drun -display-drun "Apps : " -line-padding
 bindsym F10 exec rofi -show window -display-window "Window : " -line-padding 4 \
                 -lines 10 -padding 50 -hide-scrollbar \
                 -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+
+bindsym F11 exec ~/git/Dotfiles/config/i3/scripts/shutdown_menu -p rofi -c \
+
+#spotify keybindings
+bindsym $mod+F9 exec ~/bin/spotify_remote.sh previous
+bindsym $mod+F10 exec ~/bin/spotify_remote.sh play
+bindsym $mod+F11 exec ~/bin/spotify_remote.sh pause
+bindsym $mod+F12 exec ~/bin/spotify_remote.sh next
+
+
