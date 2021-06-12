@@ -23,15 +23,16 @@ function _exit()              # Function to run upon exit of shell.
 }
 trap _exit EXIT
 
-PS1="\[\033[32m\]\w\n\e[0;35m\u\e[1;36m@\e[0;38m\h]$ \[\033[0m\]"
+PS1="\[\033[32m\]\w\n\e[0;38m[\e[0;35m\u\e[1;36m@\e[0;38m\h\e[0;35m]\e[1;36m$ \[\033[0m\]"
 
 # System Aliases
 alias rm='rm -vr'
 alias cp='cp -vr'
 alias mv='mv -v'
 alias mkdir='mkdir -pv'
-alias ls='ls -h --color'
-alias ll="ls -lAv --group-directories-first |more"
+alias SS='sudo systemctl'
+alias ls='ls -hAN --color=auto --group-directories-first'
+alias ll='ls -lAv --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 alias h='history'
 alias j='jobs -l'
@@ -67,8 +68,8 @@ alias gcom='git commit -m'
 alias gp='git push origin'
 
 # youtube-dl
-alias yta-best="youtube-dl --extract-audio --audio-format best "
-alias ytv-best="youtube-dl -f bestvideo+bestaudio "
+alias yta='youtube-dl --extract-audio --audio-format best'
+alias ytv='youtube-dl -f bestvideo+bestaudio '
 alias yta-playlist="youtube-dl --extract-audio --audio-format mp3 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
 alias ytv-playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
 
