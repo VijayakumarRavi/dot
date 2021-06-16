@@ -44,7 +44,7 @@ makefs() {
 	sleep 10
 	if [[ -b /dev/sdb1 ]]; then
 		echo "Home partition Already exist"
-		mkdir /mnt/home
+		mkdir -p /mnt/home
 		mount /dev/sdb1 /mnt/home
 	elif [[ -b /dev/sdb ]]; then
 		clear
@@ -62,6 +62,7 @@ y
 EOF
 		partprobe
 		mkdir /mnt/home
+		mkfs.ext4 /dev/sda3
 		mount /dev/sdb1 /mnt/home
 	else
 		echo "Home disk not found"
