@@ -1,6 +1,8 @@
 #!/bin/bash
 
 partition() {
+	clear
+	echo "Creating ROOT partition"
 	cat <<EOF | gdisk /dev/sda
 o
 n
@@ -22,30 +24,52 @@ n
 
 w
 EOF
+	clear
 	partprobe
 	lsblk
 	sleep 10
 }
 
 makefs() {
+	clear
+	echo "Make and Mounting partition"
 	mkfs.ext4 /dev/sda3
 	mkfs.fat -F32 /dev/sda1
 	mkswap /dev/sda2
-	sleep 10
-}
-
-mountfs() {
 	swapon /dev/sda2
 	mount /dev/sda3 /mnt
 	mkdir -p /mnt/boot/efi
 	mount /dev/sda1 /mnt/boot/efi
-	mkdir /mnt/home
-	mount /dev/sdb1 /mnt/home
+	sleep 10
+	if [[ -b /dev/sdb1 ]]; then
+		echo "Home partition Already exist"
+		mkdir /mnt/home
+		mount /dev/sdb1 /mnt/home
+	elif [[ -b /dev/sdb ]]; then
+		clear
+		echo "Creating home partition"
+		cat <<EOF | fdisk /dev/sdb
+o
+n
+p
+
+
+
+w
+EOF
+		partprobe
+		mkdir /mnt/home
+		mount /dev/sdb1 /mnt/home
+	else
+		echo "Home disk not found"
+	fi
 	lsblk
 	sleep 20
 }
 
 install-pkgs() {
+	clear
+	echo "Installing Required packages"
 	pacman -Sy --noconfirm archlinux-keyring
 	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
@@ -58,6 +82,8 @@ chroot-ex() {
 #!/bin/bash
 printf "\e[1;32m\n*********CHROOT Scripts Started**********\n\e[0m"
 etc-configs() {
+	clear
+	echo "editing config files"
 	ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 	timedatectl set-ntp true
 	hwclock --systohc
@@ -73,6 +99,8 @@ etc-configs() {
 }
 
 starting-service() {
+	clear
+	echo "Enableing Services \n\n"
 	systemctl enable NetworkManager
 	systemctl enable bluetooth
 	systemctl enable cups.service
@@ -100,10 +128,14 @@ config-users() {
 }
 
 i3-install() {
+	clear
+	echo "Installing i3wm"
 	pacman -S xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon
 }
 
 kvm-install() {
+	clear
+	echo "Installing Kvm"
 	pacman -S virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
