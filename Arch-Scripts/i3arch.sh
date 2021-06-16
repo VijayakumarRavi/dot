@@ -26,7 +26,6 @@ n
 w
 y
 EOF
-	clear
 	partprobe
 	lsblk
 	sleep 10
