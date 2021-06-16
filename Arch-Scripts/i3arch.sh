@@ -5,6 +5,7 @@ partition() {
 	echo "Creating ROOT partition"
 	cat <<EOF | gdisk /dev/sda
 o
+y
 n
 
 
@@ -23,6 +24,7 @@ n
 
 
 w
+y
 EOF
 	clear
 	partprobe
@@ -48,14 +50,16 @@ makefs() {
 	elif [[ -b /dev/sdb ]]; then
 		clear
 		echo "Creating home partition"
-		cat <<EOF | fdisk /dev/sdb
+		cat <<EOF | gdisk /dev/sdb
 o
+y
 n
 p
 
 
 
 w
+y
 EOF
 		partprobe
 		mkdir /mnt/home
