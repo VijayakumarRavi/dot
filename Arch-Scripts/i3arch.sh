@@ -62,7 +62,7 @@ y
 EOF
 		partprobe
 		mkdir /mnt/home
-		mkfs.ext4 /dev/sda3
+		mkfs.ext4 /dev/sdb1
 		mount /dev/sdb1 /mnt/home
 	else
 		echo "Home disk not found"
