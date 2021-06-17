@@ -251,7 +251,6 @@ env_type() {
 		i3_install
 	elif [[ $DE == basic ]] || [[ $DE == 3 ]]; then
 		printf "\e[1;34m Basic installation completed \e[0m"
-		exit
 	else
 		printf "\e[1;34m Invalid option \e[0m"
 		exit
@@ -284,7 +283,7 @@ main() {
 	printf "\e[1;33m 1.UEFI \n\e[0m"
 	printf "\e[1;33m 2.MBR \n\e[0m"
 	read -p " Enter your system type: " opt
-	clear
+
 	printf "\e[1;34m Select Desktop Environment \n\e[0m"
 	printf "\e[1;34m 1.Gnome \n\e[0m"
 	printf "\e[1;34m 2.i3wm \n\e[0m"
@@ -293,11 +292,9 @@ main() {
 
 	if [[ $opt == UEFI ]] || [[ $opt == 1 ]] || [[ $opt == uefi ]]; then
 		printf "\e[1;33m Selected UEFI mode \e[0m"
-		system="uefi"
 		uefi_install
 	elif [[ $opt == MBR ]] || [[ $opt == 2 ]] || [[ $opt == mbr ]]; then
 		printf "\e[1;33m Selected MBR mode \e[0m"
-		system="mbr"
 		mbr_install
 	else
 		printf "\e[1;33m Invalid option \e[0m"
