@@ -283,13 +283,13 @@ main() {
 	printf "\e[1;33m 1.UEFI \n\e[0m"
 	printf "\e[1;33m 2.MBR \n\e[0m"
 	read -p " Enter your system type: " opt
-
+	sleep 2
 	printf "\e[1;34m Select Desktop Environment \n\e[0m"
 	printf "\e[1;34m 1.Gnome \n\e[0m"
 	printf "\e[1;34m 2.i3wm \n\e[0m"
 	printf "\e[1;34m 3.basic \n\e[0m"
 	read -p " Enter your DE type: " DE
-
+	sleep 2
 	if [[ $opt == UEFI ]] || [[ $opt == 1 ]] || [[ $opt == uefi ]]; then
 		printf "\e[1;33m Selected UEFI mode \e[0m"
 		uefi_install
