@@ -278,8 +278,7 @@ mbr_install() {
 }
 
 main() {
-	selection=$(dialog --backtitle "Arch linux Installation" --title "System Type" --cancel-label "Exit" --menu "Please select:" 0 0 4 "1" "UEFI" "2" "MBR" )
-	#2>&1 1>&3 )
+	selection=$(dialog --backtitle "Arch linux Installation" --title "System Type" --cancel-label "Exit" --menu "Please select:" 0 0 4 "1" "UEFI" "2" "MBR" 2>&1 1>&3 )
 	case $selection in
 		1 )
       	uefi_install
