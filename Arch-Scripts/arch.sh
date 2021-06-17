@@ -258,53 +258,40 @@ env_type() {
 }
 
 uefi_install() {
-	uefi_partition
-	uefi_makefs
-	install_pkgs
-	env_type
-	chroot_ex
-	grub_uefi
-	printf "\e[1;35m\n\n Installation completed \n\e[0m"
+	#uefi_partition
+	#uefi_makefs
+	#install_pkgs
+	#env_type
+	#chroot_ex
+	#grub_uefi
+	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
 mbr_install() {
-	mbr_partition
-	mbr_makefs
-	install_pkgs
-	env_type
-	chroot_ex
-	grub_mbr
-	printf "\e[1;35m\n\n Installation completed  \e[0m"
+	#mbr_partition
+	#mbr_makefs
+	#install_pkgs
+	#env_type
+	#chroot_ex
+	#grub_mbr
+	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
 
 main() {
-	clear
-	printf "\e[1;33m Select System Type \n\e[0m"
-	printf "\e[1;33m 1.UEFI \n\e[0m"
-	printf "\e[1;33m 2.MBR \n\e[0m"
-	read -p " Enter your system type: " opt
-	printf "\e[1;33m  sys type = $opt \n\e[0m"
-
-	printf "\e[1;34m Select Desktop Environment \n\e[0m"
-	printf "\e[1;34m 1.Gnome \n\e[0m"
-	printf "\e[1;34m 2.i3wm \n\e[0m"
-	printf "\e[1;34m 3.basic \n\e[0m"
-	read -p " Enter your DE type: " DE
-	printf "\e[1;33m  DE = $DE \n\e[0m"
-
-	if [[ $opt == UEFI ]] || [[ $opt == 1 ]] || [[ $opt == uefi ]]; then
-		printf "\e[1;33m Selected UEFI mode \e[0m"
-		uefi_install
-	elif [[ $opt == MBR ]] || [[ $opt == 2 ]] || [[ $opt == mbr ]]; then
-		printf "\e[1;33m Selected MBR mode \e[0m"
-		mbr_install
-	else
-		printf "\e[1;33m Invalid option \e[0m"
-		exit
-	fi
+	selection=$(dialog --backtitle "Arch linux Installation" --title "System Type" --cancel-label "Exit" --menu "Please select:" 0 0 4 "1" "UEFI" "2" "MBR" )
+	#2>&1 1>&3 )
+	case $selection in
+		1 )
+      	uefi_install
+      	display_result "UEFI Install"
+      	;;
+    	2 )
+	  	mbr_install
+      	display_result "MBR Install"
+      	;;
+  	esac
 }
-
 printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
-timedatectl set-ntp true
+#timedatectl set-ntp true
 main
 
