@@ -315,6 +315,7 @@ mbr_install() {
 }
 
 main() {
+  pacman -Sy dialog
   DIALOG_CANCEL=1
   DIALOG_ESC=255
   HEIGHT=0
