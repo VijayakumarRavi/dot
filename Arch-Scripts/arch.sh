@@ -257,40 +257,103 @@ env_type() {
 	fi
 }
 
+de_type() {
+  DIALOG_CANCEL=1
+  DIALOG_ESC=255
+  HEIGHT=0
+  WIDTH=0
+  exec 3>&1
+  DE=$(dialog \
+    --backtitle "Arch Installation" \
+    --title "Menu" \
+    --cancel-label "Exit" \
+    --menu "Please select:" $HEIGHT $WIDTH 4 \
+    "1" "Gnome" \
+    "2" "i3wm" \
+    2>&1 1>&3)
+    exit_status=$?
+  exec 3>&-
+    case $exit_status in
+    $DIALOG_CANCEL)
+      clear
+      echo "Program terminated."
+      exit
+      ;;
+    $DIALOG_ESC)
+      clear
+      echo "Program aborted." >&2
+      exit 1
+      ;;
+  esac
+  case $DE in
+	  1 )
+		  ;;
+	  2 )
+		  ;;
+  esac
+
+}
+
 uefi_install() {
-	#uefi_partition
-	#uefi_makefs
-	#install_pkgs
-	#env_type
-	#chroot_ex
-	#grub_uefi
+	uefi_partition
+	uefi_makefs
+	install_pkgs
+	env_type
+	chroot_ex
+	grub_uefi
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
 mbr_install() {
-	#mbr_partition
-	#mbr_makefs
-	#install_pkgs
-	#env_type
-	#chroot_ex
-	#grub_mbr
+	mbr_partition
+	mbr_makefs
+	install_pkgs
+	env_type
+	chroot_ex
+	grub_mbr
 	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
 
 main() {
-	selection=$(dialog --backtitle "Arch linux Installation" --title "System Type" --cancel-label "Exit" --menu "Please select:" 0 0 4 "1" "UEFI" "2" "MBR" 2>&1 1>&3 )
-	case $selection in
-		1 )
-      	uefi_install
-      	display_result "UEFI Install"
-      	;;
-    	2 )
-	  	mbr_install
-      	display_result "MBR Install"
-      	;;
-  	esac
+  DIALOG_CANCEL=1
+  DIALOG_ESC=255
+  HEIGHT=0
+  WIDTH=0
+  exec 3>&1
+  selection=$(dialog \
+    --backtitle "Arch Installation" \
+    --title "Menu" \
+    --cancel-label "Exit" \
+    --menu "Please select:" $HEIGHT $WIDTH 4 \
+    "1" "UEFI" \
+    "2" "MBR" \
+    2>&1 1>&3)
+    exit_status=$?
+  exec 3>&-
+    case $exit_status in
+    $DIALOG_CANCEL)
+      clear
+      echo "Program terminated."
+      exit
+      ;;
+    $DIALOG_ESC)
+      clear
+      echo "Program aborted." >&2
+      exit 1
+      ;;
+  esac
+  case $selection in
+	  1 )
+		  de_type
+		  uefi_install
+		  ;;
+	  2 )
+		  de_type
+		  mbr_install
+		  ;;
+  esac
+
 }
 printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
-#timedatectl set-ntp true
+timedatectl set-ntp true
 main
-
