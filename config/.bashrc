@@ -14,7 +14,8 @@ export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
 neofetch
-echo -e "\e[0;33mVanakkam da Mapla\e[0;31m"
+# echo -e "\e[0;33mVanakkam da Mapla\e[0;31m"
+echo -e "\e[38;5;45mUNIX IS VERY SIMPLE \e[1;92mIT JUST NEEDS A\nGENIUS TO UNDERSTAND ITS SIMPLICITY\n 		\e[38;5;45m-By Dennis Ritchie\e[m"
 echo -e "\e[0;32m"
 date
 function _exit()              # Function to run upon exit of shell.
@@ -30,7 +31,7 @@ alias rm='rm -vr'
 alias cp='cp -vr'
 alias mv='mv -v'
 alias mkdir='mkdir -pv'
-alias SS='sudo systemctl'
+alias SS='doas systemctl'
 alias ls='ls -hAN --color=auto --group-directories-first'
 alias ll='ls -lAv --color=auto --group-directories-first'
 alias grep='grep --color=auto'
@@ -44,10 +45,11 @@ alias df='df -kTh'
 alias q='exit'
 alias :q='exit'
 alias c='clear'
+alias r='ranger'
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias n='nvim'
-alias sn='sudo nvim'
+alias sn='doas nvim'
 
 # Edit congfis
 alias nvimrc='nvim ~/.config/nvim/init.vim'
@@ -56,9 +58,10 @@ alias i3con='nvim ~/.config/i3/config'
 alias loadbash='source ~/.bashrc'
 alias notes='vim ~/.notes.txt'
 
-alias p='sudo pacman'
+alias p='doas pacman'
 alias y='yay'
-alias orphan='sudo pacman -Rs $(pacman -Qqtd)' # Removes orphan packages
+alias orphan='doas pacman -Rs $(pacman -Qqtd)' # Removes orphan packages
+alias mirrorlist='doas reflector -a 6 -c IN --save /etc/pacman.d/mirrorlist'
 
 # Git
 alias gs='git status'
@@ -70,8 +73,8 @@ alias gp='git push origin'
 # youtube-dl
 alias yta='youtube-dl --extract-audio --audio-format best'
 alias ytv='youtube-dl -f bestvideo+bestaudio '
-alias yta-playlist="youtube-dl --extract-audio --audio-format mp3 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
-alias ytv-playlist="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
+alias ytap="youtube-dl --extract-audio --audio-format mp3 -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
+alias ytvp="youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' "
 
 # Handy Extract Program
 function extract()

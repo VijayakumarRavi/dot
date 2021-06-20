@@ -53,8 +53,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
-#bindsym $mod+d exec --no-startup-id rofi -show run -font "pragmata 8" -fg "#EEE8D5" -bg "#073642" -bgalt "#002b36" -hlfg "#002b36" -hlbg "#657B83" -o 85
-bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id rofi -show run -font "pragmata 8" -fg "#EEE8D5" -bg "#073642" -bgalt "#002b36" -hlfg "#002b36" -hlbg "#657B83" -o 85
+bindsym $mod+d exec --no-startup-id dmenu_run -l 10
 
 # change focus
 bindsym $mod+h focus left
@@ -81,14 +81,11 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+z split h
-
+bindsym $mod+Shift+v split h
 # split in vertical orientation
 bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
-
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
 bindsym $mod+Shift+t  layout tabbed
@@ -102,9 +99,6 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -156,58 +150,21 @@ workspace 6 output DVI-1
 workspace 8 output DVI-1
 workspace 10 output DVI-1
 
-
-# https://www.reddit.com/r/i3wm/comments/460ggx/can_i_have_i3_always_display_virtual_desktops_17/
-
-# Go to lowest empty workspace
-bindsym $mod+Shift+q exec ~/git/Dotfiles/config/i3/scripts/bin/nextworkspace
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec i3exit logout
-
-bindsym $mod+Shift+s exec i3exit suspend
-
-bindsym $mod+Shift+x exec i3lock-fancy --show-failed-attempts
-# "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+bindsym Shift+Left resize shrink width 1 px or 1 ppt
+bindsym Shift+Down resize grow height 1 px or 1 ppt
+bindsym Shift+Up resize shrink height 1 px or 1 ppt
+bindsym Shift+Right resize grow width 1 px or 1 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        bindsym Shift+Left resize shrink width 1 px or 1 ppt
-        bindsym Shift+Down resize grow height 1 px or 1 ppt
-        bindsym Shift+Up resize shrink height 1 px or 1 ppt
-        bindsym Shift+Right resize grow width 1 px or 1 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-bindsym $mod+r mode "resize"
+#gaps
+gaps inner 15
+gaps outer 10
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command i3status -c ~/git/Dotfiles/config/i3/i3status.conf
+	#status_command i3blocks -c ~/git/Dotfiles/config/i3/i3blocks.conf
 	i3bar_command i3bar -t
 	font pango:Mono Sans Bold 12
 	tray_output none
@@ -226,13 +183,26 @@ bar {
 	}
 }
 
+#colours
+# class                 border  backgr. text    indicator
+client.focused          #4c7899 #285577 #ffffff #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000
+client.background       #ffffff
 
 # autostart
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id picom -f
 exec --no-startup-id blueman-tray
 exec --no-startup-id numlockx on
+exec --no-startup-id mocp -a ~/Music/Manju\ Music/Manju\ Music.m3u & mocp -S
 exec --no-startup-id --slient sleep 2 && thunderbird
+exec killall -q /usr/lib/x86_64-linux-gnu/notify-osd
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+#set keyboard delay and rate
+exec --no-startup-id xset r rate 200 25
 
 # floating windows
 #for_window [class="[.]*"] floating enable
@@ -246,57 +216,55 @@ for_window [class="Firefox" instance="Toplevel"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [class="Mainwindow.py"] floating enable
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="(?i)virtualbox"] fullscreen enable
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [title="File Transfer*"] floating enable
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Clipgrab"] floating enable
 
-#contrain floating window size
 floating_maximum_size 1680 x 1050
-
 # remove titlebars
 new_window pixel 3
 
-# mouse
-#focus_follows_mouse yes
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
 
-#gaps
-gaps inner 15
-gaps outer 10
+# spotify keybindings
+# bindsym $mod+F9 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh previous
+# bindsym $mod+F10 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh play
+# bindsym $mod+F11 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh pause
+# bindsym $mod+F12 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh next
 
-# notifications
-exec killall -q /usr/lib/x86_64-linux-gnu/notify-osd
-exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+# Rofi
+bindsym F1 exec rofi -show drun
+bindsym F2 exec rofi -show window
+bindsym F3 exec rofi -show ssh
+bindsym F4 exec rofi -show file-browser
+
+# Mocp controls
+bindsym F8 exec mocp -v +10 && notify-send "Volume +10"
+bindsym F7 exec mocp -v -10 && notify-send "Volume -10"
+bindsym F9 exec mocp -p -t shuffle && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym F10 exec mocp -r && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym F11 exec mocp -G && sleep 2 && notify-send "`mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym F12 exec mocp -f && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
 
 # Shortcuts
-bindsym $mod+e exec pcmanfm
+bindsym $mod+r exec alacritty -e ranger
 bindsym $mod+w exec firefox
+bindsym $mod+e exec brave
 bindsym $mod+s exec spotify
 
-#colours
-# class                 border  backgr. text    indicator
-client.focused          #4c7899 #285577 #ffffff #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000
-
-client.background       #ffffff
-
-#set keyboard delay and rate
-exec --no-startup-id xset r rate 200 25
-
-## rofi bindings fancy application menu (two bindings F9/$mod+d)
-bindsym F9 exec rofi -modi drun -show drun -display-drun "Apps : " -line-padding 4 \
-                -columns 2 -padding 30 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
-
-bindsym F10 exec rofi -show window -display-window "Window : " -line-padding 4 \
-                -lines 10 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
-
-bindsym F11 exec ~/git/Dotfiles/config/i3/scripts/shutdown_menu -p rofi -c \
-
-#spotify keybindings
-bindsym $mod+F9 exec ~/bin/spotify_remote.sh previous
-bindsym $mod+F10 exec ~/bin/spotify_remote.sh play
-bindsym $mod+F11 exec ~/bin/spotify_remote.sh pause
-bindsym $mod+F12 exec ~/bin/spotify_remote.sh next
-
+# Keybinds for dmenu and other scripts
+bindsym $mod+Shift+q exec ~/git/Dotfiles/config/i3/scripts/nextworkspace
+bindsym $mod+F7 exec ~/git/Dotfiles/config/i3/scripts/record
+bindsym $mod+F8 exec ~/git/Dotfiles/config/i3/scripts/wifi
+bindsym $mod+F9 exec ~/git/Dotfiles/config/i3/scripts/search
+bindsym $mod+F10 exec ~/git/Dotfiles/config/i3/scripts/displayselect
+bindsym $mod+F11 exec ~/git/Dotfiles/config/i3/scripts/logout
+bindsym $mod+F12 exec ~/git/Dotfiles/config/i3/scripts/dmenuunicode
 
