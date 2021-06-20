@@ -163,8 +163,8 @@ gaps outer 10
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status -c ~/git/Dotfiles/config/i3/i3status.conf
-	#status_command i3blocks -c ~/git/Dotfiles/config/i3/i3blocks.conf
+    status_command i3status -c ~/git/dot/config/i3/i3status.conf
+	#status_command i3blocks -c ~/git/dot/config/i3/i3blocks.conf
 	i3bar_command i3bar -t
 	font pango:Mono Sans Bold 12
 	tray_output none
@@ -234,10 +234,10 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # spotify keybindings
-# bindsym $mod+F9 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh previous
-# bindsym $mod+F10 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh play
-# bindsym $mod+F11 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh pause
-# bindsym $mod+F12 exec ~/git/Dotfiles/config/i3/scripts/spotify_remote.sh next
+# bindsym $mod+F9 exec ~/git/dot/config/i3/scripts/spotify_remote.sh previous
+# bindsym $mod+F10 exec ~/git/dot/config/i3/scripts/spotify_remote.sh play
+# bindsym $mod+F11 exec ~/git/dot/config/i3/scripts/spotify_remote.sh pause
+# bindsym $mod+F12 exec ~/git/dot/config/i3/scripts/spotify_remote.sh next
 
 # Rofi
 bindsym F1 exec rofi -show drun
@@ -260,11 +260,11 @@ bindsym $mod+e exec brave
 bindsym $mod+s exec spotify
 
 # Keybinds for dmenu and other scripts
-bindsym $mod+Shift+q exec ~/git/Dotfiles/config/i3/scripts/nextworkspace
-bindsym $mod+F7 exec ~/git/Dotfiles/config/i3/scripts/record
-bindsym $mod+F8 exec ~/git/Dotfiles/config/i3/scripts/wifi
-bindsym $mod+F9 exec ~/git/Dotfiles/config/i3/scripts/search
-bindsym $mod+F10 exec ~/git/Dotfiles/config/i3/scripts/displayselect
-bindsym $mod+F11 exec ~/git/Dotfiles/config/i3/scripts/logout
-bindsym $mod+F12 exec ~/git/Dotfiles/config/i3/scripts/dmenuunicode
+bindsym $mod+Shift+q exec ~/git/dot/config/i3/scripts/nextworkspace
+bindsym $mod+F7 exec ~/git/dot/config/i3/scripts/record
+bindsym $mod+F8 exec ~/git/dot/config/i3/scripts/wifi
+bindsym $mod+F9 exec ~/git/dot/config/i3/scripts/search
+bindsym $mod+F10 exec ~/git/dot/config/i3/scripts/displayselect
+bindsym $mod+F11 exec ~/git/dot/config/i3/scripts/logout
+bindsym $mod+F12 exec ~/git/dot/config/i3/scripts/dmenuunicode
 
