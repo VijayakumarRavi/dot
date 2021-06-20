@@ -270,6 +270,7 @@ de_type() {
     --menu "Please select:" $HEIGHT $WIDTH 4 \
     "1" "Gnome" \
     "2" "i3wm" \
+	"3" "basic"
     2>&1 1>&3)
     exit_status=$?
   exec 3>&-
@@ -289,6 +290,8 @@ de_type() {
 	  1 )
 		  ;;
 	  2 )
+		  ;;
+	  3 )
 		  ;;
   esac
 
