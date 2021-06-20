@@ -154,11 +154,11 @@ install_pkgs() {
 }
 
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon
+	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
 gnome_install() {
-	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty
+	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
 chroot_ex() {
@@ -212,17 +212,7 @@ config-users() {
 	sleep 10
 }
 
-
-
-kvm-install() {
-	clear
-	echo "Installing Kvm"
-	pacman -S --noconfirm virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
-}
-
 etc-configs
-i3-install
-kvm-install
 config-users
 starting-service
 sleep 10
@@ -242,7 +232,7 @@ grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 }
 
-env_type() {
+de_type() {
 	if [[ $DE == GNOME ]] || [[ $DE == 1 ]] || [[ $DE == gnome ]]; then
 		printf "\e[1;34m Selected Gnome \n\e[0m"
 		gnome_install
@@ -257,7 +247,7 @@ env_type() {
 	fi
 }
 
-de_type() {
+de_choose() {
   DIALOG_CANCEL=1
   DIALOG_ESC=255
   HEIGHT=0
@@ -301,9 +291,9 @@ uefi_install() {
 	uefi_partition
 	uefi_makefs
 	install_pkgs
-	env_type
 	chroot_ex
 	grub_uefi
+	de_type
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
@@ -311,9 +301,9 @@ mbr_install() {
 	mbr_partition
 	mbr_makefs
 	install_pkgs
-	env_type
 	chroot_ex
 	grub_mbr
+	de_type
 	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
 
@@ -348,11 +338,11 @@ main() {
   esac
   case $selection in
 	  1 )
-		  de_type
+		  de_choose
 		  uefi_install
 		  ;;
 	  2 )
-		  de_type
+		  de_choose
 		  mbr_install
 		  ;;
   esac
