@@ -5,7 +5,7 @@
 # Variables
 #==============
 HOME=/home/vijay
-dotfiles_dir=/home/vijay/git/Dotfiles/config
+dotfiles_dir=/home/vijay/git/dot/config
 BPurple='\e[1;35m'
 NC="\e[m"
 create-dirs() {
@@ -26,7 +26,7 @@ fi
 
 cloneing-repos(){
 	# cd $HOME/git/
-	git clone --recursive https://github.com/VijayakumarRavi/Dotfiles.git $HOME/git/Dotfiles/ ;
+	git clone --recursive https://github.com/VijayakumarRavi/dot.git $HOME/git/dot/ ;
 	git clone --recursive https://github.com/akinomyoga/ble.sh.git $HOME/git/ble.sh/ ;
 	make -C $HOME/git/ble.sh install PREFIX=$HOME/.local ;
 }
@@ -63,8 +63,8 @@ others-settings() {
 }
 
 grub-theme() {
-	cd $HOME/git/Dotfiles/themes
-	bash install.sh ;
+	cd $HOME/git/dot/themes
+	sudo bash install.sh ;
 }
 
 create-dirs
