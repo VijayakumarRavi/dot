@@ -39,8 +39,8 @@ uefi_makefs() {
 	mkswap /dev/sda2
 	swapon /dev/sda2
 	mount /dev/sda3 /mnt
-	mkdir -p /mnt/boot/efi
-	mount /dev/sda1 /mnt/boot/efi
+	mkdir -p /mnt/boot
+	mount /dev/sda1 /mnt/boot
 	lsblk
 	sleep 10
 	if [[ -b /dev/sdb1 ]]; then
@@ -232,13 +232,28 @@ EOF
 
 grub_uefi() {
 	cat <<EOF | arch-chroot /mnt bash
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 }
 
 grub_mbr() {
 	cat <<EOF | arch-chroot /mnt bash
 grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+EOF
+}
+
+sysboot() {
+	cat <<EOF | arch-chroot /mnt bash
+bootctl --path=/boot install
+echo ' ' > /boot/loader/loader.conf
+echo "default arch-*" >> /boot/loader/loader.conf
+echo "timeout 3" >> /boot/loader/loader.conf
+echo "#console-mode max" >> /boot/loader/loader.conf
+touch /boot/loader/entries/arch.conf
+echo "title 	 Arch Linux" >> /boot/loader/entries/arch.conf
+echo "linux 	 /vmlinuz-linux" >> /boot/loader/entries/arch.conf
+echo "initrd 	 /initramfs-linux.img" >> /boot/loader/entries/arch.conf
+echo "options 	 root=/dev/sda3 rw" >> /boot/loader/entries/arch.conf
 EOF
 }
 
@@ -300,7 +315,8 @@ uefi_install() {
 	install_pkgs
 	env_type
 	chroot_ex
-	grub_uefi
+	# grub_uefi
+	sysboot
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
