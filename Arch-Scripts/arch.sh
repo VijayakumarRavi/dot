@@ -39,8 +39,8 @@ uefi_makefs() {
 	mkswap /dev/sda2
 	swapon /dev/sda2
 	mount /dev/sda3 /mnt
-	mkdir -p /mnt/boot
-	mount /dev/sda1 /mnt/boot
+	mkdir -p /mnt/boot/efi
+	mount /dev/sda1 /mnt/boot/efi
 	lsblk
 	sleep 10
 	if [[ -b /dev/sdb1 ]]; then
@@ -154,11 +154,11 @@ install_pkgs() {
 }
 
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon
+	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
 gnome_install() {
-	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty
+	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
 chroot_ex() {
@@ -212,17 +212,7 @@ config-users() {
 	sleep 10
 }
 
-
-
-kvm-install() {
-	clear
-	echo "Installing Kvm"
-	pacman -S --noconfirm virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
-}
-
 etc-configs
-i3-install
-kvm-install
 config-users
 starting-service
 sleep 10
@@ -232,7 +222,7 @@ EOF
 
 grub_uefi() {
 	cat <<EOF | arch-chroot /mnt bash
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 }
 
@@ -257,7 +247,7 @@ echo "options 	 root=/dev/sda3 rw" >> /boot/loader/entries/arch.conf
 EOF
 }
 
-env_type() {
+de_type() {
 	if [[ $DE == GNOME ]] || [[ $DE == 1 ]] || [[ $DE == gnome ]]; then
 		printf "\e[1;34m Selected Gnome \n\e[0m"
 		gnome_install
@@ -272,7 +262,7 @@ env_type() {
 	fi
 }
 
-de_type() {
+de_choose() {
   DIALOG_CANCEL=1
   DIALOG_ESC=255
   HEIGHT=0
@@ -285,6 +275,7 @@ de_type() {
     --menu "Please select:" $HEIGHT $WIDTH 4 \
     "1" "Gnome" \
     "2" "i3wm" \
+    "3" "basic" \
     2>&1 1>&3)
     exit_status=$?
   exec 3>&-
@@ -305,6 +296,8 @@ de_type() {
 		  ;;
 	  2 )
 		  ;;
+	  3 )
+		  ;;
   esac
 
 }
@@ -313,10 +306,10 @@ uefi_install() {
 	uefi_partition
 	uefi_makefs
 	install_pkgs
-	env_type
 	chroot_ex
-	# grub_uefi
+	#grub_uefi
 	sysboot
+	de_type
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
@@ -324,9 +317,9 @@ mbr_install() {
 	mbr_partition
 	mbr_makefs
 	install_pkgs
-	env_type
 	chroot_ex
 	grub_mbr
+	de_type
 	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
 
@@ -361,11 +354,11 @@ main() {
   esac
   case $selection in
 	  1 )
-		  de_type
+		  de_choose
 		  uefi_install
 		  ;;
 	  2 )
-		  de_type
+		  de_choose
 		  mbr_install
 		  ;;
   esac
