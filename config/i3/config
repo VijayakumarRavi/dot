@@ -167,7 +167,7 @@ bar {
 	#status_command i3blocks -c ~/git/dot/config/i3/i3blocks.conf
 	i3bar_command i3bar -t
 	font pango:Mono Sans Bold 12
-	tray_output none
+	# tray_output none
 	#height 18
 	colors {
 		#background #20242c

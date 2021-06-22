@@ -255,7 +255,7 @@ de_choose() {
   exec 3>&1
   DE=$(dialog \
     --backtitle "Arch Installation" \
-    --title "Menu" \
+    --title "Select Desktop type" \
     --cancel-label "Exit" \
     --menu "Please select:" $HEIGHT $WIDTH 4 \
     "1" "Gnome" \
@@ -316,7 +316,7 @@ main() {
   exec 3>&1
   selection=$(dialog \
     --backtitle "Arch Installation" \
-    --title "Menu" \
+    --title "Select Firmware type" \
     --cancel-label "Exit" \
     --menu "Please select:" $HEIGHT $WIDTH 4 \
     "1" "UEFI" \
