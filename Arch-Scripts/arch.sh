@@ -233,27 +233,27 @@ EOF
 }
 
 dots() {
-	cat <<EOF | arch-chroot /mnt bash sudo -U vijay
+	cat <<EOF | arch-chroot /mnt bash
 #!/bin/bash
 
 # printf "\e[1;32m*********Dotfiles Scripts Started**********/n\e[0m"
 #==============
 # Variables
 #==============
-HOME=/home/vijay
+ho=/home/vijay
 dotfiles_dir=/home/vijay/git/dot/config
 BPurple='\e[1;35m'
 NC="\e[m"
 create-dirs() {
-if [[ ! -d $HOME/git ]]; then
-	mkdir -p $HOME/git ;
+if [[ ! -d $ho/git ]]; then
+	mkdir -p $ho/git ;
 	echo "git folder is created" ;
 else
 	echo "git is already exist" ;
 fi
 
-if [[ ! -d $HOME/.config ]]; then
-	mkdir $HOME/.config ;
+if [[ ! -d $ho/.config ]]; then
+	mkdir $ho/.config ;
 	echo ".config folder is created" ;
 else
 	echo ".config already exist" ;
@@ -261,52 +261,56 @@ fi
 }
 
 cloneing-repos(){
-	# cd $HOME/git/
-	git clone --recursive https://github.com/VijayakumarRavi/dot.git $HOME/git/dot/ ;
-	git clone --recursive https://github.com/akinomyoga/ble.sh.git $HOME/git/ble.sh/ ;
-	make -C $HOME/git/ble.sh install PREFIX=$HOME/.local ;
+	cd $ho/git/
+	git clone --recursive https://github.com/VijayakumarRavi/dot.git $ho/git/dot/ ;
+	git clone --recursive https://github.com/akinomyoga/ble.sh.git $ho/git/ble.sh/ ;
+	make -C $ho/git/ble.sh install PREFIX=$ho/.local ;
 }
 
 link-files() {
-	sudo ln -svf $dotfiles_dir/pacman.conf /etc/ ;
-	ln -svf $dotfiles_dir/alacritty $HOME/.config/ ;
-	ln -svf $dotfiles_dir/htop $HOME/.config/ ;
-	ln -svf $dotfiles_dir/neofetch $HOME/.config/ ;
-	ln -svf $dotfiles_dir/i3 $HOME/.config/ ;
-	ln -svf $dotfiles_dir/i3status $HOME/.config/ ;
-	ln -svf $dotfiles_dir/nvim $HOME/.config/ ;
-	ln -svf $dotfiles_dir/pcmanfm $HOME/.config/ ;
-	ln -svf $dotfiles_dir/picom $HOME/.config/ ;
-	ln -svf $dotfiles_dir/polybar $HOME/.config/ ;
-	ln -svf $dotfiles_dir/tmux/ $HOME/.config/ ;
-	ln -svf $dotfiles_dir/transmission/ $HOME/.config/ ;
-	ln -svf $dotfiles_dir/zsh/ $HOME/.config/ ;
-	ln -svf $dotfiles_dir/.bashrc $HOME/.bashrc ;
-	ln -svf $dotfiles_dir/.inputrc $HOME/.inputrc ;
-	ln -svf $dotfiles_dir/.conkyrc $HOME/.conkyrc ;
-	ln -svf $dotfiles_dir/.gitconfig $HOME/.gitconfig ;
-	ln -svf $dotfiles_dir/zsh/.zshrc $HOME/.zshrc ;
+	ln -svf $dotfiles_dir/alacritty $ho/.config/ ;
+	ln -svf $dotfiles_dir/htop $ho/.config/ ;
+	ln -svf $dotfiles_dir/neofetch $ho/.config/ ;
+	ln -svf $dotfiles_dir/i3 $ho/.config/ ;
+	ln -svf $dotfiles_dir/i3status $ho/.config/ ;
+	ln -svf $dotfiles_dir/nvim $ho/.config/ ;
+	ln -svf $dotfiles_dir/pcmanfm $ho/.config/ ;
+	ln -svf $dotfiles_dir/picom $ho/.config/ ;
+	ln -svf $dotfiles_dir/polybar $ho/.config/ ;
+	ln -svf $dotfiles_dir/tmux/ $ho/.config/ ;
+	ln -svf $dotfiles_dir/transmission/ $ho/.config/ ;
+	ln -svf $dotfiles_dir/zsh/ $ho/.config/ ;
+	ln -svf $dotfiles_dir/.bashrc $ho/.bashrc ;
+	ln -svf $dotfiles_dir/.inputrc $ho/.inputrc ;
+	ln -svf $dotfiles_dir/.conkyrc $ho/.conkyrc ;
+	ln -svf $dotfiles_dir/.gitconfig $ho/.gitconfig ;
+	ln -svf $dotfiles_dir/zsh/.zshrc $ho/.zshrc ;
 }
 
 others-settings() {
-	cd $HOME/git
+	cd $ho/git
 	curl https://raw.githubusercontent.com/anhsirk0/fetch-master-6000/master/fm6000.pl --output fm6000 && chmod +x fm6000 && sudo mv fm6000 /usr/bin/ ;
-	sudo npm install -g neovim ;
-	sudo npm install --save nord ;
 	pip3 install pynvim ;
-	curl -L https://github.com/git/git/raw/master/contrib/completion/git-completion.bash -o $HOME/.git-completion.bash ;
-	curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o $HOME/.git-prompt.sh ;
+	curl -L https://github.com/git/git/raw/master/contrib/completion/git-completion.bash -o $ho/.git-completion.bash ;
+	curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o $ho/.git-prompt.sh ;
 }
 
 grub-theme() {
-	cd $HOME/git/dot/themes
+	cd $ho/git/dot/themes
 	sudo bash install.sh ;
 }
 
-create-dirs
-cloneing-repos
-link-files
+sudo_files() {
+	ln -svf $dotfiles_dir/pacman.conf /etc/ ;
+	npm install -g neovim ;
+	npm install --save nord ;
+}
+
+sudo -U vijay create-dirs
+sudo -U vijay cloneing-repos
+sudo -U vijay link-files
 grub-theme
+sudo_files
 others-settings
 
 echo -e "\n\nApram ena ba!!\nNeeye pathukoo\nEllam adhu edathula vechachi\n"
