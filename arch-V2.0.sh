@@ -218,14 +218,19 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	cd /tmp || exit 1
 	rm -rf /tmp/"$1"*
 	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u vijay tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
+	sudo -u vijay tar -xvf "$1".tar.gz &&
 	cd "$1" &&
-	sudo -u vijay makepkg --noconfirm -si >/dev/null 2>&1 || return 1
+	sudo -u vijay makepkg --noconfirm -si || return 1
 	cd /tmp || return 1) ;}
 
 install_aur() {
-	sudo -u vijay yay -S --noconfirm "$1"
+	echo vijay | sudo -S -u vijay yay -S --noconfirm "$1"
 	sleep 5
+}
+
+newperms() { # Set special sudoers settings for install (or after).
+	sed -i "/#LARBS/d" /etc/sudoers
+	echo "$* #LARBS" >> /etc/sudoers ;
 }
 
 LARBS() {
