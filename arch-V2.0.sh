@@ -195,8 +195,8 @@ starting-service() {
 	systemctl enable fstrim.timer
 	systemctl enable firewalld
 	systemctl enable acpid
-	systemctl enable libvertd
 	systemctl enable lightdm
+	systemctl enable libvertd
 	systemctl enable gdm
 	sleep 10
 }
