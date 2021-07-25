@@ -218,7 +218,7 @@ manualinstall() { # Installs $1 manually if not installed. Used only for AUR hel
 	cd /tmp || exit 1
 	rm -rf /tmp/"$1"*
 	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	echo vijay | sudo -S -u vijay tar -xvf "$1".tar.gz &&
+	tar -xvf "$1".tar.gz &&
 	cd "$1" &&
 	echo vijay | sudo -S -u vijay makepkg --noconfirm -si || return 1
 	cd /tmp || return 1) ;}
