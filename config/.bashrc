@@ -70,8 +70,8 @@ alias gc='git clone'
 git_auto() {
 	add=$1
 	com=$2
-	echo "Add: " $add
-	echo "Com: " $com
+	echo "Add-file: " $add
+	echo "Comm-msg: " $com
 	sleep 2
 	git add $add
 	git commit -m "$com"
