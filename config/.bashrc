@@ -72,10 +72,13 @@ git_auto() {
 	com=$2
 	echo "Add: " $add
 	echo "Com: " $com
-	sleep 5
+	sleep 2
 	git add $add
 	git commit -m "$com"
 	git push origin
+	printf(\n\n)
+	echo $(git status --porcelain | awk '{print $2}')
+	printf(\n\n)
 }
 
 # youtube-dl

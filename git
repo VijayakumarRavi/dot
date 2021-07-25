@@ -22,6 +22,7 @@ def run_command(command: str):
         print("error: " + error)
     except TypeError:
         print()
+        print()
 
 
 def main():
