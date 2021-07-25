@@ -65,10 +65,18 @@ alias mirrorlist='doas reflector -a 6 -c IN --save /etc/pacman.d/mirrorlist'
 
 # Git
 alias gs='git status'
-alias ga='git add'
 alias gc='git clone'
-alias gcom='git commit -m'
-alias gp='git push origin'
+
+git_auto() {
+	add=$1
+	com=$2
+	echo "Add: " $add
+	echo "Com: " $com
+	sleep 5
+	git add $add
+	git commit -m "$com"
+	git push origin
+}
 
 # youtube-dl
 alias yta='youtube-dl --extract-audio --audio-format best'
