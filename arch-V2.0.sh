@@ -247,7 +247,8 @@ LARBS() {
 	# Use all cores for compilation.
 	sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
 
-	manualinstall yay
+	# manualinstall yay
+	curl -LO https://github.com/VijayakumarRavi/arch-repo/raw/main/x86_64/yay-10.2.2-4-x86_64.pkg.tar.zst && pacman -U *.pkg.tar.zst
 	progsfile="https://raw.githubusercontent.com/VijayakumarRavi/dot/main/config/pkglocallist"
 	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs
 	while read -r prog ; do
