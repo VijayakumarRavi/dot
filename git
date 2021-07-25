@@ -22,7 +22,6 @@ def run_command(command: str):
         print("error: " + error)
     except TypeError:
         print()
-        print("Format './git add_file commit_msg'")
 
 
 def main():
