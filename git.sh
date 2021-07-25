@@ -8,4 +8,5 @@ git_auto() {
 	sleep 5
 	git add $add
 	git commit -m "$com"
+	git push
 }
