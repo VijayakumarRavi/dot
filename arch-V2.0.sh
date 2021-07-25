@@ -250,7 +250,7 @@ LARBS() {
 	# manualinstall yay
 	curl -LO https://github.com/VijayakumarRavi/arch-repo/raw/main/x86_64/yay-10.2.2-4-x86_64.pkg.tar.zst && pacman -U --noconfirm *.pkg.tar.zst
 	progsfile="https://raw.githubusercontent.com/VijayakumarRavi/dot/main/config/pkglocallist"
-	([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs) || curl -Ls "$progsfile" | sed '/^#/d' > /tmp/progs
+	curl -L "$progsfile" --output /tmp/progs
 	while read -r prog ; do
 		install_aur $prog
 	done < /tmp/progs ;
