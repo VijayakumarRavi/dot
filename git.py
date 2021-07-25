@@ -5,7 +5,7 @@ import sys
 
 add: str = sys.argv[1]
 commit: str = sys.argv[2]
-branch: str = sys.argv[3]
+# branch: str = sys.argv[3]
 
 
 def run_command(command: str):
@@ -29,12 +29,12 @@ def run_command(command: str):
 def main():
     global add
     global commit
-    global branch
+    # global branch
     if add == "" or add == " ":
         add = "."
-    if branch == "":
-        branch = "master"
-    print("add: '" + add + "' commit: '" + commit + "' branch: '" + branch + "'")
+    #if branch == "":
+    #    branch = "master"
+    print("add: '" + add + "' commit: '" + commit + "' ")
 
     command = "git add " + add
     run_command(command)
@@ -43,7 +43,7 @@ def main():
     command = 'git commit -m "' + commit + '"'
     run_command(command)
 
-    command = "git push origin " + branch
+    command = "git push origin "
     run_command(command)
 
 
