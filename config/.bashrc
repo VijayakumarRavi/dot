@@ -76,7 +76,8 @@ git_auto() {
 	git add $add
 	git commit -m "$com"
 	git push origin
-	echo $(git status --porcelain | awk 'match($1, "M"){print $2}')
+	echo "un commited files"
+	git ls-files -m
 }
 
 # youtube-dl
