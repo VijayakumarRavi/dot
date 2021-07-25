@@ -76,7 +76,7 @@ git_auto() {
 	git add $add
 	git commit -m "$com"
 	git push origin
-	echo "un commited files"
+	printf "\e\n\n[1;32m Pending files \n\e[0m"
 	git ls-files -m
 }
 
