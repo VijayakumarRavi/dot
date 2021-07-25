@@ -76,9 +76,7 @@ git_auto() {
 	git add $add
 	git commit -m "$com"
 	git push origin
-	printf(\n\n)
 	echo $(git status --porcelain | awk '{print $2}')
-	printf(\n\n)
 }
 
 # youtube-dl
