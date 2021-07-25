@@ -76,7 +76,8 @@ git_auto() {
 	git add $add
 	git commit -m "$com"
 	git push origin
-	printf "\e\n\n[1;32m Pending files \n\e[0m"
+	printf "\e[1;32m\n\n Pending files \n\n\e[0m"
+	printf "\e[1;35m"
 	git ls-files -m
 }
 
