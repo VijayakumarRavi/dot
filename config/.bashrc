@@ -76,7 +76,7 @@ git_auto() {
 	git add $add
 	git commit -m "$com"
 	git push origin
-	echo $(git status --porcelain | awk '{print $2}')
+	echo $(git status --porcelain | awk 'match($1, "M"){print $2}')
 }
 
 # youtube-dl
