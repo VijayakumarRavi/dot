@@ -6,7 +6,7 @@
 shopt -s autocd
 shopt -s cdspell
 shopt -s cdable_vars
-
+shopt -s expand_aliases
 # vim mode
 set -o vi
 
@@ -14,8 +14,8 @@ export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
 neofetch
-# echo -e "\e[0;33mVanakkam da Mapla\e[0;31m"
-echo -e "\e[38;5;45mUNIX IS VERY SIMPLE \e[1;92mIT JUST NEEDS A\nGENIUS TO UNDERSTAND ITS SIMPLICITY\n 		\e[38;5;45m-By Dennis Ritchie\e[m"
+echo -e "\e[0;33mVanakkam da Mapla\e[0;31m"
+#echo -e "\e[38;5;45mUNIX IS VERY SIMPLE \e[1;92mIT JUST NEEDS A\nGENIUS TO UNDERSTAND ITS SIMPLICITY\n 		\e[38;5;45m-By Dennis Ritchie\e[m"
 echo -e "\e[0;32m"
 date
 function _exit()              # Function to run upon exit of shell.
