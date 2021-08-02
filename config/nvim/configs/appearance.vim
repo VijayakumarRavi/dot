@@ -6,9 +6,9 @@ set list listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:· ",eol:¬
 
 " Colorschemes
 " set termguicolors
-set background=dark
-" colorscheme substrata
-colorscheme nord
+" set background=dark
+colorscheme default
+" colorscheme nord
 " colorscheme industry
 
 " Function, identifier and comments in italic

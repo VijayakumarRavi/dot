@@ -3,7 +3,7 @@
 set number
 
 " Enable mouse scroll
-" set mouse=a
+set mouse=a
 
 " Lines vim should remember
 set history=1000
@@ -120,4 +120,34 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 set scrolloff=4
+
+" Commenting blocks of code.
+augroup commenting_blocks_of_code
+  autocmd!
+  autocmd FileType c,cpp,java,scala let b:comment_leader = '//  '
+  autocmd FileType sh,ruby,python   let b:comment_leader = '#  '
+  autocmd FileType conf,fstab,sh    let b:comment_leader = '#  '
+  autocmd FileType tex              let b:comment_leader = '%  '
+  autocmd FileType mail             let b:comment_leader = '>  '
+  autocmd FileType vim              let b:comment_leader = '"  '
+  autocmd FileType lua              let b:comment_leader = '--  '
+
+augroup END
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+" Testing
+
+" 1. undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ; ;<c-g>u
+inoremap ' '<c-g>u
+inoremap [ [<c-g>u
+inoremap ] ]<c-g>u
+
+" 2. move visuallines
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
