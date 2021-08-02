@@ -35,7 +35,7 @@ for_window [class="^.*"] border pixel o
 hide_edge_borders smart
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -240,18 +240,18 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+F12 exec ~/git/dot/config/i3/scripts/spotify_remote.sh next
 
 # Rofi
-bindsym F1 exec rofi -show drun
-bindsym F2 exec rofi -show window
-bindsym F3 exec rofi -show ssh
-bindsym F4 exec rofi -show file-browser
+bindsym $mod+F1 exec rofi -show drun
+bindsym $mod+F2 exec rofi -show window
+bindsym $mod+F3 exec rofi -show ssh
+bindsym $mod+F4 exec rofi -show file-browser
 
 # Mocp controls
-bindsym F8 exec mocp -v +10 && notify-send "Volume +10"
-bindsym F7 exec mocp -v -10 && notify-send "Volume -10"
-bindsym F9 exec mocp -p -t shuffle && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
-bindsym F10 exec mocp -r && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
-bindsym F11 exec mocp -G && sleep 2 && notify-send "`mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
-bindsym F12 exec mocp -f && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym $mod+F8 exec mocp -v +10 && notify-send "Volume +10"
+bindsym $mod+F7 exec mocp -v -10 && notify-send "Volume -10"
+bindsym $mod+F9 exec mocp -p -t shuffle && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym $mod+F10 exec mocp -r && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym $mod+F11 exec mocp -G && sleep 2 && notify-send "`mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
+bindsym $mod+F12 exec mocp -f && sleep 2 && notify-send "Now Playing `mocp -i | grep File | awk -F - '{ print  $2 $3}'`"
 
 # Shortcuts
 bindsym $mod+r exec alacritty -e ranger
@@ -261,10 +261,10 @@ bindsym $mod+s exec spotify
 
 # Keybinds for dmenu and other scripts
 bindsym $mod+Shift+q exec ~/git/dot/config/i3/scripts/nextworkspace
-bindsym $mod+F7 exec ~/git/dot/config/i3/scripts/record
-bindsym $mod+F8 exec ~/git/dot/config/i3/scripts/wifi
-bindsym $mod+F9 exec ~/git/dot/config/i3/scripts/search
-bindsym $mod+F10 exec ~/git/dot/config/i3/scripts/displayselect
-bindsym $mod+F11 exec ~/git/dot/config/i3/scripts/logout
-bindsym $mod+F12 exec ~/git/dot/config/i3/scripts/dmenuunicode
+bindsym $mod+Shift+F7 exec ~/git/dot/config/i3/scripts/record
+bindsym $mod+Shift+F8 exec ~/git/dot/config/i3/scripts/wifi
+bindsym $mod+Shift+F9 exec ~/git/dot/config/i3/scripts/search
+bindsym $mod+Shift+F10 exec ~/git/dot/config/i3/scripts/displayselect
+bindsym $mod+Shift+F11 exec ~/git/dot/config/i3/scripts/logout
+bindsym $mod+Shift+F12 exec ~/git/dot/config/i3/scripts/dmenuunicode
 
