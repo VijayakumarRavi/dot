@@ -156,7 +156,7 @@ install_pkgs() {
 }
 
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom i3lock-fancy xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot pnmixer network-manager-applet xfce4-power-manager qt5-styleplugins papirus-icon-theme
 }
 
 gnome_install() {
@@ -215,47 +215,10 @@ config-users() {
 }
 
 
-manualinstall() { # Installs $1 manually if not installed. Used only for AUR helper here.
-	[ -f "/usr/bin/$1" ] || (
-	dialog --infobox "Installing \"$1\", an AUR helper..." 4 50
-	cd /tmp || exit 1
-	rm -rf /tmp/"$1"*
-	curl -sO https://aur.archlinux.org/cgit/aur.git/snapshot/"$1".tar.gz &&
-	sudo -u vijay tar -xvf "$1".tar.gz >/dev/null 2>&1 &&
-	cd "$1" &&
-	sudo -u vijay makepkg --noconfirm -si >/dev/null 2>&1 || return 1
-	cd /tmp || return 1) ;}
-
-install_aur() {
-	sudo -u vijay yay -S --noconfirm "$1"
-}
-
-LARBS() {
-	[ -f /etc/sudoers.pacnew ] && cp /etc/sudoers.pacnew /etc/sudoers # Just in case
-
-	# Allow user to run sudo without password. Since AUR programs must be installed
-	# in a fakeroot environment, this is required for all builds with AUR.
-	newperms "%wheel ALL=(ALL) NOPASSWD: ALL"
-
-	# Make pacman and paru colorful and adds eye candy on the progress bar because why not.
-	grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
-	grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
-
-	# Use all cores for compilation.
-	sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
-
-	manualinstall yay
-	while read -r prog ; do
-		install_aur $prog
-	done < /home/vijay/Desktop/pkglocallist ;
-
-}
-
 etc-configs
 config-users
 starting-service
 sleep 10
-install_aur
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
 EOF
 }
