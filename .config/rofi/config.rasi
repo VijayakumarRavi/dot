@@ -1,5 +1,6 @@
 configuration {
-	theme: "~/.config/rofi/themes/dmenu.rasi";
+	// theme: "~/.config/rofi/themes/dmenu.rasi";
+	theme: "/usr/share/rofi/themes/gruvbox-dark.rasi";
 	show-icons: true;
     icon-theme: "Papirus";
     terminal: "/usr/bin/alacritty";

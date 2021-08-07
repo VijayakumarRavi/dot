@@ -163,8 +163,8 @@ gaps outer 3
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status -c ~/git/dot/config/i3/i3status.conf
-	#status_command i3blocks -c ~/git/dot/config/i3/i3blocks.conf
+    status_command i3status -c ~/.config/i3/i3status.conf
+	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	i3bar_command i3bar -t
 	font pango:Mono Sans Bold 12
 	# tray_output none
@@ -234,13 +234,14 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # spotify keybindings
-# bindsym $mod+F9 exec ~/git/dot/config/i3/scripts/spotify_remote.sh previous
-# bindsym $mod+F10 exec ~/git/dot/config/i3/scripts/spotify_remote.sh play
-# bindsym $mod+F11 exec ~/git/dot/config/i3/scripts/spotify_remote.sh pause
-# bindsym $mod+F12 exec ~/git/dot/config/i3/scripts/spotify_remote.sh next
+# bindsym $mod+F9 exec ~/.config/i3/scripts/spotify_remote.sh previous
+# bindsym $mod+F10 exec ~/.config/i3/scripts/spotify_remote.sh play
+# bindsym $mod+F11 exec ~/.config/i3/scripts/spotify_remote.sh pause
+# bindsym $mod+F12 exec ~/.config/i3/scripts/spotify_remote.sh next
 
 # Rofi
-bindsym $mod+F1 exec rofi -show drun
+bindsym mod1+space exec rofi -show drun
+# -theme /usr/share/rofi/themes/gruvbox-dark-hard.rasi
 bindsym $mod+F2 exec rofi -show window
 bindsym $mod+F3 exec rofi -show ssh
 bindsym $mod+F4 exec rofi -show file-browser
@@ -260,11 +261,11 @@ bindsym $mod+e exec brave
 bindsym $mod+s exec spotify
 
 # Keybinds for dmenu and other scripts
-bindsym $mod+Shift+q exec ~/git/dot/config/i3/scripts/nextworkspace
-bindsym $mod+Shift+F7 exec ~/git/dot/config/i3/scripts/record
-bindsym $mod+Shift+F8 exec ~/git/dot/config/i3/scripts/wifi
-bindsym $mod+Shift+F9 exec ~/git/dot/config/i3/scripts/search
-bindsym $mod+Shift+F10 exec ~/git/dot/config/i3/scripts/displayselect
-bindsym $mod+Shift+F11 exec ~/git/dot/config/i3/scripts/logout
-bindsym $mod+Shift+F12 exec ~/git/dot/config/i3/scripts/dmenuunicode
+bindsym $mod+Shift+q exec ~/.config/i3/scripts/nextworkspace
+bindsym $mod+Shift+F7 exec ~/.config/i3/scripts/record
+bindsym $mod+Shift+F8 exec ~/.config/i3/scripts/wifi
+bindsym $mod+Shift+F9 exec ~/.config/i3/scripts/search
+bindsym $mod+Shift+F10 exec ~/.config/i3/scripts/displayselect
+bindsym $mod+Shift+F11 exec ~/.config/i3/scripts/logout
+bindsym $mod+Shift+F12 exec ~/.config/i3/scripts/dmenuunicode
 
