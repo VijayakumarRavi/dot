@@ -14,7 +14,7 @@ export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
 neofetch
-echo -e "\e[0;33mVanakkam da Mapla\e[0;31m \e[0;32m"
+echo -e "\e[0;33mVanakkam da Mapla\e[0;31m\e[0;32m"
 #echo -e "\e[38;5;45mUNIX IS VERY SIMPLE \e[1;92mIT JUST NEEDS A\nGENIUS TO UNDERSTAND ITS SIMPLICITY\n 		\e[38;5;45m-By Dennis Ritchie\e[m"
 date
 function _exit()              # Function to run upon exit of shell.
@@ -71,7 +71,7 @@ alias y='yay'
 alias orphan='doas pacman -Rs $(pacman -Qqtd)' # Removes orphan packages
 alias mirrorlist='doas reflector -a 6 -c IN --save /etc/pacman.d/mirrorlist'
 
-alias w='~/.config/unsplash.sh'
+alias w='/home/vijay/git/dot/.config/unsplash.sh'
 
 # Git
 alias gs='git status'
