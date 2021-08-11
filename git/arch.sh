@@ -146,9 +146,16 @@ EOF
 install_pkgs() {
 	clear
 	echo "Installing Required packages"
-	pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com && pacman-key --lsign-key 3056513887B78AEB && sleep 5 && pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && pacman-key --recv-key B545E9B7CD906FE3 && pacman-key --lsign-key B545E9B7CD906FE3 && curl -L https://vijayakumarravi.github.io/dot/config/pacman.conf --output /etc/pacman.conf && sleep 10
+	pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com && \
+		pacman-key --lsign-key 3056513887B78AEB && \
+		sleep 5 && \
+		pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && \
+		pacman-key --recv-key B545E9B7CD906FE3 && \
+		pacman-key --lsign-key B545E9B7CD906FE3 && \
+		curl -L https://vijayakumarravi.github.io/dot/config/pacman.conf --output /etc/pacman.conf && \
+		sleep 10 ;
 
-	pacman -Sy --noconfirm archlinux-keyring
+	pacman -Sy --noconfirm archlinux-keyring ;
 	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
 	cat /mnt/etc/fstab ;
@@ -156,7 +163,7 @@ install_pkgs() {
 }
 
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom i3lock-fancy xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot pnmixer network-manager-applet xfce4-power-manager qt5-styleplugins papirus-icon-theme
+	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager qt5-styleplugins papirus-icon-theme
 }
 
 gnome_install() {
@@ -294,9 +301,9 @@ uefi_install() {
 	uefi_partition
 	uefi_makefs
 	install_pkgs
+	de_type
 	chroot_ex
 	grub_uefi
-	de_type
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
 
@@ -304,9 +311,9 @@ mbr_install() {
 	mbr_partition
 	mbr_makefs
 	install_pkgs
+	de_type
 	chroot_ex
 	grub_mbr
-	de_type
 	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
 
