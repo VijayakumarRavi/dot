@@ -293,8 +293,8 @@ uefi_install() {
 	uefi_partition
 	uefi_makefs
 	install_pkgs
-	chroot_ex
 	de_type
+	chroot_ex
 	grub_uefi
 	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
@@ -303,8 +303,8 @@ mbr_install() {
 	mbr_partition
 	mbr_makefs
 	install_pkgs
-	chroot_ex
 	de_type
+	chroot_ex
 	grub_mbr
 	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
 }
