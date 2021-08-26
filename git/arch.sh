@@ -154,7 +154,7 @@ install_pkgs() {
 }
 
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager papirus-icon-theme
+	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager papirus-icon-theme net-tools noto-fonts-emoji noto-fonts noto-fonts-extra
 }
 
 gnome_install() {
@@ -352,5 +352,5 @@ main() {
 }
 printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
 timedatectl set-ntp true
-timedatectl set-timezone Asia/Kolkata 
+timedatectl set-timezone Asia/Kolkata
 main
