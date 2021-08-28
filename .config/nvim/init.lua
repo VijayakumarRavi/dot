@@ -153,7 +153,7 @@ map('n', '<S-Left>', '<C-w>2-')
 map('n', '<S-Right>', '<C-w>2+')
 map('n', '<S-Up>', '<C-w>2>')
 map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>')
-map('n', '<leader>t', '<cmd>terminal<CR>')
+map('n', '<leader>t', '<cmd>:split term://bash<CR>')
 map('n', '<leader>u', '<cmd>update<CR>')
 map('n', '<leader>x', '<cmd>conf qa<CR>')
 map('n', 'Q', '<cmd>lua warn_caps()<CR>')
@@ -245,7 +245,7 @@ cmd ([[
 augroup commenting_blocks_of_code
   autocmd!
   autocmd FileType c,cpp,java,scala let b:comment_leader = '//  '
-  autocmd FileType sh,ruby,python   let b:comment_leader = '#  '
+  autocmd FileType bash,ruby,python   let b:comment_leader = '#  '
   autocmd FileType conf,fstab,sh    let b:comment_leader = '#  '
   autocmd FileType tex              let b:comment_leader = '%  '
   autocmd FileType mail             let b:comment_leader = '>  '
@@ -260,6 +260,8 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 ----- Moving Block of code ----
 map('v', 'J', ":m '>+1<CR>gv=gv")
 map('v', 'K', ":m '<-2<CR>gv=gv")
+
+cmd (":autocmd TermOpen * setlocal statusline=%{b:term_title}")
 
 ------ Telescope ----
 map('n', '<leader>f', '<cmd>Telescope find_files<cr>')
