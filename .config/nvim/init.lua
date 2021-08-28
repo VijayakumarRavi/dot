@@ -239,6 +239,8 @@ vim.tbl_map(function(c) cmd(fmt('autocmd %s', c)) end, {
 })
 
 ------ My Custom Testing lua part ------
+
+------ commenting_blocks_of_code -------
 cmd ([[
 augroup commenting_blocks_of_code
   autocmd!
@@ -254,6 +256,10 @@ augroup END
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 ]])
+
+----- Moving Block of code ----
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
 
 ------ Telescope ----
 map('n', '<leader>f', '<cmd>Telescope find_files<cr>')
