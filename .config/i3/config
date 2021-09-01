@@ -194,6 +194,8 @@ client.background       #ffffff
 
 # autostart
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id xrandr --output Virtual-1 --mode 1920x1080
+#exec --no-startup-id /home/vijay/git/dot/.config/unsplash.sh
 exec --no-startup-id picom -f
 exec --no-startup-id blueman-tray
 exec --no-startup-id numlockx on
@@ -239,6 +241,9 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+F11 exec ~/.config/i3/scripts/spotify_remote.sh pause
 # bindsym $mod+F12 exec ~/.config/i3/scripts/spotify_remote.sh next
 
+#screenshots
+bindsym --release Shift+Print exec "~/git/dot/.config/i3/scripts/screenshots.sh -s /home/vijay/Pictures/screenshots/"
+bindsym --release Print exec "~/git/dot/.config/i3/scripts/screenshort.sh /home/vijay/Pictures/screenshots/"
 # Rofi
 bindsym mod1+space exec rofi -show drun
 # -theme /usr/share/rofi/themes/gruvbox-dark-hard.rasi
