@@ -13,8 +13,8 @@ set -o vi
 export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
-neofetch
-echo -e "\e[0;33mVanakkam da Mapla\e[0;31m\e[0;32m"
+#neofetch
+echo -e "\e[0;33mVanakkam da Mapla\e[0;31m\e[0;32m \n"
 #echo -e "\e[38;5;45mUNIX IS VERY SIMPLE \e[1;92mIT JUST NEEDS A\nGENIUS TO UNDERSTAND ITS SIMPLICITY\n 		\e[38;5;45m-By Dennis Ritchie\e[m"
 date
 function _exit()              # Function to run upon exit of shell.
@@ -31,8 +31,8 @@ RANDOM_PROMPTS() {
 }
 # $(RANDOM_PROMPTS)
 
-#PS1="\[\033[32m\]\w\n\e[0;38m[\e[0;35m\u\e[1;36m@\e[0;38m\h\e[0;35m]\e[1;36m ∮ \[\033[0m\]"
-PS1="🍎\e[0;34m \033[1m$(ifconfig $(route -n | grep ^0.0.0.0 | awk '{print $NF}') | grep inet | grep -v inet6 | awk '{print $2}') : \033[0m"
+PS1="\[\033[32m\]\w\n\e[0;38m[\e[0;35m\u\e[1;36m@\e[0;38m\h\e[0;35m]\e[1;36m ∮ \[\033[0m\]"
+#PS1="\n🍎\e[0;34m \033[1m$(ifconfig $(route -n | grep ^0.0.0.0 | awk '{print $NF}') | grep inet | grep -v inet6 | awk '{print $2}') : \033[0m"
 
 # System Aliases
 alias rm='rm -vr'
@@ -57,14 +57,15 @@ alias r='ranger'
 alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias n='nvim'
-alias sn='doas nvim'
+alias sn='sudo nvim'
+alias vim='nvim'
 
 # Edit congfis
-alias nvimrc='nvim ~/.config/nvim/init.vim'
+alias nrc='nvim ~/.config/nvim/init.lua'
 alias bashrc='nvim ~/.bashrc'
 alias i3con='nvim ~/.config/i3/config'
 alias loadbash='source ~/.bashrc'
-alias notes='vim ~/.notes.txt'
+alias notes='nvim ~/.notes.txt'
 
 alias p='doas pacman'
 alias y='yay'
@@ -75,7 +76,7 @@ alias w='/home/vijay/git/dot/.config/unsplash.sh'
 
 # Git
 alias gs='git status'
-alias gc='git clone'
+alias gc='git clone --depth=1'
 
 git_auto() {
 	add=$1
@@ -124,3 +125,6 @@ function extract()
 aur(){ curl  -O https://aur.archlinux.org/cgit/aur.git/snapshot/$1.tar.gz && tar -xvf $1.tar.gz && cd $1 && makepkg --noconfirm -si && cd .. && rm -rf $1 $1.tar.gz ;}
 # syntax highlighting
 ((_ble_bash)) && ble-attach
+
+# alias luamake=/home/vijay/git/lua-language-server/3rd/luamake/luamake
+. "$HOME/.cargo/env"
