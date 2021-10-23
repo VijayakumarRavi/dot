@@ -7,16 +7,8 @@ uefi_partition() {
     sgdisk -a 2048 -o /dev/sda
 
     # Creating partition 
-    sgdisk -n 1:0:+250M /dev/sda
-    sgdisk -n 1:0:0 /dev/sda
-
-    # set partition types
-    sgdisk -t 1:ef00 /dev/sda
-    sgdisk -t 2:8200 /dev/sda
-
-    # label partitions
-    sgdisk -c 1:"UEFISYS" /dev/sda
-    sgdisk -c 2:"ROOT" /dev/sda
+    sgdisk -n 1:0:+250M -t 1:ef00 -c 1:"UEFISYS" /dev/sda
+    sgdisk -n 2:0:0 -t 2:8300 -c 2:"ROOT"  /dev/sda
 
     lsblk
 	sleep 10
@@ -40,9 +32,7 @@ uefi_makefs() {
 		clear
 		echo "Creating home partition"
         sgdisk -Z /dev/sdb
-        sgdisk -n 1:0:0 /dev/sdb
-        sgdisk -t 2:8300 /dev/sdb
-        sgdisk -c 1:"HOME" /dev/sda
+        sgdisk -n 1:0:0 -t 2:8300 -c 1:"HOME" /dev/sdb
 		mkdir /mnt/home
 		mkfs.ext4 /dev/sdb1
 		mount /dev/sdb1 /mnt/home
