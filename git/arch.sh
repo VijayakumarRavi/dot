@@ -32,7 +32,7 @@ uefi_makefs() {
 		clear
 		echo "Creating home partition"
         sgdisk -Z /dev/sdb
-        sgdisk -n 1:0:0 -t 2:8300 -c 1:"HOME" /dev/sdb
+        sgdisk -n 1:0:0 -t 1:8300 -c 1:"HOME" /dev/sdb
 		mkdir /mnt/home
 		mkfs.ext4 /dev/sdb1
 		mount /dev/sdb1 /mnt/home
