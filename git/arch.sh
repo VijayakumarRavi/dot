@@ -185,15 +185,13 @@ de_choose() {
 }
 
 postinstall() {
-    cat <<EOF | arch-chroot /mnt /usr/bin/runuser -u vijay --
-    echo "CLONING: YAY"
-    cd ~
-    git clone "https://aur.archlinux.org/yay.git"
-    cd ${HOME}/yay
-    makepkg -si --noconfirm
+	arch-chroot /mnt /usr/bin/runuser -u vijay --  echo "CLONING: YAY"
+    arch-chroot /mnt /usr/bin/runuser -u vijay -- cd ~
+    arch-chroot /mnt /usr/bin/runuser -u vijay --  git clone "https://aur.archlinux.org/yay.git"
+    arch-chroot /mnt /usr/bin/runuser -u vijay --  cd ${HOME}/yay
+    arch-chroot /mnt /usr/bin/runuser -u vijay --  makepkg -si --noconfirm
 
-    yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git
-EOF
+    arch-chroot /mnt /usr/bin/runuser -u vijay --  yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git
 }
 
 main() {
