@@ -210,6 +210,7 @@ config-users() {
 	newgrp libvirt
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
 	printf "\e[1;32m\n********createing user Successfully Done*********\n\e[0m"
+	sed -i 's/^#Para/Para/' /etc/pacman.conf
 	sleep 10
 }
 
@@ -351,6 +352,20 @@ main() {
 
 }
 printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
+preinstall() {
+	echo "-------------------------------------------------"
+	echo "Setting up mirrors for optimal download          "
+	echo "-------------------------------------------------"
+	iso=$(curl -4 ifconfig.co/country-iso)
+	timedatectl set-ntp true
+	pacman -S --noconfirm pacman-contrib terminus-font
+	setfont ter-v22b
+	sed -i 's/^#Para/Para/' /etc/pacman.conf
+	pacman -S --noconfirm reflector rsync
+	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+	reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
+}
 timedatectl set-ntp true
 timedatectl set-timezone Asia/Kolkata
+preinstall
 main
