@@ -55,10 +55,12 @@ install_pkgs() {
 
 i3_install() {
 	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager papirus-icon-theme net-tools noto-fonts-emoji noto-fonts noto-fonts-extra
+	arch-chroot /mnt systemctl enable lightdm
 }
 
 gnome_install() {
 	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+	arch-chroot /mnt systemctl enable gdm
 }
 
 chroot_ex() {
@@ -96,8 +98,6 @@ starting-service() {
 	systemctl enable firewalld
 	systemctl enable acpid
 	systemctl enable libvirtd
-	systemctl enable lightdm
-	systemctl enable gdm
 	sleep 10
 }
 
@@ -119,7 +119,7 @@ etc-configs
 config-users
 starting-service
 sleep 10
-printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
+printf "\e[1;32mDone! Type exit, umount -a and reboot.\n\e[0m"
 EOF
 }
 
@@ -231,9 +231,9 @@ preinstall() {
 	iso=$(curl -4 ifconfig.co/country-iso)
 	timedatectl set-ntp true
 	timedatectl set-timezone Asia/Kolkata
+	sed -i 's/^#Para/Para/' /etc/pacman.conf
 	pacman -Sy --noconfirm dialog pacman-contrib terminus-font reflector rsync
 	setfont ter-v22b
-	sed -i 's/^#Para/Para/' /etc/pacman.conf
 	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 }
