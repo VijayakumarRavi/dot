@@ -213,8 +213,6 @@ EOF
 }
 
 main() {
-  pacman -Sy --noconfirm dialog
-
   de_choose
 
   uefi_partition
@@ -238,21 +236,23 @@ echo " /_/   \_\|_| \_\ \____||_| |_| |___||_| \_||____/  |_|/_/   \_\|_____||__
 
 echo "-------------------------------------------------------------------------------"
 
+
 preinstall() {
 	echo "-------------------------------------------------"
 	echo "Setting up mirrors for optimal download          "
 	echo "-------------------------------------------------"
 	iso=$(curl -4 ifconfig.co/country-iso)
 	timedatectl set-ntp true
-	pacman -S --noconfirm pacman-contrib terminus-font
+	timedatectl set-timezone Asia/Kolkata
+	pacman -Sy --noconfirm dialog
+	pacman -Sy --noconfirm pacman-contrib terminus-font
 	setfont ter-v22b
 	sed -i 's/^#Para/Para/' /etc/pacman.conf
-	pacman -S --noconfirm reflector rsync
+	pacman -Sy --noconfirm reflector rsync
 	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 }
-timedatectl set-ntp true
-timedatectl set-timezone Asia/Kolkata
+
 preinstall
 main
 postinstall
