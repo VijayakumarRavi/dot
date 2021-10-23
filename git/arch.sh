@@ -8,7 +8,6 @@ uefi_partition() {
 
     # Creating partition 
     sgdisk -n 1:0:+250M -t 1:ef00 -c 1:"UEFISYS" /dev/sda
-	sleep 10
     sgdisk -n 2:0:0 -t 2:8300 -c 2:"ROOT"  /dev/sda
 
     lsblk
@@ -33,7 +32,7 @@ uefi_makefs() {
 		clear
 		echo "Creating home partition"
         sgdisk -Z /dev/sdb
-        sgdisk -n 1:0:0 -t 2:8300 -c 1:"HOME" /dev/sdb
+        sgdisk -n 1:0:0 -t 1:8300 -c 1:"HOME" /dev/sdb
 		mkdir /mnt/home
 		mkfs.ext4 /dev/sdb1
 		mount /dev/sdb1 /mnt/home
@@ -186,19 +185,24 @@ de_choose() {
 }
 
 postinstall() {
-    cat <<EOF | arch-chroot /mnt /usr/bin/runuser -u vijay --
-    echo "CLONING: YAY"
-    cd ~
-    git clone "https://aur.archlinux.org/yay.git"
-    cd ${HOME}/yay
-    makepkg -si --noconfirm
+cat <<EOF > /mnt/home/vijay/temp.sh
+echo "CLONING: YAY"
+cd ~
+git clone "https://aur.archlinux.org/yay.git"
+cd ${HOME}/yay
+makepkg -si --noconfirm
 
-    yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git
+yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git --noconfirm
 EOF
+
+chmod +x /mnt/home/vijay/temp.sh
+arch-chroot /mnt /usr/bin/runuser -u vijay -- /home/vijay/temp.sh
+rm -v /mnt/home/vijay/temp.sh
 }
 
 main() {
   de_choose
+
   uefi_partition
   uefi_makefs
   install_pkgs
@@ -220,7 +224,6 @@ echo " /_/   \_\|_| \_\ \____||_| |_| |___||_| \_||____/  |_|/_/   \_\|_____||__
 
 echo "-------------------------------------------------------------------------------"
 
-
 preinstall() {
 	echo "-------------------------------------------------"
 	echo "Setting up mirrors for optimal download          "
@@ -228,11 +231,9 @@ preinstall() {
 	iso=$(curl -4 ifconfig.co/country-iso)
 	timedatectl set-ntp true
 	timedatectl set-timezone Asia/Kolkata
-	pacman -Sy --noconfirm dialog
-	pacman -Sy --noconfirm pacman-contrib terminus-font
+	pacman -Sy --noconfirm dialog pacman-contrib terminus-font reflector rsync
 	setfont ter-v22b
 	sed -i 's/^#Para/Para/' /etc/pacman.conf
-	pacman -Sy --noconfirm reflector rsync
 	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 }
