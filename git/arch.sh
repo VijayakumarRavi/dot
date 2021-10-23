@@ -3,31 +3,22 @@
 uefi_partition() {
 	clear
 	echo "Creating ROOT partition"
-	cat <<EOF | gdisk /dev/sda
-o
-y
-n
+    sgdisk -Z /dev/sda
+    sgdisk -a 2048 -o /dev/sda
 
+    # Creating partition 
+    sgdisk -n 1:0:+250M /dev/sda
+    sgdisk -n 1:0:0 /dev/sda
 
-+200M
-ef00
-n
+    # set partition types
+    sgdisk -t 1:ef00 /dev/sda
+    sgdisk -t 2:8300 /dev/sda
 
+    # label partitions
+    sgdisk -c 1:"UEFISYS" /dev/sda
+    sgdisk -c 2:"ROOT" /dev/sda
 
-+2G
-8200
-n
-
-
-
-n
-
-
-w
-y
-EOF
-	partprobe
-	lsblk
+    lsblk
 	sleep 10
 }
 
@@ -36,8 +27,6 @@ uefi_makefs() {
 	echo "Make and Mounting partition"
 	mkfs.ext4 /dev/sda3
 	mkfs.fat -F32 /dev/sda1
-	mkswap /dev/sda2
-	swapon /dev/sda2
 	mount /dev/sda3 /mnt
 	mkdir -p /mnt/boot/efi
 	mount /dev/sda1 /mnt/boot/efi
@@ -50,18 +39,10 @@ uefi_makefs() {
 	elif [[ -b /dev/sdb ]]; then
 		clear
 		echo "Creating home partition"
-		cat <<EOF | gdisk /dev/sdb
-o
-y
-n
-p
-
-
-
-w
-y
-EOF
-		partprobe
+        sgdisk -Z /dev/sdb
+        sgdisk -n 1:0:0 /dev/sdb
+        sgdisk -t 2:8300 /dev/sdb
+        sgdisk -c 1:"HOME" /dev/sda
 		mkdir /mnt/home
 		mkfs.ext4 /dev/sdb1
 		mount /dev/sdb1 /mnt/home
@@ -71,77 +52,6 @@ EOF
 	lsblk
 	sleep 20
 }
-
-mbr_partition() {
-	clear
-	echo "Creating ROOT partition"
-	cat <<EOF | fdisk /dev/sda
-o
-n
-p
-
-
-+200M
-n
-p
-
-
-+2G
-n
-p
-
-
-
-n
-p
-
-
-w
-EOF
-	partprobe
-	lsblk
-	sleep 10
-}
-
-mbr_makefs() {
-	clear
-	echo "Make and Mounting partition"
-	mkfs.ext4 /dev/sda3
-	mkfs.ext4 /dev/sda1
-	mkswap /dev/sda2
-	swapon /dev/sda2
-	mount /dev/sda3 /mnt
-	mkdir -p /mnt/boot
-	mount /dev/sda1 /mnt/boot
-	lsblk
-	sleep 10
-	if [[ -b /dev/sdb1 ]]; then
-		echo "Home partition Already exist"
-		mkdir -p /mnt/home
-		mount /dev/sdb1 /mnt/home
-	elif [[ -b /dev/sdb ]]; then
-		clear
-		echo "Creating home partition"
-		cat <<EOF | fdisk /dev/sdb
-o
-n
-p
-
-
-
-w
-EOF
-		partprobe
-		mkdir /mnt/home
-		mkfs.ext4 /dev/sdb1
-		mount /dev/sdb1 /mnt/home
-	else
-		echo "Home disk not found"
-	fi
-	lsblk
-	sleep 20
-}
-
 
 install_pkgs() {
 	clear
@@ -290,68 +200,44 @@ de_choose() {
 
 }
 
-uefi_install() {
-	uefi_partition
-	uefi_makefs
-	install_pkgs
-	de_type
-	chroot_ex
-	grub_uefi
-	printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
-}
+postinstall() {
+    cat <<EOF | arch-chroot /mnt /usr/bin/runuser -u vijay --
+    echo "CLONING: YAY"
+    cd ~
+    git clone "https://aur.archlinux.org/yay.git"
+    cd ${HOME}/yay
+    makepkg -si --noconfirm
 
-mbr_install() {
-	mbr_partition
-	mbr_makefs
-	install_pkgs
-	de_type
-	chroot_ex
-	grub_mbr
-	printf "\e[1;35m\n\nMBR Installation completed  \e[0m"
+    yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git
+EOF
 }
 
 main() {
   pacman -Sy --noconfirm dialog
-  DIALOG_CANCEL=1
-  DIALOG_ESC=255
-  HEIGHT=0
-  WIDTH=0
-  exec 3>&1
-  selection=$(dialog \
-    --backtitle "Arch Installation" \
-    --title "Select Firmware type" \
-    --cancel-label "Exit" \
-    --menu "Please select:" $HEIGHT $WIDTH 4 \
-    "1" "UEFI" \
-    "2" "MBR" \
-    2>&1 1>&3)
-    exit_status=$?
-  exec 3>&-
-    case $exit_status in
-    $DIALOG_CANCEL)
-      clear
-      echo "Program terminated."
-      exit
-      ;;
-    $DIALOG_ESC)
-      clear
-      echo "Program aborted." >&2
-      exit 1
-      ;;
-  esac
-  case $selection in
-	  1 )
-		  de_choose
-		  uefi_install
-		  ;;
-	  2 )
-		  de_choose
-		  mbr_install
-		  ;;
-  esac
 
+  de_choose
+
+  uefi_partition
+  uefi_makefs
+  install_pkgs
+  de_type
+  chroot_ex
+  grub_uefi
+  printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
-printf "\e[1;32m*********Arch Scripts Started**********\n\e[0m"
+
+printf "\e[1;32m*********Arch Script Started**********\n\e[0m"
+
+echo "------------------------------------------------------------------------------"
+
+echo "     _     ____    ____  _   _   ___  _   _  ____  _____   _     _      _      "
+echo "    / \   |  _ \  / ___|| | | | |_ _|| \ | |/ ___||_   _| / \   | |    | |     "
+echo "   / _ \  | |_) || |    | |_| |  | | |  \| |\___ \  | |  / _ \  | |    | |     "
+echo "  / ___ \ |  _ < | |___ |  _  |  | | | |\  | ___) | | | / ___ \ | |___ | |___  "
+echo " /_/   \_\|_| \_\ \____||_| |_| |___||_| \_||____/  |_|/_/   \_\|_____||_____| "
+
+echo "-------------------------------------------------------------------------------"
+
 preinstall() {
 	echo "-------------------------------------------------"
 	echo "Setting up mirrors for optimal download          "
@@ -369,3 +255,4 @@ timedatectl set-ntp true
 timedatectl set-timezone Asia/Kolkata
 preinstall
 main
+postinstall
