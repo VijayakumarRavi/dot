@@ -17,9 +17,9 @@ uefi_partition() {
 uefi_makefs() {
 	clear
 	echo "Make and Mounting partition"
-	mkfs.ext4 /dev/sda3
+	mkfs.ext4 /dev/sda2
 	mkfs.fat -F32 /dev/sda1
-	mount /dev/sda3 /mnt
+	mount /dev/sda2 /mnt
 	mkdir -p /mnt/boot/efi
 	mount /dev/sda1 /mnt/boot/efi
 	lsblk
@@ -126,12 +126,6 @@ EOF
 grub_uefi() {
 	cat <<EOF | arch-chroot /mnt bash
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB  && grub-mkconfig -o /boot/grub/grub.cfg
-EOF
-}
-
-grub_mbr() {
-	cat <<EOF | arch-chroot /mnt bash
-grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 }
 
