@@ -12,7 +12,7 @@ uefi_partition() {
 
     # set partition types
     sgdisk -t 1:ef00 /dev/sda
-    sgdisk -t 2:8300 /dev/sda
+    sgdisk -t 2:8200 /dev/sda
 
     # label partitions
     sgdisk -c 1:"UEFISYS" /dev/sda
