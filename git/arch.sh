@@ -199,7 +199,6 @@ EOF
 
 main() {
   de_choose
-
   uefi_partition
   uefi_makefs
   install_pkgs
