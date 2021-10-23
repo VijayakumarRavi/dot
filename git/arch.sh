@@ -227,11 +227,9 @@ preinstall() {
 	iso=$(curl -4 ifconfig.co/country-iso)
 	timedatectl set-ntp true
 	timedatectl set-timezone Asia/Kolkata
-	pacman -Sy --noconfirm dialog
-	pacman -Sy --noconfirm pacman-contrib terminus-font
+	pacman -Sy --noconfirm dialog pacman-contrib terminus-font reflector rsync
 	setfont ter-v22b
 	sed -i 's/^#Para/Para/' /etc/pacman.conf
-	pacman -Sy --noconfirm reflector rsync
 	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 	reflector -a 48 -c $iso -f 5 -l 20 --sort rate --save /etc/pacman.d/mirrorlist
 }
