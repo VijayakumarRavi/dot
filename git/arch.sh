@@ -189,9 +189,11 @@ cat <<EOF > /mnt/home/vijay/temp.sh
 echo "CLONING: YAY"
 cd ~
 git clone "https://aur.archlinux.org/yay.git"
-cd ${HOME}/yay
+cd /home/vijay/yay
 makepkg -si --noconfirm
-
+rm -rv /home/vijay/yay
+sleep 4
+git clone --depth=1 https://github.com/VijayakumarRavi/dot.git
 yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git --noconfirm
 EOF
 
