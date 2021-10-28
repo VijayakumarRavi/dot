@@ -232,6 +232,8 @@ preinstall() {
 	timedatectl set-ntp true
 	timedatectl set-timezone Asia/Kolkata
 	sed -i 's/^#Para/Para/' /etc/pacman.conf
+	sed -i 's/^#Color/Color/' /etc/pacman.conf
+	sed -i 's/^#VerbosePkg/VerbosePkg/' /etc/pacman.conf
 	pacman -Sy --noconfirm dialog pacman-contrib terminus-font reflector rsync
 	setfont ter-v22b
 	mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
