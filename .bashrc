@@ -82,10 +82,10 @@ git_auto() {
 	add=$1
 	com=$2
 	echo "Add-file: " $add
-	echo "Comm-msg: " $com
+	echo "Comm-msg: " $com 
 	sleep 2
 	git add $add
-	git commit -m "$com"
+	git commit -m "$com ${date}"
 	git push origin
 	printf "\e[1;32m\n\nPending files \n\n\e[0m"
 	printf "\e[1;35m"
