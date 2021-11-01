@@ -47,7 +47,7 @@ install_pkgs() {
 	clear
 	echo "Installing Required packages"
 	pacman -Sy --noconfirm archlinux-keyring ;
-	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
+	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl doas bat htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
 	cat /mnt/etc/fstab ;
 	sleep 20
@@ -74,6 +74,7 @@ etc-configs() {
 	timedatectl set-ntp true
 	hwclock --systohc
 	echo "archlinux" >> /etc/hostname
+    echo "permit nopass vijay as root" >> /etc/doas.conf
 	echo "127.0.0.1 localhost" >> /etc/hosts
 	echo "::1       localhost" >> /etc/hosts
 	echo "127.0.1.1 archlinux.localdomain archlinux" >> /etc/hosts
@@ -194,7 +195,7 @@ makepkg -si --noconfirm
 rm -rv /home/vijay/yay
 sleep 4
 git clone --depth=1 https://github.com/VijayakumarRavi/dot.git
-yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git --noconfirm
+yay -Sy nerd-fonts-source-code-pro ubuntu-latex-fonts-git --noconfirm --sudoloop
 EOF
 
 chmod +x /mnt/home/vijay/temp.sh
