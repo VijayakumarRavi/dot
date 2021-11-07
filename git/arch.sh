@@ -6,7 +6,7 @@ uefi_partition() {
     sgdisk -Z /dev/sda
     sgdisk -a 2048 -o /dev/sda
 
-    # Creating partition 
+    # Creating partition
     sgdisk -n 1:0:+250M -t 1:ef00 -c 1:"UEFISYS" /dev/sda
     sgdisk -n 2:0:0 -t 2:8300 -c 2:"ROOT"  /dev/sda
 
@@ -47,18 +47,51 @@ install_pkgs() {
 	clear
 	echo "Installing Required packages"
 	pacman -Sy --noconfirm archlinux-keyring ;
-	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font cups reflector polkit udisks2 pulseaudio-bluetooth npm
+	pacstrap /mnt base base-devel linux linux-headers linux-firmware xf86-video-nouveau \
+        git neovim intel-ucode curl htop neofetch python-pip gawk grub efibootmgr \
+        networkmanager network-manager-applet \dialog wpa_supplicant mtools \
+        dosfstools avahi gvfs gvfs-smb nfs-utils inetutils dnsutils bluez \
+        bluez-utils alsa-utils pulseaudio bash-completion openssh rsync acpi \
+        acpi_call tlp iptables-nft ipset firewalld sof-firmware nss-mdns acpid \
+        os-prober ntfs-3g terminus-font cups reflector polkit udisks2 \
+        pulseaudio-bluetooth npm
 	genfstab -U /mnt >> /mnt/etc/fstab ;
 	cat /mnt/etc/fstab ;
 	sleep 20
 }
 
+dwm_install() {
+    pacstrap /mnt  xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xbacklight xorg-xprop \
+     noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
+     sxiv mpv zathura zathura-pdf-mupdf ffmpeg imagemagick  \
+     fzf man-db xwallpaper python-pywal youtube-dl unclutter xclip maim \
+     zip unzip unrar p7zip xdotool papirus-icon-theme brightnessctl  \
+     dosfstools ntfs-3g git sxhkd zsh pipewire pipewire-pulse \
+     vim emacs arc-gtk-theme rsync firefox dash \
+     xcompmgr libnotify dunst slock jq \
+     dhcpcd networkmanager rsync pamixer
+    cat <<EOF | arch-chroot /mnt bash
+git clone --depth=1 https://github.com/VijayakumarRavi/dwm.git /home/vijay/.local/src/dwm
+make -C /home/vijay/.local/src/dwm install
+git clone --depth=1 https://github.com/VijayakumarRavi/st.git /home/vijay/.local/src/st
+make -C /home/vijay/.local/src/st install
+git clone --depth=1 https://github.com/VijayakumarRavi/dmenu.git /home/vijay/.local/src/dmenu
+make -C /home/vijay/.local/src/dmenu install
+EOF
+}
+
 i3_install() {
-	pacstrap /mnt xorg i3 dmenu lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager papirus-icon-theme net-tools noto-fonts-emoji noto-fonts noto-fonts-extra
+	pacstrap /mnt xorg i3 dmenu ttf-dejavu ttf-liberation noto-fonts firefox nitrogen picom lxappearance vlc pcmanfm \
+        papirus-icon-theme alacritty blueman volumeicon virt-manager qemu qemu-arch-extra ovmf vde2 materia-gtk-theme \
+        ebtables dnsmasq bridge-utils openbsd-netcat awesome rofi picom xclip ttf-roboto polkit-gnome \
+        materia-theme lxappearance flameshot network-manager-applet xfce4-power-manager \
+        papirus-icon-theme net-tools noto-fonts-emoji noto-fonts noto-fonts-extra
 }
 
 gnome_install() {
-	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm materia-gtk-theme papirus-icon-theme alacritty virt-manager qemu qemu-arch-extra ovmf vde2 ebtables dnsmasq bridge-utils openbsd-netcat
+	pacstrap /mnt xorg gdm gnome gnome-tweaks htop ttf-dejavu ttf-liberation noto-fonts firefox vlc pcmanfm \
+        materia-gtk-theme papirus-icon-theme alacritty virt-manager qemu qemu-arch-extra ovmf \
+        vde2 ebtables dnsmasq bridge-utils openbsd-netcat
 }
 
 chroot_ex() {
@@ -74,7 +107,7 @@ etc-configs() {
 	echo "archlinux" >> /etc/hostname
 	echo "127.0.0.1 localhost" >> /etc/hosts
 	echo "::1       localhost" >> /etc/hosts
-	echo "127.0.1.1 archlinux.localdomain archlinux" >> /etc/hosts
+	echo "127.0.1.1 archbtw.localdomain archbtw" >> /etc/hosts
 	echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 	echo "en_US ISO-8859-1" >> /etc/locale.gen
@@ -96,7 +129,6 @@ starting-service() {
 	systemctl enable firewalld
 	systemctl enable acpid
 	systemctl enable libvirtd
-	systemctl enable lightdm
 	systemctl enable gdm
 	sleep 10
 }
@@ -106,8 +138,8 @@ config-users() {
 	useradd -m vijay
 	echo root:vijay | chpasswd
 	echo vijay:vijay | chpasswd
-	usermod -aG libvirt vijay
 	newgrp libvirt
+	usermod -aG libvirt vijay
 	echo "vijay ALL=(ALL) ALL" >> /etc/sudoers.d/vijay
 	printf "\e[1;32m\n********createing user Successfully Done*********\n\e[0m"
 	sed -i 's/^#Para/Para/' /etc/pacman.conf
@@ -133,10 +165,13 @@ de_type() {
 	if [[ $DE == GNOME ]] || [[ $DE == 1 ]] || [[ $DE == gnome ]]; then
 		printf "\e[1;34m Selected Gnome \n\e[0m"
 		gnome_install
-	elif [[ $DE == i3 ]] || [[ $DE == 2 ]] || [[ $DE == i3wm ]]; then
+	elif [[ $DE == dwm ]] || [[ $DE == 2 ]] || [[ $DE == dwm ]]; then
+		printf "\e[1;34m Selected dwm \n\e[0m"
+		dwm_install
+	elif [[ $DE == i3 ]] || [[ $DE == 3 ]] || [[ $DE == i3wm ]]; then
 		printf "\e[1;34m Selected i3wm \n\e[0m"
 		i3_install
-	elif [[ $DE == basic ]] || [[ $DE == 3 ]]; then
+	elif [[ $DE == basic ]] || [[ $DE == 4 ]]; then
 		printf "\e[1;34m Basic installation completed \e[0m"
 	else
 		printf "\e[1;34m Invalid option \e[0m"
@@ -156,8 +191,9 @@ de_choose() {
     --cancel-label "Exit" \
     --menu "Please select:" $HEIGHT $WIDTH 4 \
     "1" "Gnome" \
-    "2" "i3wm" \
-    "3" "basic" \
+    "2" "Dwm" \
+    "3" "i3wm" \
+    "4" "basic" \
     2>&1 1>&3)
     exit_status=$?
   exec 3>&-
