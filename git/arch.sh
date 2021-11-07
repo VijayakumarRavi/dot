@@ -66,10 +66,8 @@ dwm_install() {
      sxiv mpv zathura zathura-pdf-mupdf ffmpeg imagemagick  \
      fzf man-db xwallpaper python-pywal youtube-dl unclutter xclip maim \
      zip unzip unrar p7zip xdotool papirus-icon-theme brightnessctl  \
-     dosfstools ntfs-3g git sxhkd zsh pipewire pipewire-pulse \
-     vim emacs arc-gtk-theme rsync firefox dash \
-     xcompmgr libnotify dunst slock jq \
-     dhcpcd networkmanager rsync pamixer
+     dosfstools ntfs-3g git sxhkd neovim arc-gtk-theme rsync firefox dash \
+     xcompmgr libnotify dunst slock jq networkmanager rsync pamixer
     cat <<EOF | arch-chroot /mnt bash
 git clone --depth=1 https://github.com/VijayakumarRavi/dwm.git /home/vijay/.local/src/dwm
 make -C /home/vijay/.local/src/dwm install
@@ -242,8 +240,8 @@ main() {
   uefi_partition
   uefi_makefs
   install_pkgs
-  de_type
   chroot_ex
+  de_type
   grub_uefi
   printf "\e[1;35m\n\nUEFI Installation completed \n\e[0m"
 }
